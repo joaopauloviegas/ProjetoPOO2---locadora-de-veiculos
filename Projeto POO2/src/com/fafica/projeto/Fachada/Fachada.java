@@ -25,24 +25,32 @@ public class Fachada {
 		return Fachada.instance;
 	}
 	
-	
+	//metodo cadastrar
 	public void cadastar(Carro carro){
 		controladorCarro.cadastarCarro(carro);
 	}
 	
+	
+	//metodo atualizar
 	public void atualizar(){
 		
 	}
 	
+	
+	//metodo remover
 	public void remover(){
 		
 	}
 	
+	
+	//metodo procurar
 	public Object procurar(){
 		return null;
 		
 	}
 	
+	
+	//metodo listar
 	public ArrayList<Object> listar(){
 		return null;
 	}

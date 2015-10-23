@@ -6,23 +6,27 @@ public class ControladorCliente {
 
 	private IRepositorioCliente repositorioCliente;
 	
+	//controlador
 	public ControladorCliente(){
 		this.repositorioCliente = new RepositorioCliente();
 	}
 	
-	public void cadastarCliente(Cliente cliente){
+	//metodo cadastrar cliente
+	public void cadastarCliente(Cliente cliente) throws ClienteJaCadastradoException, CPFInvalidoException{
 		this.repositorioCliente.cadastrarCliente(cliente);
 	}
 	
-	public void atualizarCliente(Cliente cliente){
+	
+	
+	public void atualizarCliente(Cliente cliente) throws ClienteNaoEncontradoException,CPFInvalidoException{
 		this.repositorioCliente.atualizarCliente(cliente);
 	}
 	
-	public boolean removerCliente(String cpf){
+	public boolean removerCliente(String cpf)throws ClienteNaoEncontradoException, CPFInvalidoException{
 		return this.repositorioCliente.removerCliente(cpf);
 	}
 	
-	public Cliente procurarCliente(String cpf){
+	public Cliente procurarCliente(String cpf)throws ClienteNaoEncontradoException, CPFInvalidoException{
 		Cliente cliente = null;
 		
 		cliente = this.repositorioCliente.procurarCliente(cpf);
@@ -30,7 +34,7 @@ public class ControladorCliente {
 		
 	}
 	
-	public ArrayList<Cliente> listarCliente(){
+	public ArrayList<Cliente> listarCliente() throws ClienteNaoEncontradoException{
 		return this.repositorioCliente.listarCliente();
 		
 	}
