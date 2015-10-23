@@ -12,7 +12,14 @@ public class ControladorCliente {
 	}
 	
 	//metodo cadastrar cliente
-	public void cadastarCliente(Cliente cliente) throws ClienteJaCadastradoException, CPFInvalidoException{
+	public void cadastarCliente(Cliente cliente) throws ClienteJaCadastradoException, 
+														CPFInvalidoException,
+														CampoObrigatorioException,
+														IllegalArgumentException
+														{
+		
+		if(cliente == null) throw new IllegalAccessError("Cliente invalido");
+		if(cliente.getNome().equals("")) throw new CampoObrigatorioException("nome");
 		this.repositorioCliente.cadastrarCliente(cliente);
 	}
 	
