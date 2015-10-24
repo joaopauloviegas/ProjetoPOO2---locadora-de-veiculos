@@ -3,7 +3,9 @@ package com.fafica.projeto.Fachada;
 import java.util.ArrayList;
 
 import com.fafica.projeto.Carro.Carro;
+import com.fafica.projeto.Carro.CarroJaCadastradoException;
 import com.fafica.projeto.Carro.ControladorCarro;
+import com.fafica.projeto.Cliente.CampoObrigatorioException;
 import com.fafica.projeto.Cliente.ControladorCliente;
 
 public class Fachada {
@@ -26,7 +28,9 @@ public class Fachada {
 	}
 	
 	//metodo cadastrar
-	public void cadastar(Carro carro){
+	public void cadastar(Carro carro) throws IllegalArgumentException, 
+											 CarroJaCadastradoException, 
+											 CampoObrigatorioException{
 		controladorCarro.cadastarCarro(carro);
 	}
 	

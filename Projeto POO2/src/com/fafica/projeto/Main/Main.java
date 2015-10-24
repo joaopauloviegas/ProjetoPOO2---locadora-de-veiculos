@@ -2,11 +2,13 @@ package com.fafica.projeto.Main;
 
 
 import com.fafica.projeto.Carro.Carro;
+import com.fafica.projeto.Carro.CarroJaCadastradoException;
+import com.fafica.projeto.Cliente.CampoObrigatorioException;
 import com.fafica.projeto.Fachada.Fachada;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException {
 	
 		Fachada fachada = Fachada.getInstance();
 		
