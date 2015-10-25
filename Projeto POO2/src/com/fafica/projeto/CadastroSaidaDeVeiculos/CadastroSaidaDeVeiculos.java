@@ -6,7 +6,7 @@ public class CadastroSaidaDeVeiculos {
 
 	private int codigoLocacao;
 	private Cliente cliente;
-	//private Funcionario funcionario;
+	private Funcionario funcionario;
 	private String data;
 	private double quilometragem;
 	private double valor;
@@ -52,6 +52,12 @@ public class CadastroSaidaDeVeiculos {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
+	public Funcionario getFuncionario() {
+		return funcionario;
+	}
+    public void setFuncionario(Funcionario funcionario) {
+		this.funcionario = funcionario;
+	}
 
 
 	@Override
@@ -61,7 +67,8 @@ public class CadastroSaidaDeVeiculos {
 				+ "\nCliente: " + cliente.getNome() 
 				+ "\nData: " + data
 				+ "\nQuilometragem: " + quilometragem 
-				+ "\nValor: " + valor;
+				+ "\nValor: " + valor
+				+"\nFuncionario: " + funcionario;
 	}
 	
 	

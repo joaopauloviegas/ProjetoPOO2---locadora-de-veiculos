@@ -1,10 +1,13 @@
 package com.fafica.projeto.Cliente;
 
+import com.fafica.projeto.Endereco.Endereco;
+
 public class Cliente {
 
 	private String nome;
 	private String cpf;
 	private int codigo;
+	private Endereco endereco;
 	
 	public Cliente(String nome, String cpf, int codigo){
 		this.nome = nome;
@@ -36,10 +39,19 @@ public class Cliente {
 		this.codigo = codigo;
 	}
 
+	public Endereco getEndereco() {
+		return endereco;
+	}
+
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
+
 	@Override
 	public String toString() {
-		return "Cliente [nome=" + nome + ", cpf=" + cpf + ", codigo=" + codigo + "]";
+		return "Cliente [nome=" + nome + ", cpf=" + cpf + ", codigo=" + codigo + ", endereco=" + endereco + "]";
 	}
+
 
 	
 	

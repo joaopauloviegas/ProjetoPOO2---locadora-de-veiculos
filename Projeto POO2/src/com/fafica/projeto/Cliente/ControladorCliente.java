@@ -67,7 +67,7 @@ public class ControladorCliente {
 	
 	
 	//METODO LISTAR
-	public ArrayList<Cliente> listarCliente() throws ClienteNaoEncontradoException{
+	public ArrayList<Cliente> listarCliente(){
 		
 		return this.repositorioCliente.listarCliente();
 		
