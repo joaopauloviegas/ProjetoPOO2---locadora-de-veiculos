@@ -1,6 +1,7 @@
 package com.fafica.projeto.CadastroSaidaDeVeiculos;
 
 import com.fafica.projeto.Cliente.Cliente;
+import com.fafica.projeto.Funcionario.Funcionario;
 
 public class CadastroSaidaDeVeiculos {
 

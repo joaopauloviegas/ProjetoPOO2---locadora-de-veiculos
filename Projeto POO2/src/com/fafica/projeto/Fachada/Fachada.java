@@ -7,16 +7,20 @@ import com.fafica.projeto.Carro.CarroJaCadastradoException;
 import com.fafica.projeto.Carro.ControladorCarro;
 import com.fafica.projeto.Cliente.CampoObrigatorioException;
 import com.fafica.projeto.Cliente.ControladorCliente;
+import com.fafica.projeto.Funcionario.ControladorFuncionario;
+import com.fafica.projeto.Funcionario.Funcionario;
 
 public class Fachada {
 
 	public static Fachada instance;
 	private ControladorCliente controladorCliente;
 	private ControladorCarro controladorCarro;
+	private ControladorFuncionario controladorFuncionario;
 	
 	public Fachada(){
 		this.controladorCliente = new ControladorCliente();
 		this.controladorCarro = new ControladorCarro();
+		this.controladorFuncionario = new ControladorFuncionario();
 	}// fim do construtor
 	
 	
@@ -32,6 +36,11 @@ public class Fachada {
 											 CarroJaCadastradoException, 
 											 CampoObrigatorioException{
 		controladorCarro.cadastarCarro(carro);
+		
+	}
+	
+	public void cadastrar(Funcionario funcionario){
+		this.controladorFuncionario.adicionar(funcionario);
 	}
 	
 	
