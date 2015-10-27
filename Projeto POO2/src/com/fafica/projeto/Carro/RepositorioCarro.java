@@ -29,12 +29,22 @@ public class RepositorioCarro implements IRepositorioCarro {
 		
 		return null;
 	}
+	
+	
 
 	@Override
 	public ArrayList<Carro> listarCarro() {
 		
 		return null;
 	}
+	
+	public boolean existe(Integer id) {
+		boolean resposta = false;
+		
+		
+		return resposta;
+	}
+
 
 	
 }// fim da classe

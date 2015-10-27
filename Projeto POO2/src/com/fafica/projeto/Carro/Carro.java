@@ -2,6 +2,7 @@ package com.fafica.projeto.Carro;
 
 public class Carro {
 
+	private Integer id;
 	private String nome;
 	private int ano;
 	private String placa;
@@ -11,6 +12,17 @@ public class Carro {
 	
 
 	public Carro(String nome, int ano, String placa, int quantidadePorta, double quilometragem, String categoria) {
+		this.id = 0;
+		this.nome = nome;
+		this.ano = ano;
+		this.placa = placa;
+		this.quantidadePorta = quantidadePorta;
+		this.quilometragem = quilometragem;
+		this.categoria = categoria;
+	}
+	
+	public Carro(Integer id,String nome, int ano, String placa, int quantidadePorta, double quilometragem, String categoria) {
+		this.setId(id);;
 		this.nome = nome;
 		this.ano = ano;
 		this.placa = placa;
@@ -19,7 +31,14 @@ public class Carro {
 		this.categoria = categoria;
 	}
 
+	public Integer getId() {
+		return id;
+	}
 
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -83,6 +102,7 @@ public class Carro {
 	@Override
 	public String toString() {
 		return "Carro "
+	            + "\nID: " + id
 				+ "\nNome: " + nome 
 				+ "\nAno: " + ano 
 				+ "\nPlaca: " + placa 
