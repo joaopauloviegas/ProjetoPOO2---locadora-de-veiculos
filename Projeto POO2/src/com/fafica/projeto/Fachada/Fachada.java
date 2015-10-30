@@ -16,6 +16,8 @@ import com.fafica.projeto.Cliente.Cliente;
 import com.fafica.projeto.Cliente.ClienteJaCadastradoException;
 import com.fafica.projeto.Cliente.ClienteNaoEncontradoException;
 import com.fafica.projeto.Cliente.ControladorCliente;
+import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
+import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Funcionario.ControladorFuncionario;
 import com.fafica.projeto.Funcionario.Funcionario;
 
@@ -110,10 +112,22 @@ public class Fachada {
 			return null;
 		}
 	
-	//FUNCIONARIO
 	
-	public void cadastrar(Funcionario funcionario){
+		//CADASTRO FUNCIONARIO
+	public void cadastrar(Funcionario funcionario) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
 		this.controladorFuncionario.adicionar(funcionario);
+	}
+		//ATUALIZAR DO FUNCIONARIO
+	public void atualizar(Funcionario funcionario) throws EnderecoNaoEncontradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
+		this.controladorFuncionario.atualizar(funcionario);
+	}//fim do atualizar
+		
+	public void remover(Integer id){
+		
+	}//fim do remover
+	
+	public Funcionario buscar(Integer id){
+		return null;
 	}
 	
 }// fim da classe

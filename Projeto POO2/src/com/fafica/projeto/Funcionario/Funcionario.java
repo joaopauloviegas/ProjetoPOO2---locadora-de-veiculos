@@ -6,22 +6,22 @@ public class Funcionario {
 	
 	private String nome;
 	private String cpf;
-	private String endereco;
+	private Endereco endereco;
 	private Integer id;
 	
 	
-	public Funcionario(String nome,String cpf,String endereco){
+	public Funcionario(String nome,String cpf,Endereco endereco){
 		this.id = 0;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.endereco = endereco;
 	}
 	
-	public Funcionario(Integer id, String nome, String cpf, String endereco){
+	public Funcionario(Integer id, String nome, String cpf){
 		this.setId(id);
 		this.nome = nome;
 		this.cpf = cpf;
-		this.endereco = endereco;
+		
 	}
 	
 	
@@ -37,10 +37,10 @@ public class Funcionario {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public String getEndereco() {
+	public Endereco getEndereco() {
 		return endereco;
 	}
-	public void setEndereco(String endereco) {
+	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
 	public Integer getId() {

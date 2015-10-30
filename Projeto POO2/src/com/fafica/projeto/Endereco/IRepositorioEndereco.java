@@ -11,5 +11,5 @@ public interface IRepositorioEndereco {
 	public void remover(Integer id)throws EnderecoNaoEncontradoException;
 	public ArrayList<Endereco> listar();
 	public boolean existe(Integer id);
-	public int getIndice(Integer id);
+	
 }

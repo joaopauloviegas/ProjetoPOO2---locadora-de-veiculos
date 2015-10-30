@@ -22,21 +22,26 @@ public class RepositorioEndereco implements IRepositorioEndereco {
 
 	@Override
 	public void atualizar(Endereco endereco) throws EnderecoNaoEncontradoException {
-		int i = getIndice(endereco.getId());
-		if(i == -1)throw new EnderecoNaoEncontradoException();
-		
+		boolean achou;
+		for(int i = 0; i < enderecos.size();i++){
+			if(endereco.getId().equals(enderecos.get(i).getId()))achou = true;
+			else if(achou = false)throw new EnderecoNaoEncontradoException();
+			enderecos.set(i, endereco);
+		}//fim do for
+				
 		
 	}//fim do atualizar
 
 	@Override
 	public void remover(Integer id)throws EnderecoNaoEncontradoException {
-		int i = getIndice(id);
-		if(i == -1)throw new EnderecoNaoEncontradoException();
-		for(Endereco end2 : enderecos){
-			if(id == end2.getId()){
-				enderecos.remove(end2);
-			}//fim do if
-		}//fim do for
+		boolean achou;
+		for(int i = 0; i < enderecos.size();i++){
+			if(id.equals(enderecos.get(i).getId()))achou = true;
+			else if(achou = false)throw new EnderecoNaoEncontradoException();
+			
+			enderecos.remove(i);
+		}
+		
 	}//fim do remover
 
 	@Override
@@ -50,11 +55,15 @@ public class RepositorioEndereco implements IRepositorioEndereco {
 
 	@Override
 	public Endereco buscar(Integer id)throws EnderecoNaoEncontradoException {
-		Endereco endereco = null;
-		int i = getIndice(id);
-		if(i == -1)throw new EnderecoNaoEncontradoException();
+		Endereco  endereco = null;
+		boolean achou;
+		for(int i = 0; i < enderecos.size();i++){
+			if(id.equals(enderecos.get(i).getId()))achou = true;
+			else if(achou = false)throw new EnderecoNaoEncontradoException();
+			endereco = enderecos.get(i);
+		}
+		return endereco;
 		
-		return enderecos.get(i);
 	}//fim do buscar
 
 
@@ -70,17 +79,6 @@ public class RepositorioEndereco implements IRepositorioEndereco {
 	}
 
 
-	@Override
-	public int getIndice(Integer id) {
-		int resposta = -1;
-		boolean achou = false;
-		for(int i = 0; !achou && ( i< enderecos.size());i++){
-			if(enderecos.get(i).getId().equals(id)){
-				resposta = i;
-				achou = true;
-			}//fim do if
-		}//fim do for
-		return resposta;
-	}
+	
 
 }
