@@ -1,5 +1,6 @@
 package com.fafica.projeto.Fachada;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto.CadastroSaidaDeVeiculos.CadastroSaidaDeVeiculos;
@@ -48,19 +49,21 @@ public class Fachada {
 	
 	
 	//METODO CADASTRAR PARA CARRO
-	public void cadastar(Carro carro) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException{
+	public void cadastarCarro(Carro carro) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException, SQLException{
+		System.out.println("Estou na fachada");
 		controladorCarro.cadastarCarro(carro);
+		
 	}
 	//METODO ATUAALIZAR PARA CARRO
-	public void atualizar(Carro carro) throws IllegalArgumentException, CarroNaoEncontradoException, CampoObrigatorioException{
+	public void atualizarCarro(Carro carro) throws IllegalArgumentException, CarroNaoEncontradoException, CampoObrigatorioException{
 		controladorCarro.atualizarCarro(carro);
 	}
 	//METODO REMOVER PARA CARRO
-	public void remover(Carro placa) throws IllegalArgumentException, CarroNaoEncontradoException, CampoObrigatorioException{
+	public void removerCarro(Carro placa) throws IllegalArgumentException, CarroNaoEncontradoException, CampoObrigatorioException{
 		controladorCarro.removerCarro(placa);
 	}
 	//METODO PROCURAR PARA CARRO
-	public Object procurar(Carro placa) throws CarroNaoEncontradoException, CampoObrigatorioException{
+	public Object procurarCarro(Carro placa) throws CarroNaoEncontradoException, CampoObrigatorioException{
 		return controladorCarro.procurarCarro(placa);
 	}
 	//METODO LISTAR PARA CARRO

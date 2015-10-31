@@ -1,5 +1,6 @@
 package com.fafica.projeto.Carro;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto.Cliente.CampoObrigatorioException;
@@ -10,17 +11,20 @@ public class ControladorCarro {
 
 	public ControladorCarro() {
 		
-		this.repositorioCarro = new RepositorioCarro();
+		//this.repositorioCarro = new RepositorioCarro();
+		this.repositorioCarro = new RepositorioCarroBD();
 				
 	}
 	//METODO CADASTRAR
 	public void cadastarCarro(Carro carro) throws CarroJaCadastradoException,
 												  CampoObrigatorioException,
-												  IllegalArgumentException {
+												  IllegalArgumentException, 
+												  SQLException {
 	
 		if(carro == null) throw new IllegalAccessError("Carro Invalido");
 		if(carro.getPlaca().equals(""))throw new CampoObrigatorioException("placa");
 		if(carro.getNome().equals(""))throw new CampoObrigatorioException("nome");
+		System.out.println("estou no controlador");
 		this.repositorioCarro.cadastrarCarro(carro);
 	}
 	
@@ -61,7 +65,7 @@ public class ControladorCarro {
 	
 	
 	// METODO LISTAR
-	public ArrayList<Carro> listarCarro(){
+	public ArrayList<Carro> listarCarro() throws SQLException{
 		return this.repositorioCarro.listarCarro();
 	}
 	
