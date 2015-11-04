@@ -14,7 +14,7 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 
 	//private PreparedStatement stm = null;
 	private Connection con = null;
-	private int id = 1;
+	private int id = 0;
 	
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -43,7 +43,7 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 		String sql = "INSERT INTO carro (ID,NOME,ANO,PLACA,QUANTIDADEPORTA,QUILOMETRAGEM,CATEGORIA) VALUES (?,?,?,?,?,?,?)" ;              
 		conecta();
 		try{
-			PreparedStatement stm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			PreparedStatement stm = con.prepareStatement(sql);
 			
 			
 			stm.setString(2, carro.getNome());
@@ -53,12 +53,12 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 			stm.setDouble(6, carro.getQuilometragem());
 			stm.setString(7, carro.getCategoria());
 			
-			stm.execute();
-			ResultSet resultSet = stm.getGeneratedKeys();
+			stm.executeUpdate();
+			ResultSet resultSet = null;
 			Integer id = 0;
 			 
 			 while(resultSet.next()) {
-		        	id = resultSet.getInt(1);
+		        	++id;
 		        	stm.setInt(1, id);
 			 }
 			 System.out.println("ID do Insert no Banco " + id);
@@ -71,23 +71,86 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	 
 	}// FIM DO METODO CADASTRAR
 
+	
+	//METODO PARA ATUALIZAR CARRO
 	@Override
 	public void atualizarCarro(Carro carro) {
+		System.out.println("estou no repositorio BD");
+		String sql = "update carro set nome=?,ano=?,placa=?,quantidadedePorta=?,quilometragem=?,categoria=? where id=?" ;              
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(sql);
+			
+			
+			stm.setString(1, carro.getNome());
+			stm.setInt(2, carro.getAno());
+			stm.setString(3, carro.getPlaca());
+			stm.setInt(4, carro.getQuantidadePorta());
+			stm.setDouble(5, carro.getQuilometragem());
+			stm.setString(6, carro.getCategoria());
+			stm.setInt(7, carro.getId());
+			
+			stm.executeUpdate();
 		
+		}catch(SQLException e){
+			System.out.println("Erro ao atualizar"+e);
+		}
+		desconecta();
 		
 	}
 
 	@Override
-	public boolean removerCarro(Carro placa) {
+	public boolean removerCarro(Carro carro) {
+		String sql = "delete carro where id=?" ;              
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(sql);
+			
+			stm.setInt(1, carro.getId());
+			stm.executeUpdate();
 		
-		return false;
+		}catch(SQLException e){
+			System.out.println("Erro ao remover"+e);
+		}
+		
+		
+		desconecta();
+		
+		return true;
 	}// fim do metodo remover 
+	
+	
+	
+	///METODO PROCURAR CARRO
 	@Override
-	public Carro procurarCarro(Carro placa) {
+	public Carro procurarCarro(Carro carro) {
+		String sql = "select * from carro where id=?";
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(sql);
+			stm.setInt(1, carro.getId());
+			
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()){
+				carro.toString();
+			}
+			stm.close();
+			rs.close();
 		
-		return null;
+			
+		}catch(SQLException e){
+			System.out.println("Erro ao procurar"+e);
+		}
+		desconecta();
+		return carro;
+		
 	}// fim do metodo procurar
 
+	
+
+	
+	
 	
 	@Override
 	public ArrayList<Carro> listarCarro() throws SQLException{
@@ -114,7 +177,10 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 				listaCarro.add(carro);
 			}// fim do while
 		
-			return listaCarro;
+			for (Carro carro : listaCarro) {
+				System.out.println(carro);
+			}
+			
 		
 		}catch(SQLException e){
 			System.out.println("Erro ao listar" + e);
