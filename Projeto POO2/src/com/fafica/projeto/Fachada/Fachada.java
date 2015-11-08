@@ -117,15 +117,16 @@ public class Fachada {
 	
 	
 		//CADASTRO FUNCIONARIO
-	public void cadastrar(Funcionario funcionario) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
+	public void cadastrarFuncionario(Funcionario funcionario) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
 		this.controladorFuncionario.adicionar(funcionario);
 	}
 		//ATUALIZAR DO FUNCIONARIO
-	public void atualizar(Funcionario funcionario) throws EnderecoNaoEncontradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
+	public void atualizarFuncionario(Funcionario funcionario) throws EnderecoNaoEncontradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
 		this.controladorFuncionario.atualizar(funcionario);
 	}//fim do atualizar
 		
-	public void remover(Integer id){
+	public void removerFuncionario(Integer id) throws EnderecoNaoEncontradoException{
+		this.controladorFuncionario.remover(id);
 		
 	}//fim do remover
 	

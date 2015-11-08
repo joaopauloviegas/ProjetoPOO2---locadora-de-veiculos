@@ -19,7 +19,7 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try{
-			 con = DriverManager.getConnection(url,"system","joao123123");
+			 con = DriverManager.getConnection(url,"system","contabli123");
 			 
 		}catch(SQLException sql){
 			System.out.println("Erro na conexão" + sql);

@@ -17,7 +17,7 @@ public class Main {
 	public static void main(String[] args) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, EnderecoNaoEncontradoException, SQLException {
 		 
 		Fachada fachada = Fachada.getInstance();
-		 int id = 1;
+		 /*int id = 1;
 		 String nome = "GOL";
 		 int ano = 2010;
 		 String placa = "kgi-2703";
@@ -28,13 +28,15 @@ public class Main {
 		
 		Carro carro1 = new Carro(nome,ano,placa,quantidadePorta,quilometragem,categoria);
 		fachada.cadastarCarro(carro1);
-		
+		*/
 		 
-		//Endereco endereco = new Endereco("Joaquim Nabuco","Kenndy","3 Andar","caruaru");
+		Endereco endereco = new Endereco("Pau Brasil","Centro","5 Andar","Recife");
 		
-		//Funcionario funcionario = new Funcionario("Joao Raflll","354.656",endereco);
+		Funcionario funcionario = new Funcionario("Gabriel Goncalves","123.123.32",endereco);
 		//fachada.cadastrar(funcionario);
-		//fachada.atualizar(funcionario);
+		fachada.atualizarFuncionario(funcionario);
+		
+		//fachada.removerFuncionario(4);
 		
 		
 		

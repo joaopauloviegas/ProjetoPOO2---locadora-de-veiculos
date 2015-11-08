@@ -25,8 +25,9 @@ public class ControladorFuncionario {
 		this.controladorEndereco.atualizar(funcionario.getEndereco());
 	}
 	
-	public void remover(Integer id){
-		
+	public void remover(Integer id) throws EnderecoNaoEncontradoException{
+		this.repositorioFuncionario.remover(id);
+		this.controladorEndereco.remover(id);
 	}//fim do remover
 	
 	public Funcionario buscar(Integer id){
