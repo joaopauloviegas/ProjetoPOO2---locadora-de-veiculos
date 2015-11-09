@@ -5,6 +5,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
@@ -19,7 +22,7 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try{
-			 con = DriverManager.getConnection(url,"system","contabli123");
+			 con = DriverManager.getConnection(url,"system","joao123123");
 			 
 		}catch(SQLException sql){
 			System.out.println("Erro na conexão" + sql);
@@ -40,28 +43,21 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	@Override
 	public void cadastrarCarro(Carro carro)throws SQLException {
 	System.out.println("estou no repositorio BD");
-		String sql = "INSERT INTO carro (ID,NOME,ANO,PLACA,QUANTIDADEPORTA,QUILOMETRAGEM,CATEGORIA) VALUES (?,?,?,?,?,?,?)" ;              
+		String sql = "INSERT INTO carro (NOME,ANO,PLACA,QUANTIDADEPORTA,QUILOMETRAGEM,CATEGORIA) VALUES (?,?,?,?,?,?)" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			
 			
-			stm.setString(2, carro.getNome());
-			stm.setInt(3, carro.getAno());
-			stm.setString(4, carro.getPlaca());
-			stm.setInt(5, carro.getQuantidadePorta());
-			stm.setDouble(6, carro.getQuilometragem());
-			stm.setString(7, carro.getCategoria());
+			stm.setString(1, carro.getNome());
+			stm.setInt(2, carro.getAno());
+			stm.setString(3, carro.getPlaca());
+			stm.setInt(4, carro.getQuantidadePorta());
+			stm.setDouble(5, carro.getQuilometragem());
+			stm.setString(6, carro.getCategoria());
 			
 			stm.executeUpdate();
-			ResultSet resultSet = null;
-			Integer id = 0;
-			 
-			 while(resultSet.next()) {
-		        	++id;
-		        	stm.setInt(1, id);
-			 }
-			 System.out.println("ID do Insert no Banco " + id);
+			
 			
 		}catch(SQLException e){
 			System.out.println("Erro ao cadastrar"+e);
@@ -76,7 +72,7 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	@Override
 	public void atualizarCarro(Carro carro) {
 		System.out.println("estou no repositorio BD");
-		String sql = "update carro set nome=?,ano=?,placa=?,quantidadedePorta=?,quilometragem=?,categoria=? where id=?" ;              
+		String sql = "update carro set nome=?,ano=?,quantidadePorta=?,quilometragem=?,categoria=? where placa=? or id=?" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
@@ -84,10 +80,10 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 			
 			stm.setString(1, carro.getNome());
 			stm.setInt(2, carro.getAno());
-			stm.setString(3, carro.getPlaca());
-			stm.setInt(4, carro.getQuantidadePorta());
-			stm.setDouble(5, carro.getQuilometragem());
-			stm.setString(6, carro.getCategoria());
+			stm.setInt(3, carro.getQuantidadePorta());
+			stm.setDouble(4, carro.getQuilometragem());
+			stm.setString(5, carro.getCategoria());
+			stm.setString(6, carro.getPlaca());
 			stm.setInt(7, carro.getId());
 			
 			stm.executeUpdate();
@@ -101,12 +97,13 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 
 	@Override
 	public boolean removerCarro(Carro carro) {
-		String sql = "delete carro where id=?" ;              
+		String sql = "delete carro where id=? or placa=?" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			
 			stm.setInt(1, carro.getId());
+			stm.setString(2, carro.getPlaca());
 			stm.executeUpdate();
 		
 		}catch(SQLException e){
@@ -123,24 +120,38 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	
 	///METODO PROCURAR CARRO
 	@Override
-	public Carro procurarCarro(Carro carro) {
-		String sql = "select * from carro where id=?";
+	public Carro procurarCarro(Carro carro)throws CarroNaoEncontradoException {
+		String sql = "select * from carro where id=? or placa=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			stm.setInt(1, carro.getId());
+			stm.setString(2, carro.getPlaca());
 			
 			ResultSet rs = stm.executeQuery();
+			ArrayList<Carro> lista= new ArrayList<Carro>();
 			
 			while(rs.next()){
-				carro.toString();
+				
+				Carro c = new Carro(rs.getInt("id"),
+									rs.getString("nome"),
+									rs.getInt("ano"),
+									rs.getString("placa"),
+									rs.getInt("quantidadePorta"),
+									rs.getDouble("quilometragem"),
+									rs.getString("categoria"));
+				System.out.println(lista.add(c));
 			}
+			JOptionPane.showMessageDialog(null, lista);
 			stm.close();
 			rs.close();
 		
 			
 		}catch(SQLException e){
 			System.out.println("Erro ao procurar"+e);
+			
+		}catch(Exception e){
+			System.out.println(e);
 		}
 		desconecta();
 		return carro;
@@ -164,7 +175,7 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	    ResultSet rs = stm.executeQuery();
 		
 		try{
-			
+											
 							
 			while(rs.next()){
 				Carro carro = new Carro(rs.getInt("id"),

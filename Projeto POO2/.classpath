@@ -8,6 +8,5 @@
 	<classpathentry kind="lib" path="postgresql-9.3-1102.jdbc4.jar"/>
 	<classpathentry kind="lib" path="sqljdbc.jar"/>
 	<classpathentry kind="lib" path="sqljdbc4.jar"/>
-	<classpathentry kind="lib" path="C:/ADS/sqldeveloper/jdbc/lib/ojdbc6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

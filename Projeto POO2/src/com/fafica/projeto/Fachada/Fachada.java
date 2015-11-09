@@ -59,12 +59,12 @@ public class Fachada {
 		controladorCarro.atualizarCarro(carro);
 	}
 	//METODO REMOVER PARA CARRO
-	public void removerCarro(Carro placa) throws IllegalArgumentException, CarroNaoEncontradoException, CampoObrigatorioException{
-		controladorCarro.removerCarro(placa);
+	public void removerCarro(Carro carro) throws IllegalArgumentException, CarroNaoEncontradoException, CampoObrigatorioException{
+		controladorCarro.removerCarro(carro);
 	}
 	//METODO PROCURAR PARA CARRO
-	public Object procurarCarro(Carro placa) throws CarroNaoEncontradoException, CampoObrigatorioException{
-		return controladorCarro.procurarCarro(placa);
+	public Object procurarCarro(Carro carro) throws CarroNaoEncontradoException, CampoObrigatorioException{
+		return controladorCarro.procurarCarro(carro);
 	}
 	//METODO LISTAR PARA CARRO
 	public ArrayList<Object> listarCarro(){
