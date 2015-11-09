@@ -6,7 +6,11 @@ import java.sql.SQLException;
 import com.fafica.projeto.Carro.Carro;
 import com.fafica.projeto.Carro.CarroJaCadastradoException;
 import com.fafica.projeto.Carro.CarroNaoEncontradoException;
+import com.fafica.projeto.Cliente.CPFInvalidoException;
 import com.fafica.projeto.Cliente.CampoObrigatorioException;
+import com.fafica.projeto.Cliente.Cliente;
+import com.fafica.projeto.Cliente.ClienteJaCadastradoException;
+import com.fafica.projeto.Cliente.ClienteNaoEncontradoException;
 import com.fafica.projeto.Endereco.Endereco;
 import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
 import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
@@ -15,7 +19,7 @@ import com.fafica.projeto.Funcionario.Funcionario;
 
 public class Main {
 
-	public static void main(String[] args) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, EnderecoNaoEncontradoException, SQLException, CarroNaoEncontradoException {
+	public static void main(String[] args) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, EnderecoNaoEncontradoException, SQLException, CarroNaoEncontradoException, ClienteJaCadastradoException, CPFInvalidoException, ClienteNaoEncontradoException {
 		 
 		Fachada fachada = Fachada.getInstance();
 		 //int id = 2;
@@ -32,6 +36,14 @@ public class Main {
 		fachada.procurarCarro(carro);
 		//fachada.listarCarro();
 		 */
+		Endereco endereco = new Endereco("Av Portugal ","Universitario","4 andar","Caruaru");
+		Cliente cliente = new Cliente(3, "Diogenes","221.432.564-6","masculino", "(87)8966-6666", endereco);
+		//fachada.cadastarCliente(cliente);
+		//fachada.atualizarCliente(cliente);
+		fachada.removerCliente(cliente);
+		
+		
+		
 		
 		
 		/*

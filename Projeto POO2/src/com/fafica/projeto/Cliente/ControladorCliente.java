@@ -2,27 +2,33 @@ package com.fafica.projeto.Cliente;
 
 import java.util.ArrayList;
 
+import com.fafica.projeto.Endereco.ControladorEndereco;
+import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
 import com.fafica.projeto.util.ValidarCPF;
 
 public class ControladorCliente {
 
-	private IRepositorioCliente repositorioCliente;
+	private IRepositorioCliente repositorioClienteBD;
+	private ControladorEndereco controladorEndereco;
 	
 	//controlador
 	public ControladorCliente(){
-		this.repositorioCliente = new RepositorioCliente();
+		this.repositorioClienteBD = new RepositorioClienteBD();
+		this.controladorEndereco = new ControladorEndereco();
 	}
 	
 	//METODO CADASTRAR
 	public void cadastarCliente(Cliente cliente) throws ClienteJaCadastradoException, 
 														CPFInvalidoException,
 														CampoObrigatorioException,
-														IllegalArgumentException
+														IllegalArgumentException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException
 														{
-		
+		if(!ValidarCPF.validaCPF(cliente.getCpf())) throw new CPFInvalidoException();
 		if(cliente == null) throw new IllegalArgumentException("Cliente invalido");
 		if(cliente.getNome().equals("")) throw new CampoObrigatorioException("nome");
-		this.repositorioCliente.cadastrarCliente(cliente);
+		System.out.println("estou no controlador cliente!");
+		this.repositorioClienteBD.cadastrarCliente(cliente);
+		this.controladorEndereco.adicionar(cliente.getEndereco());
 	}
 	
 	
@@ -31,45 +37,43 @@ public class ControladorCliente {
 														 CPFInvalidoException,
 														 CampoObrigatorioException{
 		
-		if(!ValidarCPF.validaCPF(cliente.getCpf())) throw new CPFInvalidoException();
+		//if(!ValidarCPF.validaCPF(cliente.getCpf())) throw new CPFInvalidoException();
 		if(cliente.getNome().equals("")) throw new CampoObrigatorioException("nome");
-		this.repositorioCliente.atualizarCliente(cliente);
+		this.repositorioClienteBD.atualizarCliente(cliente);
 	}
 	
 	
 	//METODO REMOVER
-	public boolean removerCliente(String cpf)throws ClienteNaoEncontradoException, 
+	public boolean removerCliente(Cliente cliente)throws ClienteNaoEncontradoException, 
 													CPFInvalidoException{
 		
-		boolean retorno = false;
-		cpf = cpf.replaceAll("\\.|\\-|\\ ", "");
+	  if(!ValidarCPF.validaCPF(cliente.getCpf())) throw new CPFInvalidoException();
 		
-		if(!ValidarCPF.validaCPF(cpf)) throw new CPFInvalidoException();
-		else{
-			retorno =  this.repositorioCliente.removerCliente(cpf);
-	   }
-	  return retorno;
+	  return this.repositorioClienteBD.removerCliente(cliente);
 	}
 	
 	
 	//METOFO PROCURAR
-	public Cliente procurarCliente(String cpf)throws ClienteNaoEncontradoException, 
+	public Cliente procurarCliente(Cliente cliente)throws ClienteNaoEncontradoException, 
 													 CPFInvalidoException{
-		Cliente cliente = null;
+		/*
+		String cpf;
+		Cliente cliente;
 		cpf = cpf.replaceAll("\\.|\\-|\\ ", "");
 		if(!ValidarCPF.validaCPF(cpf)) throw new CPFInvalidoException();
 		else{
-			cliente = this.repositorioCliente.procurarCliente(cpf);
+			cliente = this.repositorioClienteBD.procurarCliente(cliente);
 		}
 		return cliente;
-		
+		*/
+	return null;
 	}
 	
 	
 	//METODO LISTAR
 	public ArrayList<Cliente> listarCliente(){
 		
-		return this.repositorioCliente.listarCliente();
+		return this.repositorioClienteBD.listarCliente();
 		
 	}
 			

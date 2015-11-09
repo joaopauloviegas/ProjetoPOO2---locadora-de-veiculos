@@ -73,20 +73,20 @@ public class Fachada {
 	
 	
 	    //METODO CADASTRAR PARA CLIENTE
-		public void cadastar(Cliente cliente) throws IllegalArgumentException, ClienteJaCadastradoException, CPFInvalidoException, CampoObrigatorioException {
+		public void cadastarCliente(Cliente cliente) throws IllegalArgumentException, ClienteJaCadastradoException, CPFInvalidoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException {
 			controladorCliente.cadastarCliente(cliente);
 		}
 		//METODO ATUAALIZAR PARA CLIENTE
-		public void atualizar(Cliente cliente) throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException{
+		public void atualizarCliente(Cliente cliente) throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException{
 			controladorCliente.atualizarCliente(cliente);
 		}
 		//METODO REMOVER PARA CLIENTE
-		public void remover(String cpf) throws ClienteNaoEncontradoException, CPFInvalidoException {
-			controladorCliente.removerCliente(cpf);
+		public void removerCliente(Cliente cliente) throws ClienteNaoEncontradoException, CPFInvalidoException {
+			controladorCliente.removerCliente(cliente);
 		}
 		//METODO PROCURAR PARA CLIENTE
-		public Object procurar(String cpf) throws ClienteNaoEncontradoException, CPFInvalidoException {
-			return controladorCliente.procurarCliente(cpf);
+		public Object procurarCliente(Cliente cliente) throws ClienteNaoEncontradoException, CPFInvalidoException {
+			return controladorCliente.procurarCliente(cliente);
 		}
 		//METODO LISTAR PARA CLIENTE
 		public ArrayList<Cliente> listarCliente(){

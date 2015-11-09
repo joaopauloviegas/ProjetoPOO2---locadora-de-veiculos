@@ -5,18 +5,39 @@ import com.fafica.projeto.Endereco.Endereco;
 public class Cliente {
 
 
-	private int codigo;
+	private int id;
     private String nome;
     private String cpf;
-    private Endereco endereco;
-    private char sexo;
+    private String sexo;
     private String numeroTelefone;
+    private Endereco endereco;
 	
-    public int getCodigo() {
-		return codigo;
+    public Cliente( String nome, String cpf, String sexo, String numeroTelefone, Endereco endereco) {
+		
+		this.nome = nome;
+		this.cpf = cpf;
+		this.sexo = sexo;
+		this.numeroTelefone = numeroTelefone;
+		this.endereco = endereco;
+	}// fim do construtor
+    
+    public Cliente(int id, String nome, String cpf, String sexo, String numeroTelefone, Endereco endereco) {
+		
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.sexo = sexo;
+		this.numeroTelefone = numeroTelefone;
+		this.endereco = endereco;
+	}// fim do construtor
+    
+    
+    
+	public int getId() {
+		return id;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+	public void setId(int id) {
+		this.id = id;
 	}
 	public String getNome() {
 		return nome;
@@ -36,10 +57,10 @@ public class Cliente {
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
 	}
-	public char getSexo() {
+	public String getSexo() {
 		return sexo;
 	}
-	public void setSexo(char sexo) {
+	public void setSexo(String sexo) {
 		this.sexo = sexo;
 	}
 	public String getNumeroTelefone() {
@@ -50,7 +71,7 @@ public class Cliente {
 	}
 	@Override
 	public String toString() {
-		return "codigo: " + codigo 
+		return "codigo: " + id 
 				+ "\nnome: " + nome 
 				+ "\ncpf: " + cpf 
 				+ "\nendereco: " + endereco 
