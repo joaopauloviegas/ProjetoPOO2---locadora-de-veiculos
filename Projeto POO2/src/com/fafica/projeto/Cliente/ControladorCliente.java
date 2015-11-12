@@ -26,7 +26,6 @@ public class ControladorCliente {
 		if(!ValidarCPF.validaCPF(cliente.getCpf())) throw new CPFInvalidoException();
 		if(cliente == null) throw new IllegalArgumentException("Cliente invalido");
 		if(cliente.getNome().equals("")) throw new CampoObrigatorioException("nome");
-		System.out.println("estou no controlador cliente!");
 		this.repositorioClienteBD.cadastrarCliente(cliente);
 		this.controladorEndereco.adicionar(cliente.getEndereco());
 	}
@@ -66,6 +65,7 @@ public class ControladorCliente {
 		}
 		return cliente;
 		*/
+		cliente = this.repositorioClienteBD.procurarCliente(cliente);
 	return null;
 	}
 	

@@ -1,33 +1,51 @@
 package com.fafica.projeto.CadastroSaidaDeVeiculos;
 
+import com.fafica.projeto.Carro.Carro;
 import com.fafica.projeto.Cliente.Cliente;
 import com.fafica.projeto.Funcionario.Funcionario;
 
 public class CadastroSaidaDeVeiculos {
 
-	private int codigoLocacao;
+	private int id;
 	private Cliente cliente;
 	private Funcionario funcionario;
 	private String data;
+	private String hora;
+	private Carro carro;
 	private double quilometragem;
 	private double valor;
 	
 	
-	public CadastroSaidaDeVeiculos(int codigoLocacao, Cliente cliente, String data, double quilometragem,double valor) {
+	public CadastroSaidaDeVeiculos(int id, Cliente cliente,Funcionario funcionario,String data,String hora,Carro carro, double quilometragem,double valor) {
 		
-		this.codigoLocacao = codigoLocacao;
+		this.id = id;
 		this.cliente = cliente;
+		this.funcionario = funcionario;
 		this.data = data;
+		this.hora = hora;
+		this.carro = carro;
+		this.quilometragem = quilometragem;
+		this.valor = valor;
+	}
+	
+	public CadastroSaidaDeVeiculos(Cliente cliente,Funcionario funcionario, String data,String hora,Carro carro, double quilometragem,double valor) {
+		
+		
+		this.cliente = cliente;
+		this.funcionario = funcionario;
+		this.data = data;
+		this.hora = hora;
+		this.carro = carro;
 		this.quilometragem = quilometragem;
 		this.valor = valor;
 	}
 	
 	
-	public int getCodigoLocacao() {
-		return codigoLocacao;
+	public int getId() {
+		return id;
 	}
-	public void setCodigoLocacao(int codigoLocacao) {
-		this.codigoLocacao = codigoLocacao;
+	public void setCodigoLocacao(int id) {
+		this.id = id;
 	}
 	public Cliente getCliente() {
 		return cliente;
@@ -40,6 +58,18 @@ public class CadastroSaidaDeVeiculos {
 	}
 	public void setData(String data) {
 		this.data = data;
+	}
+	public String getHora() {
+		return hora;
+	}
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
+	public Carro getCarro() {
+		return carro;
+	}
+	public void setCarro(Carro carro) {
+		this.carro = carro;
 	}
 	public double getQuilometragem() {
 		return quilometragem;
@@ -64,7 +94,7 @@ public class CadastroSaidaDeVeiculos {
 	@Override
 	public String toString() {
 		return "CadastroSaidaDeVeiculos "
-				+ "\nCodigo Locacao: " + codigoLocacao 
+				+ "\nCodigo Locacao: " + id 
 				+ "\nCliente: " + cliente.getNome() 
 				+ "\nData: " + data
 				+ "\nQuilometragem: " + quilometragem 

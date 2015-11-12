@@ -41,7 +41,7 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 	@Override
 	public void cadastrarCliente(Cliente cliente) {
 		
-		System.out.println("estou no repositorio BD");
+		
 		String sql = "INSERT INTO cliente (ID,NOME,CPF,ENDERECO,SEXO,NUMEROTELEFONE) VALUES (?,?,?,?,?,?)" ;              
 		conecta();
 		try{
@@ -60,7 +60,8 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			
 			
 		}catch(SQLException e){
-			System.out.println("Erro ao cadastrar"+e);
+			JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR"
+					+ "\nVerifique se todos os dados estão escritos corretamente","ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		desconecta();
 	}// fim do metodo cadastrar
@@ -129,23 +130,14 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			stm.setInt(1, cliente.getId());
 			stm.setString(2, cliente.getCpf());
 			
-			ResultSet rs = stm.executeQuery();
-			ArrayList<Carro> lista= new ArrayList<Carro>();
-			
-			while(rs.next()){
-				// estou com problema para passar o endereco. fiquei parado aqui
-				Cliente c = new Cliente(rs.getInt("id"),
-									rs.getString("nome"),
-									rs.getString("cpf"),
-									rs.getString("sexo"),
-									rs.getString("numeroTelefone"),
-									rs.getString("endereco");
-									
-				System.out.println(lista.add(c));
-			}
-			JOptionPane.showMessageDialog(null, lista);
+			JOptionPane.showMessageDialog(null,"\nID: "+cliente.getId()+
+												"\nNOME: "+ cliente.getNome()+
+												"\nCPF: "+ cliente.getCpf()+
+												"\nSEXO: "+ cliente.getNumeroTelefone()+
+												"\nEndereco: "+ cliente.getEndereco());
+		
 			stm.close();
-			rs.close();
+			
 		
 			
 		}catch(SQLException e){

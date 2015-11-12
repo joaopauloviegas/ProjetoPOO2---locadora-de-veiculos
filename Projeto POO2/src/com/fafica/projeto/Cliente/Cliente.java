@@ -21,6 +21,15 @@ public class Cliente {
 		this.endereco = endereco;
 	}// fim do construtor
     
+public Cliente( int id, String nome, String cpf, String sexo, String numeroTelefone) {
+		this.id = id;
+		this.nome = nome;
+		this.cpf = cpf;
+		this.sexo = sexo;
+		this.numeroTelefone = numeroTelefone;
+		
+		
+	}// fim do construtor
     public Cliente(int id, String nome, String cpf, String sexo, String numeroTelefone, Endereco endereco) {
 		
 		this.id = id;
@@ -30,6 +39,17 @@ public class Cliente {
 		this.numeroTelefone = numeroTelefone;
 		this.endereco = endereco;
 	}// fim do construtor
+    
+    public Cliente(String cpf) {
+		
+    	this.cpf = cpf;
+  		
+  	}// fim do construtor
+ public Cliente(int id) {
+		
+    	this.id = id;
+  		
+  	}
     
     
     

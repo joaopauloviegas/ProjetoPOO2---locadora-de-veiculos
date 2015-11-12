@@ -67,8 +67,10 @@ public class Fachada {
 		return controladorCarro.procurarCarro(carro);
 	}
 	//METODO LISTAR PARA CARRO
-	public ArrayList<Object> listarCarro(){
-		return null;
+	public ArrayList<Carro> listarCarro() throws SQLException, CarroNaoEncontradoException{
+		System.out.println("to na fachada");
+		return controladorCarro.listarCarro();
+		
 	}
 	
 	
@@ -95,19 +97,19 @@ public class Fachada {
 	
 		
 		//METODO CADASTRAR PARA CADASTRO SAIDA DE VEICULOS
-		public void cadastar(CadastroSaidaDeVeiculos saidaVeiculo) throws IllegalArgumentException, SaidaDeVeiculosJaCadastradaException, CampoObrigatorioException {
+		public void cadastarSaidaDeVeiculos(CadastroSaidaDeVeiculos saidaVeiculo) throws IllegalArgumentException, SaidaDeVeiculosJaCadastradaException, CampoObrigatorioException {
 			controladorSaidaDeveiculos.cadastrarSaidaDeVeiculos(saidaVeiculo);
 		}
 		//METODO ATUAALIZAR PARA  CADASTRO SAIDA DE VEICULOS
-		public void atualizar(CadastroSaidaDeVeiculos saidaVeiculo) throws SaidaDeVeiculoNaoEncontradaException, CampoObrigatorioException {
+		public void atualizarSaidaDeVeiculos(CadastroSaidaDeVeiculos saidaVeiculo) throws SaidaDeVeiculoNaoEncontradaException, CampoObrigatorioException {
 			controladorSaidaDeveiculos.atualizarSaidaDeVeiculo(saidaVeiculo);
 		}
 		//METODO REMOVER PARA  CADASTRO SAIDA DE VEICULOS
-		public void remover(CadastroSaidaDeVeiculos codigoLocacao) {
+		public void removerSaidaDeVeiculos(CadastroSaidaDeVeiculos codigoLocacao) {
 			controladorSaidaDeveiculos.removerSaidaDeVeiculo(codigoLocacao);
 		}
 		//METODO PROCURAR PARA  CADASTRO SAIDA DE VEICULOS
-		public Object procurar(CadastroSaidaDeVeiculos codigoLocacao) {
+		public Object procurarSaidaDeVeiculos(CadastroSaidaDeVeiculos codigoLocacao) {
 			return controladorSaidaDeveiculos.procurarSaidaDeVeiculo(codigoLocacao);
 		}
 		//METODO LISTAR PARA  CADASTRO SAIDA DE VEICULOS

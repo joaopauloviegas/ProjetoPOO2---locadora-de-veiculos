@@ -6,11 +6,11 @@ import com.fafica.projeto.Cliente.CampoObrigatorioException;
 
 public class ControladorCadastroSaidaDeVeiculos {
 
-	private IRpositorioCadastroSaidaDeVeiculos repositorioCadastroSaidaVeiculo;
+	private IRpositorioCadastroSaidaDeVeiculos repositorioCadastroSaidaVeiculoBD;
 	
 	//construtor
 	public ControladorCadastroSaidaDeVeiculos(){
-		this.repositorioCadastroSaidaVeiculo = new RepositorioCadastroSaidaDeVeiculos();
+		this.repositorioCadastroSaidaVeiculoBD = new RepositorioCadastroSaidaDeVeiculosBD();
 	}
 	
 	
@@ -23,7 +23,7 @@ public class ControladorCadastroSaidaDeVeiculos {
 		if(saidaVeiculo.getData().equals("")) throw new CampoObrigatorioException("data");
 		
 		
-		this.repositorioCadastroSaidaVeiculo.cadastrarSaidaDeVeiculo(saidaVeiculo);
+		this.repositorioCadastroSaidaVeiculoBD.cadastrarSaidaDeVeiculo(saidaVeiculo);
 	}
 	
 	
@@ -32,13 +32,13 @@ public class ControladorCadastroSaidaDeVeiculos {
 																					 CampoObrigatorioException{
 		
 		
-		this.repositorioCadastroSaidaVeiculo.atualizarSaidaDeVeiculo(saidaVeiculo);
+		this.repositorioCadastroSaidaVeiculoBD.atualizarSaidaDeVeiculo(saidaVeiculo);
 	}
 	
 	
 	//METOFO REMOVER
 	public boolean removerSaidaDeVeiculo(CadastroSaidaDeVeiculos codigoLocacao){
-		return this.repositorioCadastroSaidaVeiculo.removerSaidaDeVeiculo(codigoLocacao);
+		return this.repositorioCadastroSaidaVeiculoBD.removerSaidaDeVeiculo(codigoLocacao);
 	}
 	
 	
@@ -46,13 +46,13 @@ public class ControladorCadastroSaidaDeVeiculos {
 	public CadastroSaidaDeVeiculos procurarSaidaDeVeiculo(CadastroSaidaDeVeiculos codigoLocacao){
 		CadastroSaidaDeVeiculos locacao;
 		
-		locacao = this.repositorioCadastroSaidaVeiculo.procurarSaidaDeVeiculo(codigoLocacao);
+		locacao = this.repositorioCadastroSaidaVeiculoBD.procurarSaidaDeVeiculo(codigoLocacao);
 		return locacao;
 	}
 	
 	
 	//METODO LISTAR  
 	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaVeiculo(){
-		return this.repositorioCadastroSaidaVeiculo.listarSaidaDeVeiculo();
+		return this.repositorioCadastroSaidaVeiculoBD.listarSaidaDeVeiculo();
 	}
 }// fim da classe

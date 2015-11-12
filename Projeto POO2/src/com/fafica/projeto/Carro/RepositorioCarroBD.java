@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
+import javax.swing.plaf.synth.SynthScrollBarUI;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,7 +71,7 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	//METODO PARA ATUALIZAR CARRO
 	@Override
 	public void atualizarCarro(Carro carro) {
-		System.out.println("estou no repositorio BD");
+		
 		String sql = "update carro set nome=?,ano=?,quantidadePorta=?,quilometragem=?,categoria=? where placa=? or id=?" ;              
 		conecta();
 		try{
@@ -127,6 +128,14 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 			stm.setInt(1, carro.getId());
 			stm.setString(2, carro.getPlaca());
 			
+			JOptionPane.showMessageDialog(null, "\nID: "+carro.getId()+
+												"\nNOME: "+carro.getNome()+
+												"\nANO: "+carro.getAno()+
+												"\nPLACA: "+carro.getPlaca()+
+												"\nPORTAS: "+carro.getQuantidadePorta()+
+												"\nKM: "+carro.getQuilometragem()+
+												"\nCATEGORIA: " +carro.getCategoria());
+			/*
 			ResultSet rs = stm.executeQuery();
 			ArrayList<Carro> lista= new ArrayList<Carro>();
 			
@@ -140,10 +149,10 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 									rs.getDouble("quilometragem"),
 									rs.getString("categoria"));
 				System.out.println(lista.add(c));
-			}
-			JOptionPane.showMessageDialog(null, lista);
+			}*/
+			//JOptionPane.showMessageDialog(null, lista);
 			stm.close();
-			rs.close();
+			//rs.close();
 		
 			
 		}catch(SQLException e){
@@ -163,8 +172,8 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	
 	
 	@Override
-	public ArrayList<Carro> listarCarro() throws SQLException{
-		  
+	public ArrayList<Carro> listarCarro() throws SQLException, CarroNaoEncontradoException{
+		System.out.println("estou no repositorio");
 		ArrayList<Carro> listaCarro = new ArrayList<Carro>();
 		
 		
@@ -177,21 +186,27 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 											
 							
 			while(rs.next()){
-				Carro carro = new Carro(rs.getInt("id"),
+				listaCarro.add(new Carro(rs.getInt("id"),
 										rs.getString("nome"),
 										rs.getInt("ano"),
 										rs.getString("placa"), 
 										rs.getInt("quantidadePorta"),
 										rs.getDouble("quilometragem"),
-										rs.getString("categoria"));
-				listaCarro.add(carro);
+										rs.getString("categoria")));
+			
+				
 			}// fim do while
-		
 			for (Carro carro : listaCarro) {
 				System.out.println(carro);
 			}
-			
-		
+			 if (listaCarro.isEmpty()) {
+	               throw new CarroNaoEncontradoException();
+	            } else {
+	                return  listaCarro;
+	                
+	            }
+						 
+			 
 		}catch(SQLException e){
 			System.out.println("Erro ao listar" + e);
 		}

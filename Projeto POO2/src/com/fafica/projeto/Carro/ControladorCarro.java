@@ -65,7 +65,8 @@ public class ControladorCarro {
 	
 	
 	// METODO LISTAR
-	public ArrayList<Carro> listarCarro() throws SQLException{
+	public ArrayList<Carro> listarCarro() throws SQLException, CarroNaoEncontradoException{
+		System.out.println("to no controlador");
 		return this.repositorioCarro.listarCarro();
 	}
 	
