@@ -1,5 +1,7 @@
 package com.fafica.projeto.Funcionario;
 
+import java.util.ArrayList;
+
 import com.fafica.projeto.Endereco.CampoObrigatorioException;
 import com.fafica.projeto.Endereco.ControladorEndereco;
 import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
@@ -30,11 +32,15 @@ public class ControladorFuncionario {
 		this.controladorEndereco.remover(id);
 	}//fim do remover
 	
-	public Funcionario buscar(Integer id){
-		return null;
+	public ArrayList<Funcionario> buscar(String cpf){
+		ArrayList<Funcionario> lista = null;
+		lista = this.repositorioFuncionario.buscar(cpf);
+		return lista;
 	}//fim do buscar
 	
-	public Funcionario listar(){
+	public ArrayList<Funcionario> listar(){
+		ArrayList<Funcionario> lista = null;
+		
 		return null;
 	}
 	

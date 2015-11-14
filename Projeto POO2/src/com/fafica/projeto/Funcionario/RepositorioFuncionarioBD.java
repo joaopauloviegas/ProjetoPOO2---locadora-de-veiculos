@@ -3,8 +3,12 @@ package com.fafica.projeto.Funcionario;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+
+import com.fafica.projeto.Endereco.Endereco;
 
 public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	
@@ -15,7 +19,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try{
-			 con = DriverManager.getConnection(url,"system","contabli123");
+			 con = DriverManager.getConnection(url,"system","91737660");
 			 
 		}catch(SQLException sql){
 			System.out.println("Erro na conexão" + sql);
@@ -74,24 +78,32 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do remover
 
 	@Override
-	public Funcionario listar() {
+	public ArrayList<Funcionario> listar() {
 		return null;
 	}//fim do listar
 
 	@Override
-	public Funcionario buscar(Integer id) {
-		Funcionario funcionario = null;
-		String query = "select * from FUNCIONARIO where id=?";
+	public ArrayList<Funcionario> buscar(String cpf) {
+		ArrayList<Funcionario> lista = new ArrayList<>();
+		String query = "select * from FUNCIONARIO where CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
-			stm.setInt(1, id);
-			stm.executeUpdate();
+			stm.setString(1, cpf);
+			ResultSet rs = stm.executeQuery();
+			
+			while(rs.next()){
+				Funcionario funcionario = new Funcionario(rs.getString("NOME"),rs.getString("CPF"), new Endereco(rs.getString("rua"),rs.getString("bairro"),rs.getString("complemento"),rs.getString("cidade")));
+				lista.add(funcionario);	
+			}
+			
+			stm.close();
+			rs.close();
 		} catch (SQLException sql){
-			System.out.println("Erro no atualizar" +sql);
-		}
-		
-		return null;
+			System.out.println("Erro no Buscarr" +sql);
+		}//fim do try
+		desconecta();
+		return lista;
 	}//fim do buscar
 	
 }//fim da classe
