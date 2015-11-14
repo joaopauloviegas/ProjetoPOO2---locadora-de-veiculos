@@ -7,6 +7,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
 import com.fafica.projeto.Cliente.TelaCadastroCliente;
+import com.fafica.projeto.Cliente.TelaRemoverCliente;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -21,6 +22,7 @@ public class TelaPrincipal {
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -67,8 +69,8 @@ public class TelaPrincipal {
 		JMenuItem mntmCliente = new JMenuItem("Cliente");
 		mntmCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCadastroCliente tlc = new TelaCadastroCliente();
-				
+				TelaCadastroCliente window = new TelaCadastroCliente();
+				window.frmTelaCadastroCliente.setVisible(true);
 				
 			}
 		});
@@ -96,6 +98,12 @@ public class TelaPrincipal {
 		mnRemover.add(mntmCarro_2);
 		
 		JMenuItem mntmCliente_2 = new JMenuItem("Cliente");
+		mntmCliente_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaRemoverCliente telaRemover = new TelaRemoverCliente();
+				telaRemover.frmTelaRemoverCliente.setVisible(true);
+			}
+		});
 		mnRemover.add(mntmCliente_2);
 		
 		JMenuItem mntmSaidaDeVeiculo_2 = new JMenuItem("Saida de Veiculo");

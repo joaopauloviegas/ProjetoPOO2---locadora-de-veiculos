@@ -35,8 +35,11 @@ public class Main {
 		 int quantidadePorta = 2;
 		 double quilometragem = 7560;
 		 String categoria = "popular";
-		 Carro carro = new Carro(id,nome,ano,placa,quantidadePorta,quilometragem,categoria);
-		 fachada.listarCarro();
+		 //Carro carro = new Carro(id,nome,ano,placa,quantidadePorta,quilometragem,categoria);
+		 //fachada.listarCarro();
+		 String cpf = "264.975.198-31";
+		 //fachada.listarCliente();
+		 fachada.procurarCliente(cpf);
 		 /*//fachada.cadastarCarro(carro);
 		//fachada.atualizarCarro(carro);
 		//fachada.removerCarro(carro);

@@ -2,6 +2,7 @@ package com.fafica.projeto.Cliente;
 
 import java.awt.EventQueue;
 
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -10,7 +11,10 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import com.fafica.projeto.Endereco.CampoObrigatorioException;
 import com.fafica.projeto.Endereco.Endereco;
+import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
+import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 
 import javax.swing.JButton;
@@ -19,7 +23,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaCadastroCliente {
 
-	private JFrame frmTelaCadastroCliente;
+	public JFrame frmTelaCadastroCliente;
 	private JTextField textNome;
 	private JTextField textCPF;
 	private JTextField textSexo;
@@ -189,8 +193,9 @@ public class TelaCadastroCliente {
 		String complemento = textComplemento.getText();
 		String cidade = textCidade.getText();
 		
+		Cliente cliente = new Cliente(nome, cpf, sexo, numeroTelefone);
 		Endereco endereco = new Endereco(rua, bairro, complemento, cidade);
-		Cliente cliente = new Cliente(nome, cpf, sexo, numeroTelefone,endereco);
+		cliente.setEndereco(endereco);
 		
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
@@ -199,8 +204,25 @@ public class TelaCadastroCliente {
 			fachada.cadastarCliente(cliente);
 			JOptionPane.showMessageDialog(null, "Cliente Cadastrado com sucesso!");
 			limparCampos();
-		}catch(Exception e) {
 			
+		}catch (IllegalArgumentException e) {
+			
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (CPFInvalidoException e) {
+			
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (CampoObrigatorioException e) {
+			
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (EnderecoJaCadastradoException e) {
+			
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		
 

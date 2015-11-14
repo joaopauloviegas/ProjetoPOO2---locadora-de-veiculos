@@ -78,13 +78,13 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			
 			
 			stm.setString(1, cliente.getNome());
-			stm.setString(2, cliente.getCpf());
-			stm.setString(3, cliente.getSexo());
-			stm.setString(4, cliente.getNumeroTelefone());
-			stm.setString(5, cliente.getEndereco().toString());
-			stm.setInt(6, cliente.getId());
-			stm.setString(7, cliente.getCpf());
-			stm.setString(8, cliente.getNome());
+			//stm.setString(2, cliente.getCpf());
+			//stm.setString(3, cliente.getSexo());
+			//stm.setString(4, cliente.getNumeroTelefone());
+			//stm.setString(5, cliente.getEndereco().toString());
+			//stm.setInt(6, cliente.getId());
+			//stm.setString(7, cliente.getCpf());
+			//stm.setString(8, cliente.getNome());
 			stm.executeUpdate();
 			
 		
@@ -98,15 +98,14 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 	
 	
 	//METODO REMOVER CLIENTE
-	public boolean removerCliente(Cliente cliente) {
+	public boolean removerCliente(String cpf) {
 		
-		String sql = "delete cliente where id=? or cpf=?" ;              
+		String sql = "delete cliente where cpf=?" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			
-			stm.setInt(1, cliente.getId());
-			stm.setString(2, cliente.getCpf());
+			stm.setString(1, cpf);
 			stm.executeUpdate();
 		
 		}catch(SQLException e){
@@ -119,26 +118,48 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 		
 		return true;
 	}// FIM FO METOTO REMOVER CLIENTE
+		
 
+	
+		
+		
 	//METODO PROCURAR CLIENTE
 	@Override
-	public Cliente procurarCliente(Cliente cliente) {
-		String sql = "select * from cliente where id=? or cpf=?";
+	public Cliente procurarCliente(String cpf) {
+		String sql = "select * from cliente where cpf=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
-			stm.setInt(1, cliente.getId());
-			stm.setString(2, cliente.getCpf());
+	
+			stm.setString(1, cpf);
 			
-			JOptionPane.showMessageDialog(null,"\nID: "+cliente.getId()+
-												"\nNOME: "+ cliente.getNome()+
-												"\nCPF: "+ cliente.getCpf()+
-												"\nSEXO: "+ cliente.getNumeroTelefone()+
-												"\nEndereco: "+ cliente.getEndereco());
-		
+			ResultSet rs = stm.executeQuery();
+			
+			ArrayList<Cliente> procurar = new ArrayList<Cliente>();
+			 Cliente cliente;
+	       while(rs.next()){
+	    	   
+	    	   return new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
+	        	/*JOptionPane.showMessageDialog(null, rs.getString(1)+"\nNome: "+
+	        			                            rs.getString ("nome")+"\nCPF: "+
+	        			                            rs.getString("cpf")+"\nSexo: "+
+	        			                            rs.getString("sexo")+"\nTelefone: "+
+	        			                            rs.getString("numerotelefone")+"\n"+
+	        			                            rs.getString("endereco"));  */
+	    	  // cliente = new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
+	    	   //procurar.add(cliente);
+	    	
+
+			
+	       }
+	       System.out.println(procurar);
+	       
+
+	       
 			stm.close();
+			rs.close();
 			
-		
+			
 			
 		}catch(SQLException e){
 			System.out.println("Erro ao procurar"+e);
@@ -147,14 +168,36 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			System.out.println(e);
 		}
 		desconecta();
-		return cliente;
+		return null;
+		
+		
+		
 	}// FIM DO METODO PROCURAR CLIENTE
 
 	
 	// METOFO LISTAR CLIENTE
 	@Override
 	public ArrayList<Cliente> listarCliente() {
-		// TODO Auto-generated method stub
+		String sql = "select * from cliente";
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(sql);
+			ResultSet rs = stm.executeQuery();
+			
+			ArrayList<Cliente> lista = new ArrayList<Cliente>();
+			
+			while(rs.next()){
+				Cliente cliente = new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
+				lista.add(cliente);
+			}// fim do while
+			System.out.println(lista);
+			stm.close();
+			rs.close();
+			
+			System.out.println("to aqui no repositorio");
+		}catch(Exception e){
+			
+		}
 		return null;
 	}// FIM DO METODO LISTAR CLIENTES
 
