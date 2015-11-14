@@ -28,23 +28,23 @@ public class Main {
 		 
 		Fachada fachada = Fachada.getInstance();
 		 
-		int id = 5;
-		 String nome = "POLO";
-		 int ano = 2015;
-		 String placa = "KKK-6789";
-		 int quantidadePorta = 2;
-		 double quilometragem = 7560;
-		 String categoria = "popular";
-		 Carro carro = new Carro(id,nome,ano,placa,quantidadePorta,quilometragem,categoria);
-		 fachada.listarCarro();
-		 /*//fachada.cadastarCarro(carro);
+		//int id = 5;
+		 //String nome = "POLO";
+		 //int ano = 2015;
+		 //String placa = "KKK-6789";
+		 //int quantidadePorta = 2;
+		 //double quilometragem = 7560;
+		 //String categoria = "popular";
+		 //Carro carro = new Carro(id,nome,ano,placa,quantidadePorta,quilometragem,categoria);
+		 //fachada.listarCarro();
+		 ///fachada.cadastarCarro(carro);
 		//fachada.atualizarCarro(carro);
 		//fachada.removerCarro(carro);
 		// fachada.procurarCarro(carro);
-	    fachada.listarCarro();
-		/*
-		 /*
-		//pegando a data e hora atual
+	    //fachada.listarCarro();
+		
+		
+		/*pegando a data e hora atual
 		 String data = "dd/MM/yyyy";  
 		 String hora = "h:mm - a";  
 		 String data1, hora1;  
@@ -60,15 +60,17 @@ public class Main {
 		 Endereco endereco = new Endereco("Guilherme Pinto","Derby","8 Andar","Recife");
 		 Cliente cliente = new Cliente( 2,"Joao paulo","09948766458","masculino", "(81)99192-0532");
 		 cliente.setEndereco(endereco);
+		 */
 		 
 		 Endereco enderecoFuncionario = new Endereco("Pau Brasil","Centro","5 Andar","Recife");
 		 Funcionario funcionario = new Funcionario("Gabriel Goncalves","123.123.32",enderecoFuncionario);
+		 //fachada.cadastrarFuncionario(funcionario);
+		 fachada.buscarFuncionario("123.123.32");
 		 
+		 //CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(1,cliente, funcionario, data1, hora1,carro,67890, 400.50);
+		 //fachada.cadastarSaidaDeVeiculos(saidaVeiculo);
 		 
-		 CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(1,cliente, funcionario, data1, hora1,carro,67890, 400.50);
-		 fachada.cadastarSaidaDeVeiculos(saidaVeiculo);
-		 
-		*/ 
+	
 		
 		//fachada.cadastarCliente(cliente);
 		//fachada.atualizarCliente(cliente);
