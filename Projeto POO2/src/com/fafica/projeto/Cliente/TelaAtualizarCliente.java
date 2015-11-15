@@ -10,6 +10,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import java.awt.ScrollPane;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import com.fafica.projeto.Endereco.Endereco;
@@ -33,6 +34,8 @@ public class TelaAtualizarCliente {
 	private JTextField textComplemento;
 	private JTextField textBairro;
 	private JTextField textCidade;
+	private Fachada fachada;
+	private Cliente cliente;
 
 	/**
 	 * Launch the application.
@@ -54,6 +57,7 @@ public class TelaAtualizarCliente {
 	 * Create the application.
 	 */
 	public TelaAtualizarCliente() {
+		fachada = Fachada.getInstance();
 		initialize();
 	}
 
@@ -219,30 +223,39 @@ public class TelaAtualizarCliente {
 
 	}
 	
+	
 	public void atualizar() throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException {
-		
-		
-		int id = Integer.parseInt(textID.getText());
+		try{
+		/*
 		String nome = textNome.getText();
 		String cpf = textCPF.getText();
-		String sexo =  textSexo.getText();
+		String sexo = textSexo.getText();
 		String numeroTelefone = textTelefone.getText();
 		String rua = textRua.getText();
-		String bairro = textBairro.getText();
-		String complemento = textComplemento.getText();
+		String complemento =textComplemento.getText();
 		String cidade = textCidade.getText();
+		String bairro = textBairro.getText();
+		*/
+			
+		String cpf = textCPF.getText();
+		int id = Integer.parseInt(textID.getText());
 		
-		Cliente cliente = new Cliente(id,nome, cpf, sexo, numeroTelefone);
-		Endereco endereco = new Endereco(rua, bairro, complemento, cidade);
-		cliente.setEndereco(endereco);
+		Cliente c = new Cliente(id);
+		cliente = fachada.procurarCliente(c);
 		
-		Fachada fachada = new Fachada();
-		fachada.getInstance();
+		cliente.setNome(textNome.getText());
+		cliente.setCpf(textCPF.getText());
+		cliente.setSexo(textSexo.getText());
+		cliente.setNumeroTelefone(textTelefone.getText());
+		cliente.getEndereco().setRua(textRua.getText());
+		cliente.getEndereco().setComplemento(textComplemento.getText());
+		cliente.getEndereco().setCidade(textCidade.getText());
+		cliente.getEndereco().setBairro(textBairro.getText());
 		
-		try{
-		fachada.atualizarCliente(cliente);
+	    fachada.atualizarCliente(c);
+		JOptionPane.showMessageDialog(null, "Cliente Atualizado com Sucesso");
 		limparCampos();
-	
+		
 		}catch(ClienteNaoEncontradoException e){
 		
 		}catch (CPFInvalidoException e) {

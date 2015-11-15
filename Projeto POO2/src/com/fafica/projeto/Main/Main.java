@@ -28,6 +28,21 @@ public class Main {
 		 
 		Fachada fachada = Fachada.getInstance();
 		 
+
+		int id = 5;
+		 String nome = "POLO";
+		 int ano = 2015;
+		 String placa = "KKK-6789";
+		 int quantidadePorta = 2;
+		 double quilometragem = 7560;
+		 String categoria = "popular";
+		 //Carro carro = new Carro(id,nome,ano,placa,quantidadePorta,quilometragem,categoria);
+		 //fachada.listarCarro();
+		 String cpf = "264.975.198-31";
+		 //fachada.listarCliente();
+		 fachada.procurarCliente(cpf);
+		 /*//fachada.cadastarCarro(carro);
+=======
 		//int id = 5;
 		 //String nome = "POLO";
 		 //int ano = 2015;
@@ -38,6 +53,7 @@ public class Main {
 		 //Carro carro = new Carro(id,nome,ano,placa,quantidadePorta,quilometragem,categoria);
 		 //fachada.listarCarro();
 		 ///fachada.cadastarCarro(carro);
+>>>>>>> branch 'master' of https://github.com/joaopauloviegas/ProjetoPOO2---locadora-de-veiculos.git
 		//fachada.atualizarCarro(carro);
 		//fachada.removerCarro(carro);
 		// fachada.procurarCarro(carro);
@@ -62,10 +78,10 @@ public class Main {
 		 cliente.setEndereco(endereco);
 		 */
 		 
-		 Endereco enderecoFuncionario = new Endereco("Pau Brasil","Centro","5 Andar","Recife");
-		 Funcionario funcionario = new Funcionario("Gabriel Goncalves","123.123.32",enderecoFuncionario);
+		 ///Endereco enderecoFuncionario = new Endereco("Pau Brasil","Centro","5 Andar","Recife");
+		 //Funcionario funcionario = new Funcionario("Gabriel Goncalves","123.123.32",enderecoFuncionario);
 		 //fachada.cadastrarFuncionario(funcionario);
-		 fachada.buscarFuncionario("123.123.32");
+		 //fachada.buscarFuncionario("123.123.32");
 		 
 		 //CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(1,cliente, funcionario, data1, hora1,carro,67890, 400.50);
 		 //fachada.cadastarSaidaDeVeiculos(saidaVeiculo);

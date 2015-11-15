@@ -87,16 +87,17 @@ public class Fachada {
 			controladorCliente.atualizarCliente(cliente);
 		}
 		//METODO REMOVER PARA CLIENTE
-		public void removerCliente(Cliente cliente) throws ClienteNaoEncontradoException, CPFInvalidoException {
-			controladorCliente.removerCliente(cliente);
+		public void removerCliente(String cpf) throws ClienteNaoEncontradoException, CPFInvalidoException {
+			controladorCliente.removerCliente(cpf);
 		}
+	
 		//METODO PROCURAR PARA CLIENTE
-		public Object procurarCliente(Cliente cliente) throws ClienteNaoEncontradoException, CPFInvalidoException {
-			return controladorCliente.procurarCliente(cliente);
+		public Cliente procurarCliente(String cpf) throws ClienteNaoEncontradoException, CPFInvalidoException {
+			return controladorCliente.procurarCliente(cpf);
 		}
 		//METODO LISTAR PARA CLIENTE
 		public ArrayList<Cliente> listarCliente(){
-			return null;
+			return this.controladorCliente.listarCliente();
 		}
 	
 		

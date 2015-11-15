@@ -43,17 +43,17 @@ public class ControladorCliente {
 	
 	
 	//METODO REMOVER
-	public boolean removerCliente(Cliente cliente)throws ClienteNaoEncontradoException, 
+	public boolean removerCliente(String cpf)throws ClienteNaoEncontradoException, 
 													CPFInvalidoException{
 		
-	  if(!ValidarCPF.validaCPF(cliente.getCpf())) throw new CPFInvalidoException();
+	  if(!ValidarCPF.validaCPF(cpf)) throw new CPFInvalidoException();
 		
-	  return this.repositorioClienteBD.removerCliente(cliente);
+	  return this.repositorioClienteBD.removerCliente(cpf);
 	}
 	
 	
 	//METOFO PROCURAR
-	public Cliente procurarCliente(Cliente cliente)throws ClienteNaoEncontradoException, 
+	public Cliente procurarCliente(String cpf)throws ClienteNaoEncontradoException, 
 													 CPFInvalidoException{
 		/*
 		String cpf;
@@ -65,7 +65,7 @@ public class ControladorCliente {
 		}
 		return cliente;
 		*/
-		cliente = this.repositorioClienteBD.procurarCliente(cliente);
+		this.repositorioClienteBD.procurarCliente(cpf);
 	return null;
 	}
 	

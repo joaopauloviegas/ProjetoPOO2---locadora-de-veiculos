@@ -30,6 +30,15 @@ public Cliente( int id, String nome, String cpf, String sexo, String numeroTelef
 		
 		
 	}// fim do construtor
+public Cliente( String nome, String cpf, String sexo, String numeroTelefone) {
+	
+	this.nome = nome;
+	this.cpf = cpf;
+	this.sexo = sexo;
+	this.numeroTelefone = numeroTelefone;
+	
+	
+}// fim do construtor
     public Cliente(int id, String nome, String cpf, String sexo, String numeroTelefone, Endereco endereco) {
 		
 		this.id = id;
@@ -50,6 +59,11 @@ public Cliente( int id, String nome, String cpf, String sexo, String numeroTelef
     	this.id = id;
   		
   	}
+	 public Cliente(int id, String cpf) {
+			
+	 	this.id = id;
+		this.cpf = cpf;
+	}
     
     
     
