@@ -4,6 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto.CadastroDeReserva.CadastroDeReserva;
+import com.fafica.projeto.CadastroDeReserva.CadastroDeReservaJaCadastradaException;
 import com.fafica.projeto.CadastroDeReserva.ControladorCadastroDeReserva;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.CadastroSaidaDeVeiculos;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.ControladorCadastroSaidaDeVeiculos;
@@ -145,8 +146,8 @@ public class Fachada {
 	    }
 	    
 	    //CADASTRODERESERVA
-	    public void cadastrarCadastroDeReserva(CadastroDeReserva cadastrodeReserva){
-	    	
+	    public void cadastrarCadastroDeReserva(CadastroDeReserva cadastrodeReserva) throws CadastroDeReservaJaCadastradaException, com.fafica.projeto.CadastroDeReserva.CampoObrigatorioException{
+	    	this.controladorcadastrodeReserva.adicionar(cadastrodeReserva);
 	    }//fim do cadastrar
 	    
 	    //ATUALIZA CADASTRODERESERVA

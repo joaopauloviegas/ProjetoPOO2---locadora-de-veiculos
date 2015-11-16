@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 public class RepositorioCadastroDeReservaBD implements IRepositorioCadastroDeReserva {
 	
 	private Connection con;
-	private PreparedStatement stm;
+	private Statement stm;
 	
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
@@ -33,49 +33,64 @@ public class RepositorioCadastroDeReservaBD implements IRepositorioCadastroDeRes
 	}//fim do desconecta
 	
 	public void adicionar(CadastroDeReserva cadastrodeReserva){
-		String query = "INSERT INTO CADASTRODESERVA(CLIENTE,ENDERECO,DATA,CARRO,QUANTIDADE,VALOR)"
-				+"VALUES ('"+cadastrodeReserva.getCliente()+"', '"+cadastrodeReserva.getEndereco()+"' , '"+cadastrodeReserva.getData()+"', '"+cadastrodeReserva.getCarro()+"' , '"+cadastrodeReserva.getQuantidade()+"' , '"+cadastrodeReserva.getValor()+"')";
+		String query = "INSERT INTO CADASTRODERESERVA(CLIENTE,ENDERECO,DATA,CARRO,QUANTIDADE,VALOR)"
+				+"VALUES ('"+cadastrodeReserva.getCliente().toString()+"', '"+cadastrodeReserva.getEndereco().toString()+"' , '"+cadastrodeReserva.getData()+"', '"+cadastrodeReserva.getCarro().toString()+"' , '"+cadastrodeReserva.getQuantidade()+"' , '"+cadastrodeReserva.getValor()+"')";
 		conecta();
 		try{
-			stm = con.prepareStatement(query, new String[]{"CODIGO"});
-			ResultSet rs = stm.getGeneratedKeys();
-			Integer id = 0;
-			
-			while(rs.next()){
-				id = rs.getInt(1);
-			}//fim do while
-			System.out.println("Id do insert no banco" +id);
+			stm = con.createStatement();
+			stm.executeQuery(query);
 			stm.close();
-			rs.close();
+			
 		} catch(SQLException sql){
 			System.out.println("Erro no inserir"+sql);
 		}//fim do try
 		desconecta();
-		
-		
-	}//
+	}//fim do adicionar
 
-	@Override
-	public void remover(CadastroDeReserva cadastrodeReserva) {
-			
-		
-	}
+	
 
 	@Override
 	public void atualizar(CadastroDeReserva cadastrodeReserva) {
+		String query = "UPDATE CADASTRODERESERVA SET CLIENTE=?,ENDERECO=?,DATA=?, CARRO=?, QUANTIDADE=?, VALOR=? WHERE CODIGO=?";
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(query);
+			stm.setString(1, cadastrodeReserva.getCliente().toString());
+			stm.setString(2, cadastrodeReserva.getEndereco().toString());
+			stm.setString(3, cadastrodeReserva.getData());
+			stm.setString(5, cadastrodeReserva.getCarro().toString());
+			stm.setInt(6, cadastrodeReserva.getQuantidade());
+			stm.setDouble(7, cadastrodeReserva.getValor());
+			stm.setInt(8, cadastrodeReserva.getId());
+			stm.executeUpdate();
+		} catch (SQLException sql){
+			System.out.println("Erro no atualizar" +sql);
+		}
 		
-	}
+	}//fim do atualizar
+	
+	@Override
+	public void remover(Integer id) {
+		String query = "DELETE FROM CADASTRODERESERVA WHERE CODIGO=? ";
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(query);
+			stm.setInt(1, id);
+			stm.executeUpdate();
+		} catch (SQLException sql){
+			System.out.println("Erro no atualizar" +sql);
+		}
+			
+	}//fim do remover
 
 	@Override
 	public ArrayList<CadastroDeReserva> buscar(Integer id) {
-		
 		return null;
-	}
+	}//fim do buscar
 
 	@Override
 	public ArrayList<CadastroDeReserva> listar() {
-		
 		return null;
-	}
+	}//fim do listar
 
 }

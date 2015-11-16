@@ -106,4 +106,6 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 		return lista;
 	}//fim do buscar
 	
+	
+	
 }//fim da classe
