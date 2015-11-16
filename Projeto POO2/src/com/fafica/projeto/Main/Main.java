@@ -6,6 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import com.fafica.projeto.CadastroDeReserva.CadastroDeReserva;
+import com.fafica.projeto.CadastroDeReserva.CadastroDeReservaJaCadastradaException;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.CadastroSaidaDeVeiculos;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.SaidaDeVeiculosJaCadastradaException;
 import com.fafica.projeto.Carro.Carro;
@@ -24,11 +26,11 @@ import com.fafica.projeto.Funcionario.Funcionario;
 
 public class Main {
 
-	public static void main(String[] args) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, EnderecoNaoEncontradoException, SQLException, CarroNaoEncontradoException, ClienteJaCadastradoException, CPFInvalidoException, ClienteNaoEncontradoException, SaidaDeVeiculosJaCadastradaException {
+	public static void main(String[] args) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, EnderecoNaoEncontradoException, SQLException, CarroNaoEncontradoException, ClienteJaCadastradoException, CPFInvalidoException, ClienteNaoEncontradoException, SaidaDeVeiculosJaCadastradaException, CadastroDeReservaJaCadastradaException, com.fafica.projeto.CadastroDeReserva.CampoObrigatorioException {
 		 
 		Fachada fachada = Fachada.getInstance();
 		 
-
+		
 		int id = 5;
 		 String nome = "POLO";
 		 int ano = 2015;
@@ -40,7 +42,7 @@ public class Main {
 		 //fachada.listarCarro();
 		 String cpf = "264.975.198-31";
 		 //fachada.listarCliente();
-		 fachada.procurarCliente(cpf);
+		 //fachada.procurarCliente(cpf);
 		 /*//fachada.cadastarCarro(carro);
 =======
 		//int id = 5;
@@ -101,17 +103,17 @@ public class Main {
 		
 		
 		
-		/*
-		Endereco endereco = new Endereco("Pau Brasil","Centro","5 Andar","Recife");
 		
-		Funcionario funcionario = new Funcionario("Gabriel Goncalves","123.123.32",endereco);
-		//fachada.cadastrar(funcionario);
-		fachada.atualizarFuncionario(funcionario);
-		*/
-		//fachada.removerFuncionario(4);
+		Endereco endereco = new Endereco("Travessa Pau Brasil","Kennedy","","caruaru");
 		
+		Funcionario funcionario = new Funcionario("Bina Oliveira","123.123.32",endereco);
+		//fachada.cadastrarFuncionario(funcionario);
+		//fachada.atualizarFuncionario(funcionario);
 		
+		//fachada.removerFuncionario(23);
 		
+		CadastroDeReserva cadastrodeReserva = new CadastroDeReserva(new Cliente("Joao paulo","09948766458","masculino", "(81)99192-0532"), endereco , "30/12/2015",new Carro(5,"POLO",2015,"KKK-6789",2,7560,"Popular"),2,150.00);
+		fachada.cadastrarCadastroDeReserva(cadastrodeReserva);
 		
 		
 		

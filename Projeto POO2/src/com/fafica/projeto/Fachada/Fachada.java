@@ -3,6 +3,9 @@ package com.fafica.projeto.Fachada;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.fafica.projeto.CadastroDeReserva.CadastroDeReserva;
+import com.fafica.projeto.CadastroDeReserva.CadastroDeReservaJaCadastradaException;
+import com.fafica.projeto.CadastroDeReserva.ControladorCadastroDeReserva;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.CadastroSaidaDeVeiculos;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.ControladorCadastroSaidaDeVeiculos;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.SaidaDeVeiculoNaoEncontradaException;
@@ -28,7 +31,7 @@ public class Fachada {
 	private ControladorCliente controladorCliente;
 	private ControladorCarro controladorCarro;
 	private ControladorCadastroSaidaDeVeiculos controladorSaidaDeveiculos;
-	
+	private ControladorCadastroDeReserva controladorcadastrodeReserva;
 	private ControladorFuncionario controladorFuncionario;
 	
 	
@@ -37,6 +40,8 @@ public class Fachada {
 		this.controladorCarro = new ControladorCarro();
 		this.controladorSaidaDeveiculos = new ControladorCadastroSaidaDeVeiculos();
 		this.controladorFuncionario = new ControladorFuncionario();
+		this.controladorcadastrodeReserva = new ControladorCadastroDeReserva();
+		
 	}// fim do construtor
 	
 	
@@ -120,24 +125,50 @@ public class Fachada {
 	
 	
 		//CADASTRO FUNCIONARIO
-	public void cadastrarFuncionario(Funcionario funcionario) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
+	    public void cadastrarFuncionario(Funcionario funcionario) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, IllegalArgumentException, CPFInvalidoException{
 		this.controladorFuncionario.adicionar(funcionario);
-	}
-		//ATUALIZAR DO FUNCIONARIO
-	public void atualizarFuncionario(Funcionario funcionario) throws EnderecoNaoEncontradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
-		this.controladorFuncionario.atualizar(funcionario);
-	}//fim do atualizar
+	    }
 		
-	public void removerFuncionario(Integer id) throws EnderecoNaoEncontradoException{
+	    //ATUALIZAR DO FUNCIONARIO
+	    public void atualizarFuncionario(Funcionario funcionario) throws EnderecoNaoEncontradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, CPFInvalidoException{
+		this.controladorFuncionario.atualizar(funcionario);
+	    }//fim do atualizar
+		
+	    public void removerFuncionario(Integer id) throws EnderecoNaoEncontradoException{
 		this.controladorFuncionario.remover(id);
 		
-	}//fim do remover
+	    }//fim do remover
 	
-	public ArrayList<Funcionario> buscarFuncionario(String cpf){
+	    public ArrayList<Funcionario> buscarFuncionario(String cpf){
 		ArrayList<Funcionario> lista = null;
 		lista = this.controladorFuncionario.buscar(cpf);
 		return null;
-	}
+	    }
+	    
+	    //CADASTRODERESERVA
+	    public void cadastrarCadastroDeReserva(CadastroDeReserva cadastrodeReserva) throws CadastroDeReservaJaCadastradaException, com.fafica.projeto.CadastroDeReserva.CampoObrigatorioException{
+	    	this.controladorcadastrodeReserva.adicionar(cadastrodeReserva);
+	    }//fim do cadastrar
+	    
+	    //ATUALIZA CADASTRODERESERVA
+	    public void atualizarCadastroDeReserva(CadastroDeReserva cadastrodeReserva){
+	    	
+	    }//fim do atualizar
+	    
+	    //REMOVE CADASTRODERESERVA
+	    public void removerCadastroDeReserva(Integer id){
+	    	
+	    }//fim do remover 
+	    
+	    //PROCURAR CADASTRODERESERVA
+	    public ArrayList<CadastroDeReserva> buscarCadastroDeReserva(Integer id){
+			return null;
+	    }//fim do PROCURACADASTRODERESERVA
+	    
+	    //LISTAR CADASTRODERESERVA
+	    public ArrayList<CadastroDeReserva> listarCadastroDeReserva(){
+	    	return null;
+	    }
 	
 }// fim da classe
 
