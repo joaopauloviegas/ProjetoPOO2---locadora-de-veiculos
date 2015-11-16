@@ -24,8 +24,7 @@ import java.awt.Button;
 
 public class TelaAtualizarCliente {
 
-	private JFrame frame;
-	private JTextField textID;
+	private JFrame frmTelaAtualizarCliente;
 	private JTextField textNome;
 	private JTextField textCPF;
 	private JTextField textSexo;
@@ -45,7 +44,7 @@ public class TelaAtualizarCliente {
 			public void run() {
 				try {
 					TelaAtualizarCliente window = new TelaAtualizarCliente();
-					window.frame.setVisible(true);
+					window.frmTelaAtualizarCliente.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -65,33 +64,48 @@ public class TelaAtualizarCliente {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 520, 434);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmTelaAtualizarCliente = new JFrame();
+		frmTelaAtualizarCliente.setTitle("Tela Atualizar Cliente");
+		frmTelaAtualizarCliente.setBounds(100, 100, 520, 434);
+		frmTelaAtualizarCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaAtualizarCliente.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 32, 484, 66);
-		frame.getContentPane().add(panel);
+		frmTelaAtualizarCliente.getContentPane().add(panel);
 		panel.setLayout(null);
 		
-		JLabel lblFnjrfjfbjfrbjfbjfbjfbjfbrfjbrfjbrjfbjrfbjrfbjrfbjbfjbfj = new JLabel("ID: ");
-		lblFnjrfjfbjfrbjfbjfbjfbjfbrfjbrfjbrjfbjrfbjrfbjrfbjbfjbfj.setBounds(10, 11, 34, 14);
-		lblFnjrfjfbjfrbjfbjfbjfbjfbrfjbrfjbrjfbjrfbjrfbjrfbjbfjbfj.setFont(new Font("Tahoma", Font.BOLD, 11));
-		panel.add(lblFnjrfjfbjfrbjfbjfbjfbjfbrfjbrfjbrjfbjrfbjrfbjrfbjbfjbfj);
+		JLabel label_1 = new JLabel("CPF: ");
+		label_1.setBounds(10, 22, 46, 14);
+		panel.add(label_1);
+		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
-		textID = new JTextField();
-		textID.setBounds(60, 8, 86, 20);
-		panel.add(textID);
-		textID.setColumns(10);
+		textCPF = new JTextField();
+		textCPF.setBounds(66, 19, 143, 20);
+		panel.add(textCPF);
+		textCPF.setColumns(10);
 		
-		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(10, 0, 764, 21);
-		frame.getContentPane().add(menuBar);
+		JButton btnProcurar = new JButton("Procurar");
+		btnProcurar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					procurar();
+				} catch (ClienteNaoEncontradoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (CPFInvalidoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		});
+		btnProcurar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnProcurar.setBounds(232, 18, 89, 23);
+		panel.add(btnProcurar);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(10, 110, 484, 215);
-		frame.getContentPane().add(panel_1);
+		frmTelaAtualizarCliente.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel label = new JLabel("NOME: ");
@@ -103,16 +117,6 @@ public class TelaAtualizarCliente {
 		textNome.setColumns(10);
 		textNome.setBounds(76, 8, 376, 20);
 		panel_1.add(textNome);
-		
-		JLabel label_1 = new JLabel("CPF: ");
-		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_1.setBounds(10, 36, 46, 14);
-		panel_1.add(label_1);
-		
-		textCPF = new JTextField();
-		textCPF.setColumns(10);
-		textCPF.setBounds(76, 33, 143, 20);
-		panel_1.add(textCPF);
 		
 		JLabel label_2 = new JLabel("SEXO: ");
 		label_2.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -126,12 +130,12 @@ public class TelaAtualizarCliente {
 		
 		JLabel label_3 = new JLabel("TELEFONE: ");
 		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_3.setBounds(10, 61, 69, 14);
+		label_3.setBounds(10, 36, 69, 14);
 		panel_1.add(label_3);
 		
 		textTelefone = new JTextField();
 		textTelefone.setColumns(10);
-		textTelefone.setBounds(76, 58, 143, 20);
+		textTelefone.setBounds(76, 33, 143, 20);
 		panel_1.add(textTelefone);
 		
 		JLabel label_4 = new JLabel("RUA: ");
@@ -176,7 +180,7 @@ public class TelaAtualizarCliente {
 		
 		Panel panel_2 = new Panel();
 		panel_2.setBounds(10, 331, 484, 54);
-		frame.getContentPane().add(panel_2);
+		frmTelaAtualizarCliente.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		JButton btnAtualizar = new JButton("ATUALIZAR");
@@ -223,46 +227,29 @@ public class TelaAtualizarCliente {
 
 	}
 	
-	
+	public void procurar() throws ClienteNaoEncontradoException, CPFInvalidoException{
+		String cpf = textCPF.getText();
+		cliente = fachada.procurarCliente(cpf);
+		
+		textNome.setText(cliente.getNome());
+		textTelefone.setText(cliente.getNumeroTelefone());
+		textSexo.setText(cliente.getSexo());
+		
+	}
 	public void atualizar() throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException {
-		try{
-		/*
+		
 		String nome = textNome.getText();
-		String cpf = textCPF.getText();
 		String sexo = textSexo.getText();
-		String numeroTelefone = textTelefone.getText();
-		String rua = textRua.getText();
-		String complemento =textComplemento.getText();
-		String cidade = textCidade.getText();
-		String bairro = textBairro.getText();
-		*/
-			
+		String telefone = textTelefone.getText();
 		String cpf = textCPF.getText();
-		int id = Integer.parseInt(textID.getText());
-		
-		Cliente c = new Cliente(id);
-		cliente = fachada.procurarCliente(c);
-		
-		cliente.setNome(textNome.getText());
-		cliente.setCpf(textCPF.getText());
-		cliente.setSexo(textSexo.getText());
-		cliente.setNumeroTelefone(textTelefone.getText());
-		cliente.getEndereco().setRua(textRua.getText());
-		cliente.getEndereco().setComplemento(textComplemento.getText());
-		cliente.getEndereco().setCidade(textCidade.getText());
-		cliente.getEndereco().setBairro(textBairro.getText());
-		
-	    fachada.atualizarCliente(c);
+		try{
+			
+			cliente = new Cliente(nome,cpf,sexo,telefone);
+			fachada.atualizarCliente(cliente);
+			
 		JOptionPane.showMessageDialog(null, "Cliente Atualizado com Sucesso");
 		limparCampos();
 		
-		}catch(ClienteNaoEncontradoException e){
-		
-		}catch (CPFInvalidoException e) {
-			
-			
-		}catch (CampoObrigatorioException e) {
-			
 		}catch (Exception e) {
 			
 		}

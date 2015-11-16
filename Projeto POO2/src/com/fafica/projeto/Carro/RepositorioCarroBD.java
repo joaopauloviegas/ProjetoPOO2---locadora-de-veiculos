@@ -72,7 +72,7 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	@Override
 	public void atualizarCarro(Carro carro) {
 		
-		String sql = "update carro set nome=?,ano=?,quantidadePorta=?,quilometragem=?,categoria=? where placa=? or id=?" ;              
+		String sql = "update carro set nome=?,ano=?,quantidadePorta=?,quilometragem=?,categoria=?,placa=? where placa=? " ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
@@ -84,7 +84,8 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 			stm.setDouble(4, carro.getQuilometragem());
 			stm.setString(5, carro.getCategoria());
 			stm.setString(6, carro.getPlaca());
-			stm.setInt(7, carro.getId());
+			stm.setString(7, carro.getPlaca());
+			
 			
 			stm.executeUpdate();
 		
@@ -96,14 +97,14 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	}
 
 	@Override
-	public boolean removerCarro(Carro carro) {
-		String sql = "delete carro where id=? or placa=?" ;              
+	public boolean removerCarro(String placa) {
+		String sql = "delete carro where placa=?" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			
-			stm.setInt(1, carro.getId());
-			stm.setString(2, carro.getPlaca());
+			stm.setString(1, placa);
+			
 			stm.executeUpdate();
 		
 		}catch(SQLException e){
@@ -120,40 +121,41 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	
 	///METODO PROCURAR CARRO
 	@Override
-	public Carro procurarCarro(Carro carro)throws CarroNaoEncontradoException {
-		String sql = "select * from carro where id=? or placa=?";
+	public Carro procurarCarro(String placa)throws CarroNaoEncontradoException {
+		String sql = "select * from carro where placa=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
-			stm.setInt(1, carro.getId());
-			stm.setString(2, carro.getPlaca());
+			stm.setString(1, placa);
 			
-			JOptionPane.showMessageDialog(null, "\nID: "+carro.getId()+
-												"\nNOME: "+carro.getNome()+
-												"\nANO: "+carro.getAno()+
-												"\nPLACA: "+carro.getPlaca()+
-												"\nPORTAS: "+carro.getQuantidadePorta()+
-												"\nKM: "+carro.getQuilometragem()+
-												"\nCATEGORIA: " +carro.getCategoria());
-			/*
 			ResultSet rs = stm.executeQuery();
-			ArrayList<Carro> lista= new ArrayList<Carro>();
+			
+			ArrayList<Carro> procurar= new ArrayList<Carro>();
 			
 			while(rs.next()){
 				
-				Carro c = new Carro(rs.getInt("id"),
+				Carro carro = new Carro(rs.getInt("id"),
 									rs.getString("nome"),
 									rs.getInt("ano"),
 									rs.getString("placa"),
 									rs.getInt("quantidadePorta"),
 									rs.getDouble("quilometragem"),
 									rs.getString("categoria"));
-				System.out.println(lista.add(c));
-			}*/
-			//JOptionPane.showMessageDialog(null, lista);
+				return carro;
+				
+			}
+			
 			stm.close();
-			//rs.close();
-		
+			rs.close();
+			
+			/*JOptionPane.showMessageDialog(null, "\nID: "+carro.getId()+
+												  "\nNOME: "+carro.getNome()+
+												  "\nANO: "+carro.getAno()+
+												  "\nPLACA: "+carro.getPlaca()+
+												  "\nPORTAS: "+carro.getQuantidadePorta()+
+												  "\nKM: "+carro.getQuilometragem()+
+												  "\nCATEGORIA: " +carro.getCategoria());  */
+												
 			
 		}catch(SQLException e){
 			System.out.println("Erro ao procurar"+e);
@@ -162,7 +164,8 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 			System.out.println(e);
 		}
 		desconecta();
-		return carro;
+		return null;
+		
 		
 	}// fim do metodo procurar
 

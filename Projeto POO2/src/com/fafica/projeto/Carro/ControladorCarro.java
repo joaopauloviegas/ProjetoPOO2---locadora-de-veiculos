@@ -41,25 +41,25 @@ public class ControladorCarro {
 	
 	
 	//METODDO REMOVER
-	public boolean removerCarro(Carro carro) throws CarroNaoEncontradoException,
+	public boolean removerCarro(String placa) throws CarroNaoEncontradoException,
 													CampoObrigatorioException,
 													IllegalArgumentException{
 		
-		if(carro == null) throw new IllegalArgumentException("Placa invalida");
-		if(carro.getPlaca().equals("")) throw new CampoObrigatorioException("placa");
+		if(placa == null) throw new IllegalArgumentException("Placa invalida");
+		if(placa.equals("")) throw new CampoObrigatorioException("placa");
 		
-		return this.repositorioCarro.removerCarro(carro);
+		return this.repositorioCarro.removerCarro(placa);
 	}
 	
 	
 	//METODO PROCURAR
-	public Carro procurarCarro(Carro carro) throws CarroNaoEncontradoException,
+	public Carro procurarCarro(String placa) throws CarroNaoEncontradoException,
 												   CampoObrigatorioException{
 		Carro c = null;
-		if(carro.getPlaca() == null) throw new CarroNaoEncontradoException();
-		if(carro.getPlaca().equals("")) throw new CampoObrigatorioException("placa");
+		if(placa == null) throw new CarroNaoEncontradoException();
+		if(placa.equals("")) throw new CampoObrigatorioException("placa");
 		
-		c = this.repositorioCarro.procurarCarro(carro);
+		c = this.repositorioCarro.procurarCarro(placa);
 		return c;
 	}
 	

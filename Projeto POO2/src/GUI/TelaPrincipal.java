@@ -6,6 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
+import com.fafica.projeto.Carro.TelaAtualizarCarro;
+import com.fafica.projeto.Carro.TelaCadastroCarro;
+import com.fafica.projeto.Carro.TelaProcurarCarro;
+import com.fafica.projeto.Carro.TelaRemoverCarro;
 import com.fafica.projeto.Cliente.TelaCadastroCliente;
 import com.fafica.projeto.Cliente.TelaRemoverCliente;
 
@@ -13,10 +17,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JLabel;
+import java.awt.Font;
 
 public class TelaPrincipal {
 
-	private JFrame frame;
+	private JFrame frmTelaPrincipal;
 
 	/**
 	 * Launch the application.
@@ -27,7 +33,7 @@ public class TelaPrincipal {
 			public void run() {
 				try {
 					TelaPrincipal window = new TelaPrincipal();
-					window.frame.setVisible(true);
+					window.frmTelaPrincipal.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -46,14 +52,15 @@ public class TelaPrincipal {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 708, 365);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmTelaPrincipal = new JFrame();
+		frmTelaPrincipal.setTitle("Tela Principal");
+		frmTelaPrincipal.setBounds(100, 100, 708, 365);
+		frmTelaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaPrincipal.getContentPane().setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 692, 21);
-		frame.getContentPane().add(menuBar);
+		frmTelaPrincipal.getContentPane().add(menuBar);
 		
 		JMenu mnCadastrar = new JMenu("CADASTRAR");
 		menuBar.add(mnCadastrar);
@@ -61,6 +68,12 @@ public class TelaPrincipal {
 		JMenuItem mntmCarro = new JMenuItem("Carro");
 		mntmCarro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
+				TelaCadastroCarro telaCadastro = new TelaCadastroCarro();
+				telaCadastro.frmTelaCadastroCarro.setVisible(true);
+				
+				
+				
 				
 			}
 		});
@@ -83,6 +96,12 @@ public class TelaPrincipal {
 		menuBar.add(mnAtualizar);
 		
 		JMenuItem mntmCarro_1 = new JMenuItem("Carro");
+		mntmCarro_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaAtualizarCarro telaAtualizar =  new TelaAtualizarCarro();
+				telaAtualizar.frmTelaAtualizarCarro.setVisible(true);
+			}
+		});
 		mnAtualizar.add(mntmCarro_1);
 		
 		JMenuItem mntmCliente_1 = new JMenuItem("Cliente");
@@ -95,6 +114,12 @@ public class TelaPrincipal {
 		menuBar.add(mnRemover);
 		
 		JMenuItem mntmCarro_2 = new JMenuItem("Carro");
+		mntmCarro_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaRemoverCarro telaRemover = new TelaRemoverCarro();
+				telaRemover.frmTelaRemoverCarro.setVisible(true);
+			}
+		});
 		mnRemover.add(mntmCarro_2);
 		
 		JMenuItem mntmCliente_2 = new JMenuItem("Cliente");
@@ -113,6 +138,12 @@ public class TelaPrincipal {
 		menuBar.add(mnProcurar);
 		
 		JMenuItem mntmCarro_3 = new JMenuItem("Carro");
+		mntmCarro_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaProcurarCarro telaProcurarCarro = new TelaProcurarCarro();
+				telaProcurarCarro.frame.setVisible(true);
+			}
+		});
 		mnProcurar.add(mntmCarro_3);
 		
 		JMenuItem mntmCliente_3 = new JMenuItem("Cliente");
@@ -120,6 +151,11 @@ public class TelaPrincipal {
 		
 		JMenuItem mntmSaidaDeVeiculo_3 = new JMenuItem("Saida de veiculo");
 		mnProcurar.add(mntmSaidaDeVeiculo_3);
+		
+		JLabel lblNewLabel = new JLabel("Locadora de veiculos");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 43));
+		lblNewLabel.setBounds(145, 110, 441, 99);
+		frmTelaPrincipal.getContentPane().add(lblNewLabel);
 	}
 
 }

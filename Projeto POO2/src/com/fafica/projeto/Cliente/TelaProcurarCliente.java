@@ -17,6 +17,7 @@ import java.awt.event.ActionEvent;
 public class TelaProcurarCliente {
 
 	private JFrame frmTelaProcurarCliente;
+	
 	private JTextField textCPF;
 	private JTextField textSexo;
 	private JTextField textTelefone;
@@ -24,6 +25,7 @@ public class TelaProcurarCliente {
 	private JTextField textComplemento;
 	private JTextField textBairro;
 	private JTextField textCidade;
+	private JTextField textNome;
 
 	/**
 	 * Launch the application.
@@ -84,11 +86,6 @@ public class TelaProcurarCliente {
 		JLabel lblNome = new JLabel("Nome:");
 		lblNome.setBounds(10, 84, 46, 14);
 		panel.add(lblNome);
-		
-		JTextField textNome = new JTextField();
-		textNome.setBounds(59, 81, 631, 20);
-		panel.add(textNome);
-		textNome.setColumns(10);
 		
 		JLabel lblSexo = new JLabel("Sexo:");
 		lblSexo.setBounds(244, 112, 46, 14);
@@ -159,6 +156,11 @@ public class TelaProcurarCliente {
 		lblDadosCadastrais.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblDadosCadastrais.setBounds(10, 59, 120, 14);
 		panel.add(lblDadosCadastrais);
+		
+		textNome = new JTextField();
+		textNome.setBounds(59, 81, 327, 20);
+		panel.add(textNome);
+		textNome.setColumns(10);
 	}
 	
 	public void procurar(){
@@ -169,12 +171,16 @@ public class TelaProcurarCliente {
 			String cpf = textCPF.getText();
 			Cliente cliente = fachada.procurarCliente(cpf);
 			
+			
+			textNome.setText(cliente.getNome());
 			textTelefone.setText(cliente.getNumeroTelefone());
 			textSexo.setText(cliente.getSexo());
-			//textRua.setText(cliente.getEndereco().getRua());
-			//textComplemento.setText(cliente.getEndereco().getComplemento());
-			//textBairro.setText(cliente.getEndereco().getBairro());
-			//textCidade.setText(cliente.getEndereco().getCidade());
+			
+			// ta faltando retornar o endereco e setar no text
+			/*textRua.setText(cliente.getEndereco().getRua());
+			textComplemento.setText(cliente.getEndereco().getComplemento());
+			textBairro.setText(cliente.getEndereco().getBairro());
+			textCidade.setText(cliente.getEndereco().getCidade());*/
 			
 		}catch(Exception e){
 			

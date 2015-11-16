@@ -38,7 +38,7 @@ public class RepositorioCadastroSaidaDeVeiculosBD implements IRpositorioCadastro
 	//METODO PARA CADASTRAR UMA NOVA SAIDA DE VEICULO	
 	@Override
 	public void cadastrarSaidaDeVeiculo(CadastroSaidaDeVeiculos saidaVeiculo) {
-		String sql = "INSERT INTO saidaveiculo (id,cliente,funcionario,data,hora,quilometragem,valor,carro) VALUES (?,?,?,?,?,?,?,?)" ;              
+		String sql = "INSERT INTO saidaveiculo (id,cliente,funcionario,data,hora,valor,carro) VALUES (?,?,?,?,?,?,?)" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
@@ -48,9 +48,8 @@ public class RepositorioCadastroSaidaDeVeiculosBD implements IRpositorioCadastro
 			stm.setString(3, saidaVeiculo.getFuncionario().toString());
 			stm.setString(4, saidaVeiculo.getData());
 			stm.setString(5, saidaVeiculo.getHora());
-			stm.setDouble(6, saidaVeiculo.getQuilometragem());
-			stm.setDouble(7, saidaVeiculo.getValor());
-			stm.setString(8, saidaVeiculo.getCarro().toString());
+			stm.setDouble(6, saidaVeiculo.getValor());
+			stm.setString(7, saidaVeiculo.getCarro().toString());
 			
 			
 			stm.executeUpdate();
