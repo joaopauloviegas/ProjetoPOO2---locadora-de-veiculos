@@ -20,6 +20,8 @@ import com.fafica.projeto.Cliente.Cliente;
 import com.fafica.projeto.Cliente.ClienteJaCadastradoException;
 import com.fafica.projeto.Cliente.ClienteNaoEncontradoException;
 import com.fafica.projeto.Cliente.ControladorCliente;
+import com.fafica.projeto.Endereco.ControladorEndereco;
+import com.fafica.projeto.Endereco.Endereco;
 import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
 import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Funcionario.ControladorFuncionario;
@@ -33,6 +35,7 @@ public class Fachada {
 	private ControladorCadastroSaidaDeVeiculos controladorSaidaDeveiculos;
 	private ControladorCadastroDeReserva controladorcadastrodeReserva;
 	private ControladorFuncionario controladorFuncionario;
+	private ControladorEndereco controladorEndereco;
 	
 	
 	public Fachada(){
@@ -41,6 +44,7 @@ public class Fachada {
 		this.controladorSaidaDeveiculos = new ControladorCadastroSaidaDeVeiculos();
 		this.controladorFuncionario = new ControladorFuncionario();
 		this.controladorcadastrodeReserva = new ControladorCadastroDeReserva();
+		this.controladorEndereco = new ControladorEndereco();
 		
 	}// fim do construtor
 	
@@ -125,7 +129,7 @@ public class Fachada {
 	
 	
 		//CADASTRO FUNCIONARIO
-	    public void cadastrarFuncionario(Funcionario funcionario) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, IllegalArgumentException, CPFInvalidoException{
+	    public void cadastrarFuncionario(Funcionario funcionario) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, IllegalArgumentException, CPFInvalidoException, SQLException{
 		this.controladorFuncionario.adicionar(funcionario);
 	    }
 		
@@ -168,6 +172,11 @@ public class Fachada {
 	    //LISTAR CADASTRODERESERVA
 	    public ArrayList<CadastroDeReserva> listarCadastroDeReserva(){
 	    	return null;
+	    }
+	    
+	    //ENDERECO
+	    public void cadastrarEndereco(Endereco endereco) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, SQLException{
+	    	this.controladorEndereco.adicionar(endereco);
 	    }
 	
 }// fim da classe

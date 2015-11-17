@@ -1,5 +1,6 @@
 package com.fafica.projeto.Funcionario;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto.Cliente.CPFInvalidoException;
@@ -19,13 +20,13 @@ public class ControladorFuncionario {
 		this.controladorEndereco = new ControladorEndereco();
 	}
 	
-	public void adicionar(Funcionario funcionario) throws IllegalArgumentException, EnderecoJaCadastradoException, CampoObrigatorioException, CPFInvalidoException{
+	public void adicionar(Funcionario funcionario) throws IllegalArgumentException, EnderecoJaCadastradoException, CampoObrigatorioException, CPFInvalidoException, SQLException{
 		if(funcionario == null) throw new IllegalArgumentException("Cliente inv[alido");
-		if(!ValidarCPF.validaCPF(funcionario.getCpf())) throw new CPFInvalidoException();
+		//if(!ValidarCPF.validaCPF(funcionario.getCpf())) throw new CPFInvalidoException();
 		if(funcionario.getNome().equals("")) throw new CampoObrigatorioException();
 		
 		this.repositorioFuncionario.adicionar(funcionario);		
-		this.controladorEndereco.adicionar(funcionario.getEndereco());
+		
 	}
 	
 	public void atualizar(Funcionario funcionario) throws EnderecoNaoEncontradoException, CampoObrigatorioException, CPFInvalidoException{
@@ -34,7 +35,7 @@ public class ControladorFuncionario {
 		if(funcionario.getNome().equals("")) throw new CampoObrigatorioException();
 		
 		this.repositorioFuncionario.atualizar(funcionario);
-		this.controladorEndereco.atualizar(funcionario.getEndereco());
+		
 	}
 	
 	public void remover(Integer id) throws EnderecoNaoEncontradoException{

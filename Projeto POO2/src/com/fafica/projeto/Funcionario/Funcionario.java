@@ -6,15 +6,14 @@ public class Funcionario {
 	
 	private String nome;
 	private String cpf;
-	private Endereco endereco;
 	private Integer id;
 	
 	
-	public Funcionario(String nome,String cpf,Endereco endereco){
+	public Funcionario(String nome,String cpf){
 		this.id = 0;
 		this.nome = nome;
 		this.cpf = cpf;
-		this.endereco = endereco;
+		
 	}
 	
 	public Funcionario(Integer id, String nome, String cpf){
@@ -37,12 +36,7 @@ public class Funcionario {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+	
 	public Integer getId() {
 		return id;
 	}
@@ -51,7 +45,7 @@ public class Funcionario {
 	}
 	@Override
 	public String toString() {
-		return "Funcionario [nome=" + nome + ", cpf=" + cpf + ", endereco=" + endereco + ", id=" + id + "]";
+		return "Funcionario [nome=" + nome + ", cpf=" + cpf + " , id=" + id + "]";
 	}
 	
 	

@@ -1,5 +1,6 @@
 package com.fafica.projeto.Endereco;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class ControladorEndereco {
@@ -7,11 +8,11 @@ public class ControladorEndereco {
 	private IRepositorioEndereco repositorioEndereco;
 	
 	public ControladorEndereco(){
-		this.repositorioEndereco = new RepositorioEndereco();
+		this.repositorioEndereco = new RepositorioEnderecoBD();
 	}
 	
 	public void adicionar(Endereco endereco)throws EnderecoJaCadastradoException,
-													CampoObrigatorioException{
+													CampoObrigatorioException, SQLException{
 		if(endereco == null)throw new IllegalArgumentException("Endereco inválido");
 		if(endereco.getBairro().equals(""))throw new CampoObrigatorioException();
 		

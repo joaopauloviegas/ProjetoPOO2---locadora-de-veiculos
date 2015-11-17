@@ -19,7 +19,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try{
-			 con = DriverManager.getConnection(url,"system","91737660");
+			 con = DriverManager.getConnection(url,"system","91835759ga");
 			 
 		}catch(SQLException sql){
 			System.out.println("Erro na conexão" + sql);
@@ -35,8 +35,8 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do desconecta
 	
 	public void adicionar(Funcionario funcionario){
-		String query = "INSERT INTO FUNCIONARIO(NOME,CPF,ENDERECO)"
-							+"VALUES ('"+funcionario.getNome()+"', '"+funcionario.getCpf()+"','"+funcionario.getEndereco()+"')";
+		String query = "INSERT INTO funcionario(NOME,CPF)"
+							+"VALUES ('"+funcionario.getNome()+"', '"+funcionario.getCpf()+"')";
 		conecta();
 			try{
 				stm = con.createStatement();
@@ -49,14 +49,13 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do adicionar
 	
 	public void atualizar(Funcionario funcionario){
-		String query = "UPDATE FUNCIONARIO SET NOME=?,CPF=?,ENDERECO=? WHERE CPF=?";
+		String query = "UPDATE FUNCIONARIO SET NOME=?,CPF=? WHERE CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
 			stm.setString(1, funcionario.getNome());
 			stm.setString(2, funcionario.getCpf());
-			stm.setString(3, funcionario.getEndereco().toString());
-			stm.setString(4, funcionario.getCpf());
+			stm.setString(3, funcionario.getCpf());
 			stm.executeUpdate();
 		} catch (SQLException sql){
 			System.out.println("Erro no atualizar" +sql);
@@ -74,7 +73,6 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 		} catch (SQLException sql){
 			System.out.println("Erro no atualizar" +sql);
 		}
-		
 	}//fim do remover
 
 	@Override
@@ -93,8 +91,8 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 			ResultSet rs = stm.executeQuery();
 			
 			while(rs.next()){
-				Funcionario funcionario = new Funcionario(rs.getString("NOME"),rs.getString("CPF"), new Endereco(rs.getString("rua"),rs.getString("bairro"),rs.getString("complemento"),rs.getString("cidade")));
-				lista.add(funcionario);	
+				//Funcionario funcionario = new Funcionario(rs.getString("NOME"),rs.getString("CPF"), new Endereco(rs.getString("rua"),rs.getString("bairro"),rs.getString("complemento"),rs.getString("cidade")));
+				//lista.add(funcionario);	
 			}
 			
 			stm.close();
