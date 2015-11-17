@@ -65,8 +65,8 @@ public class ControladorCliente {
 		}
 		return cliente;
 		*/
-		this.repositorioClienteBD.procurarCliente(cpf);
-	return null;
+	return	this.repositorioClienteBD.procurarCliente(cpf);
+	//return null;
 	}
 	
 	

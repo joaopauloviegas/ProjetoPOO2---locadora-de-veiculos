@@ -12,11 +12,10 @@ public class CadastroSaidaDeVeiculos {
 	private String data;
 	private String hora;
 	private Carro carro;
-	private double quilometragem;
 	private double valor;
 	
 	
-	public CadastroSaidaDeVeiculos(int id, Cliente cliente,Funcionario funcionario,String data,String hora,Carro carro, double quilometragem,double valor) {
+	public CadastroSaidaDeVeiculos(int id, Cliente cliente,Funcionario funcionario,String data,String hora,Carro carro,double valor) {
 		
 		this.id = id;
 		this.cliente = cliente;
@@ -24,11 +23,10 @@ public class CadastroSaidaDeVeiculos {
 		this.data = data;
 		this.hora = hora;
 		this.carro = carro;
-		this.quilometragem = quilometragem;
 		this.valor = valor;
 	}
 	
-	public CadastroSaidaDeVeiculos(Cliente cliente,Funcionario funcionario, String data,String hora,Carro carro, double quilometragem,double valor) {
+	public CadastroSaidaDeVeiculos(Cliente cliente,Funcionario funcionario, String data,String hora,Carro carro,double valor) {
 		
 		
 		this.cliente = cliente;
@@ -36,7 +34,6 @@ public class CadastroSaidaDeVeiculos {
 		this.data = data;
 		this.hora = hora;
 		this.carro = carro;
-		this.quilometragem = quilometragem;
 		this.valor = valor;
 	}
 	
@@ -71,12 +68,6 @@ public class CadastroSaidaDeVeiculos {
 	public void setCarro(Carro carro) {
 		this.carro = carro;
 	}
-	public double getQuilometragem() {
-		return quilometragem;
-	}
-	public void setQuilometragem(double quilometragem) {
-		this.quilometragem = quilometragem;
-	}
 	public double getValor() {
 		return valor;
 	}
@@ -97,7 +88,6 @@ public class CadastroSaidaDeVeiculos {
 				+ "\nCodigo Locacao: " + id 
 				+ "\nCliente: " + cliente.getNome() 
 				+ "\nData: " + data
-				+ "\nQuilometragem: " + quilometragem 
 				+ "\nValor: " + valor
 				+"\nFuncionario: " + funcionario;
 	}

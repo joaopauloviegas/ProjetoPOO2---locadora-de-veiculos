@@ -68,12 +68,12 @@ public class Fachada {
 		controladorCarro.atualizarCarro(carro);
 	}
 	//METODO REMOVER PARA CARRO
-	public void removerCarro(Carro carro) throws IllegalArgumentException, CarroNaoEncontradoException, CampoObrigatorioException{
-		controladorCarro.removerCarro(carro);
+	public void removerCarro(String placa) throws IllegalArgumentException, CarroNaoEncontradoException, CampoObrigatorioException{
+		controladorCarro.removerCarro(placa);
 	}
 	//METODO PROCURAR PARA CARRO
-	public Object procurarCarro(Carro carro) throws CarroNaoEncontradoException, CampoObrigatorioException{
-		return controladorCarro.procurarCarro(carro);
+	public Carro procurarCarro(String placa) throws CarroNaoEncontradoException, CampoObrigatorioException{
+		return controladorCarro.procurarCarro(placa);
 	}
 	//METODO LISTAR PARA CARRO
 	public ArrayList<Carro> listarCarro() throws SQLException, CarroNaoEncontradoException{

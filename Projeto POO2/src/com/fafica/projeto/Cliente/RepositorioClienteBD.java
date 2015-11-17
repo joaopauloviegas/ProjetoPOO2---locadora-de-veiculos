@@ -71,20 +71,18 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 	@Override
 	public void atualizarCliente(Cliente cliente) {
 		
-		String sql = "update cliente set nome=?,cpf=?,sexo=?,numeroTelefone=?,endereco=? where id=? or cpf=? or nome=?" ;              
+		String sql = "update cliente set nome=?,cpf=?,sexo=?,numeroTelefone=?,endereco=? where cpf=?" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			
 			
 			stm.setString(1, cliente.getNome());
-			//stm.setString(2, cliente.getCpf());
-			//stm.setString(3, cliente.getSexo());
-			//stm.setString(4, cliente.getNumeroTelefone());
-			//stm.setString(5, cliente.getEndereco().toString());
-			//stm.setInt(6, cliente.getId());
-			//stm.setString(7, cliente.getCpf());
-			//stm.setString(8, cliente.getNome());
+			stm.setString(2, cliente.getCpf());
+			stm.setString(3, cliente.getSexo());
+			stm.setString(4, cliente.getNumeroTelefone());
+			stm.setString(5, cliente.getEndereco().toString());
+			stm.setString(6, cliente.getCpf());
 			stm.executeUpdate();
 			
 		
@@ -136,16 +134,32 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			ResultSet rs = stm.executeQuery();
 			
 			ArrayList<Cliente> procurar = new ArrayList<Cliente>();
-			 Cliente cliente;
+			
 	       while(rs.next()){
 	    	   
-	    	   return new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
-	        	/*JOptionPane.showMessageDialog(null, rs.getString(1)+"\nNome: "+
+	    	   String nome = rs.getString("nome");
+	    	   String cpf1 = rs.getString("cpf");
+	    	   String sexo = rs.getString("sexo");
+	    	   String numeroTelefone = rs.getString("numeroTelefone");
+	    	   String endereco = rs.getString("endereco");
+	    	   //String bairro =rs.getString("bairro");
+	    	   //String complemento = rs.getString("complemento");
+	    	   //String cidade = rs.getString("cidade");
+	    	   
+	    	   Cliente cliente = new Cliente(nome, cpf1, sexo, numeroTelefone);
+	    	   
+	    	   System.out.println(cliente);
+	    	   //Endereco endereco = new Endereco(rua, bairro, complemento, cidade);
+	    	   //cliente.setEndereco(endereco);
+	    	   
+	    	   return cliente;
+	    	   
+	    	   /*JOptionPane.showMessageDialog(null, rs.getString(1)+"\nNome: "+
 	        			                            rs.getString ("nome")+"\nCPF: "+
 	        			                            rs.getString("cpf")+"\nSexo: "+
 	        			                            rs.getString("sexo")+"\nTelefone: "+
 	        			                            rs.getString("numerotelefone")+"\n"+
-	        			                            rs.getString("endereco"));  */
+	        			                            rs.getString("endereco")); */
 	    	  // cliente = new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
 	    	   //procurar.add(cliente);
 	    	
