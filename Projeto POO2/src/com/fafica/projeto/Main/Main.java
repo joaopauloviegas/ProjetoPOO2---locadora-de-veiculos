@@ -102,10 +102,10 @@ public class Main {
 		 
 		
 		
-		Endereco endereco = new Endereco("Travessa Pau Brasil","06958005480","254","1 Andar","Kennedy","Caruaru");
+		Endereco endereco = new Endereco("Travessa Pau Brasil","06958005450","254","1 Andar","Kennedy","Caruaru");
 		fachada.cadastrarEndereco(endereco);
 		
-		Funcionario funcionario = new Funcionario("Bina Oliveira","06958005480");
+		Funcionario funcionario = new Funcionario("Bina Oliveira","06958005450");
 		fachada.cadastrarFuncionario(funcionario);
 		//fachada.atualizarFuncionario(funcionario);
 		
