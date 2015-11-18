@@ -24,8 +24,11 @@ import javax.swing.JSpinner;
 import javax.swing.JList;
 import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.imageio.ImageTranscoder;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class TelaCadastroSaidaVeiculo {
 
@@ -35,9 +38,9 @@ public class TelaCadastroSaidaVeiculo {
 	private JTextField textDiasComCarro;
 	private JTextField textValorTotal;
 	private JTextField textPlaca;
-	private JTextField textCpf;
-	private JTextField textCpfFuncionario;
-
+	private JTextField textNomeCliente;
+	private JTextField textNomeFuncionario;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -84,108 +87,122 @@ public class TelaCadastroSaidaVeiculo {
 		panel.add(lblCliente);
 		
 		JLabel lblVeiculo = new JLabel("Placa do veiculo:");
-		lblVeiculo.setBounds(10, 62, 86, 14);
+		lblVeiculo.setBounds(10, 62, 108, 14);
 		panel.add(lblVeiculo);
 		
 		JLabel lblTanqueCombustivel = new JLabel("Tanque Combustivel:");
-		lblTanqueCombustivel.setBounds(204, 90, 112, 14);
+		lblTanqueCombustivel.setBounds(303, 11, 118, 14);
 		panel.add(lblTanqueCombustivel);
 		
 		textCombustivel = new JTextField();
-		textCombustivel.setBounds(315, 87, 138, 20);
+		textCombustivel.setBounds(431, 8, 138, 20);
 		panel.add(textCombustivel);
 		textCombustivel.setColumns(10);
 		
 		JLabel lblValorDiaria = new JLabel("Valor diaria:");
-		lblValorDiaria.setBounds(10, 90, 67, 14);
+		lblValorDiaria.setBounds(10, 90, 88, 14);
 		panel.add(lblValorDiaria);
 		
 		textValorDiaria = new JTextField();
-		textValorDiaria.setBounds(76, 87, 86, 20);
+		textValorDiaria.setBounds(98, 87, 86, 20);
 		panel.add(textValorDiaria);
 		textValorDiaria.setColumns(10);
 		
 		JLabel lblPevis = new JLabel("Dias com carro:");
-		lblPevis.setBounds(10, 118, 86, 14);
+		lblPevis.setBounds(10, 118, 88, 14);
 		panel.add(lblPevis);
 		
 		textDiasComCarro = new JTextField();
-		textDiasComCarro.setBounds(95, 115, 67, 20);
+		textDiasComCarro.setBounds(117, 115, 67, 20);
 		panel.add(textDiasComCarro);
 		textDiasComCarro.setColumns(10);
 		
 		JLabel lblValorTotal = new JLabel("Valor Total:");
-		lblValorTotal.setBounds(10, 143, 56, 14);
+		lblValorTotal.setBounds(10, 143, 78, 14);
 		panel.add(lblValorTotal);
 		
 		textValorTotal = new JTextField();
-		textValorTotal.setBounds(76, 140, 86, 20);
+		textValorTotal.setBounds(98, 140, 86, 20);
 		panel.add(textValorTotal);
 		textValorTotal.setColumns(10);
 		
 		textPlaca = new JTextField();
-		textPlaca.setBounds(106, 59, 131, 20);
+		textPlaca.setBounds(128, 59, 131, 20);
 		panel.add(textPlaca);
 		textPlaca.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setBounds(603, 169, 89, 23);
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try {
+					cadastro();
+				} catch (ClienteNaoEncontradoException | CPFInvalidoException | CarroNaoEncontradoException
+						| CampoObrigatorioException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+			}
+		});
+		btnCadastrar.setBounds(584, 169, 108, 23);
 		panel.add(btnCadastrar);
 		
-		textCpf = new JTextField();
-		textCpf.setBounds(76, 8, 161, 20);
-		panel.add(textCpf);
-		textCpf.setColumns(10);
+		textNomeCliente = new JTextField();
+		textNomeCliente.setBounds(98, 8, 161, 20);
+		panel.add(textNomeCliente);
+		textNomeCliente.setColumns(10);
 		
 		JLabel lblFuncionario = new JLabel("Funcionario:");
-		lblFuncionario.setBounds(10, 37, 67, 14);
+		lblFuncionario.setBounds(10, 37, 86, 14);
 		panel.add(lblFuncionario);
 		
-		textCpfFuncionario = new JTextField();
-		textCpfFuncionario.setBounds(76, 34, 161, 20);
-		panel.add(textCpfFuncionario);
-		textCpfFuncionario.setColumns(10);
+		textNomeFuncionario = new JTextField();
+		textNomeFuncionario.setBounds(98, 34, 161, 20);
+		panel.add(textNomeFuncionario);
+		textNomeFuncionario.setColumns(10);
 	}//  fim do main
 	
 	public void cadastro() throws ClienteNaoEncontradoException, CPFInvalidoException, CarroNaoEncontradoException, CampoObrigatorioException{
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
 		
-		String cpf = textCpf.getText();
-		String cpfFuncionario = textCpfFuncionario.getText();
-		String placa = textPlaca.getText();
 		
 		int valorDiaria = Integer.parseInt(textValorDiaria.getText());
 		int diasComCarro = Integer.parseInt(textDiasComCarro.getText());
 		int valorTotal = valorDiaria * diasComCarro;
+		
 		String valorTotalString = Integer.toString(valorTotal);
+		String nomeCliente = textNomeCliente.getText();
+		String nomeFuncionario = textNomeFuncionario.getText();
+		String placa = textPlaca.getText();
+		String combustivel = textCombustivel.getText();
 		
 		
 		//pegando data e hora
-		 String data = "dd/MM/yyyy";  
-		 String hora = "h:mm - a";  
-		 String data1, hora1;  
+		 String data1 = "dd/MM/yyyy";  
+		 String hora1 = "h:mm - a";  
+		 String data, hora;  
 		   
 		 java.util.Date agora = new java.util.Date();;  
-		 SimpleDateFormat formata = new SimpleDateFormat(data);  
-		 data1 = formata.format(agora);  
-		 formata = new SimpleDateFormat(hora);  
-		 hora1 = formata.format(agora);
+		 SimpleDateFormat formata = new SimpleDateFormat(data1);  
+		 data = formata.format(agora);  
+		 formata = new SimpleDateFormat(hora1);  
+		 hora = formata.format(agora);
 		 
+		 int id = 0;
+		 ++id;
+		 
+
 		 try{
-			 Cliente cliente = fachada.procurarCliente(cpf);
-			 Carro carro = fachada.procurarCarro(placa);
-			 textValorTotal.setText(valorTotalString);
-			 
-			 Endereco endereco = new Endereco("Terra nova", "Boa vista 2", "Prox a praça","Caruaru" );
-			 Funcionario funcionario = new Funcionario("João paulo", "099.487.664-58",endereco);
-			 
-			 
-			 int id = 0;
-			 ++id;
-			 
-			 CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(id,cliente, funcionario, data1, hora1, carro, valorTotal);
+			 CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(id,nomeCliente, nomeFuncionario, data, hora, placa, valorTotal, combustivel);
+
 			 fachada.cadastarSaidaDeVeiculos(saidaVeiculo);
+			 textValorTotal.setText(valorTotalString);
+			 			 
+	
+			
+			
+			// JOptionPane.showMessageDialog(null, "Saida Cadastrada com sucesso!");
 			 
 		 }catch(Exception e){
 			 

@@ -176,36 +176,37 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 	
 	@Override
 	public ArrayList<Carro> listarCarro() throws SQLException, CarroNaoEncontradoException{
-		System.out.println("estou no repositorio");
-		ArrayList<Carro> listaCarro = new ArrayList<Carro>();
-		
 		
 		String sql = "select * from carro";
 		conecta();
 		PreparedStatement stm = con.prepareStatement(sql);
 	    ResultSet rs = stm.executeQuery();
+	    
+	    
+	   ArrayList<Carro> lista = new ArrayList<Carro>();
 		
 		try{
 											
 							
 			while(rs.next()){
-				listaCarro.add(new Carro(rs.getInt("id"),
+				Carro carro = new Carro(rs.getInt("id"),
 										rs.getString("nome"),
 										rs.getInt("ano"),
 										rs.getString("placa"), 
 										rs.getInt("quantidadePorta"),
 										rs.getDouble("quilometragem"),
-										rs.getString("categoria")));
-			
+										rs.getString("categoria"));
+				
+			lista.add(carro);
 				
 			}// fim do while
-			for (Carro carro : listaCarro) {
+			for (Carro carro : lista) {
 				System.out.println(carro);
 			}
-			 if (listaCarro.isEmpty()) {
+			 if (lista.isEmpty()) {
 	               throw new CarroNaoEncontradoException();
 	            } else {
-	                return  listaCarro;
+	                return  lista;
 	                
 	            }
 						 
@@ -213,8 +214,9 @@ public class RepositorioCarroBD implements IRepositorioCarro{
 		}catch(SQLException e){
 			System.out.println("Erro ao listar" + e);
 		}
+		return lista;
 		
-		return listaCarro;
+
 	}// fim do metodo
 
 	

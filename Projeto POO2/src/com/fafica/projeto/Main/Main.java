@@ -31,16 +31,22 @@ public class Main {
 		Fachada fachada = Fachada.getInstance();
 		 
 		
-		int id = 5;
-		 String nome = "POLO";
-		 int ano = 2015;
-		 String placa = "KKK-6789";
-		 int quantidadePorta = 2;
-		 double quilometragem = 7560;
-		 String categoria = "popular";
+	   	 //int id = 5;
+		 //String nome = "POLO";
+		 //int ano = 2015;
+		 //String placa = "KKK-6789";
+		 //int quantidadePorta = 2;
+		 //double quilometragem = 7560;
+		 //String categoria = "popular";
 		 //Carro carro = new Carro(id,nome,ano,placa,quantidadePorta,quilometragem,categoria);
-		 //fachada.listarCarro();
-		 String cpf = "264.975.198-31";
+		 
+		fachada.listarCarro();
+		
+		 
+		 
+		 
+		 
+		 // String cpf = "264.975.198-31";
 		 //fachada.listarCliente();
 		 //fachada.procurarCliente(cpf);
 		 /*//fachada.cadastarCarro(carro);
@@ -100,7 +106,7 @@ public class Main {
 		 
 		 
 		 
-		
+		/*
 		
 		
 		
@@ -115,6 +121,7 @@ public class Main {
 		CadastroDeReserva cadastrodeReserva = new CadastroDeReserva(new Cliente("Joao paulo","09948766458","masculino", "(81)99192-0532"), endereco , "30/12/2015",new Carro(5,"POLO",2015,"KKK-6789",2,7560,"Popular"),2,150.00);
 		fachada.cadastrarCadastroDeReserva(cadastrodeReserva);
 		
+		*/
 		
 		
 		

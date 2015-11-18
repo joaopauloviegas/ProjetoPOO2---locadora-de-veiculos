@@ -3,6 +3,7 @@ package com.fafica.projeto.CadastroSaidaDeVeiculos;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -38,27 +39,29 @@ public class RepositorioCadastroSaidaDeVeiculosBD implements IRpositorioCadastro
 	//METODO PARA CADASTRAR UMA NOVA SAIDA DE VEICULO	
 	@Override
 	public void cadastrarSaidaDeVeiculo(CadastroSaidaDeVeiculos saidaVeiculo) {
-		String sql = "INSERT INTO saidaveiculo (id,cliente,funcionario,data,hora,valor,carro) VALUES (?,?,?,?,?,?,?)" ;              
+		String sql = "INSERT INTO saidaVeiculo (id,nomecliente,nomefuncionario,data,hora,valor,placa,combustivel) VALUES (?,?,?,?,?,?,?,?)" ;              
 		conecta();
+		
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			
-			stm.setInt(1, saidaVeiculo.getId());
-			stm.setString(2,saidaVeiculo.getCliente().toString());
-			stm.setString(3, saidaVeiculo.getFuncionario().toString());
+			stm.setInt(1,saidaVeiculo.getId());
+			stm.setString(2,saidaVeiculo.getNomeCliente());
+			stm.setString(3, saidaVeiculo.getNomeFuncionario());
 			stm.setString(4, saidaVeiculo.getData());
 			stm.setString(5, saidaVeiculo.getHora());
 			stm.setDouble(6, saidaVeiculo.getValor());
-			stm.setString(7, saidaVeiculo.getCarro().toString());
+			stm.setString(7, saidaVeiculo.getPlaca());
+			stm.setString(8, saidaVeiculo.getCombustivel());
 			
 			
 			stm.executeUpdate();
 			
 			JOptionPane.showMessageDialog(null, "Saida cadastrada com sucesso!");
-			
+			System.out.println("repositorio");
 			
 		}catch(SQLException e){
-			JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR!","ERRO", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR!"+e,"ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		desconecta();
 		
@@ -66,20 +69,19 @@ public class RepositorioCadastroSaidaDeVeiculosBD implements IRpositorioCadastro
 	//METODO PARA ATUALIZAR SAIDA DE VEICULO
 	@Override
 	public void atualizarSaidaDeVeiculo(CadastroSaidaDeVeiculos saidaVeiculo) {
-		String sql = "update saidaveiculo set nome=?,ano=?,quantidadePorta=?,quilometragem=?,categoria=? where placa=? or id=?" ;              
+		String sql = "update saidaveiculo set nomecliente=?,nomefuncionario=?,data=?,hora=?,valor=?,combustivel=? where placa=?" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			
 			
-			stm.setInt(1, saidaVeiculo.getId());
-			stm.setString(2,saidaVeiculo.getCliente().toString());
-			stm.setString(3, saidaVeiculo.getFuncionario().toString());
-			stm.setString(4, saidaVeiculo.getData());
-			stm.setString(5, saidaVeiculo.getHora());
-			stm.setDouble(6, saidaVeiculo.getQuilometragem());
-			stm.setDouble(7, saidaVeiculo.getValor());
-			
+			stm.setString(1, saidaVeiculo.getNomeCliente());
+			stm.setString(2,saidaVeiculo.getNomeFuncionario());
+			stm.setString(3, saidaVeiculo.getData());
+			stm.setString(4, saidaVeiculo.getHora());
+			stm.setDouble(5, saidaVeiculo.getValor());
+			stm.setString(6, saidaVeiculo.getCombustivel());
+			stm.setString(7, saidaVeiculo.getPlaca());
 			stm.executeUpdate();
 		
 		}catch(SQLException e){
@@ -92,20 +94,68 @@ public class RepositorioCadastroSaidaDeVeiculosBD implements IRpositorioCadastro
 	
 	//METODO PARA REMOVER SAIDA DE VEICULO
 	@Override
-	public boolean removerSaidaDeVeiculo(CadastroSaidaDeVeiculos codigoLocacao) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean removerSaidaDeVeiculo(int id) {
+		String sql = "delete saidaveiculo where id=?" ;              
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(sql);
+			
+			stm.setInt(1, id);
+			
+			stm.executeUpdate();
+		
+		}catch(SQLException e){
+			System.out.println("Erro ao remover"+e);
+		}
+		
+		
+		desconecta();
+		return true;
 	}
 
 	
 	//METODO PARA PROCURAR SAIDA DE VEICULO
 	@Override
-	public CadastroSaidaDeVeiculos procurarSaidaDeVeiculo(CadastroSaidaDeVeiculos codigoLocacao) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	public CadastroSaidaDeVeiculos procurarSaidaDeVeiculo(String placa) {
+		String sql = "select * from saidaveiculo where placa=?";
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(sql);
 	
+			stm.setString(1, placa);
+			
+			ResultSet rs = stm.executeQuery();
+			
+			//ArrayList<CadastroSaidaDeVeiculos> procurar = new ArrayList<CadastroSaidaDeVeiculos>();
+			
+	       while(rs.next()){
+	    	   
+	    	   //id,nomecliente,nomefuncionario,data,hora,valor,placa,combustivel
+	    	    int id = rs.getInt("id");
+	    		String nomeCliente = rs.getString("nomeCliente");
+	    		String nomeFuncionario = rs.getString("nomeFuncionario");
+	    		String data = rs.getString("data");
+	    		String hora = rs.getString("hora");
+	    		String placa1 = rs.getString("placa");
+	    		double valor = rs.getDouble("valor");
+	    		String combustivel = rs.getString("combustivel");
+	   
+	    		CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(nomeCliente, nomeFuncionario, data, hora, placa1, valor, combustivel);
+	    	   
+	    	   return saidaVeiculo;
+	
+	       }
+	       
+	       stm.close();
+	       rs.close();
+	       
+		}catch(Exception e){
+			
+		}
+		desconecta();
+		return null;
+	}//fim do metodo procurar
+
 	//METODO PARA LISTAR SAIDA DE VEICULO
 	@Override
 	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaDeVeiculo() {
