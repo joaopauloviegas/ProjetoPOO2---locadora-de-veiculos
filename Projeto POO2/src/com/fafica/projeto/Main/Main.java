@@ -108,18 +108,17 @@ public class Main {
 		 
 		/*
 		
+		Endereco endereco = new Endereco("Travessa Pau Brasil","06958005450","254","1 Andar","Kennedy","Caruaru");
+		fachada.cadastrarEndereco(endereco);
 		
-		
-		Endereco endereco = new Endereco("Travessa Pau Brasil","Kennedy","","caruaru");
-		
-		Funcionario funcionario = new Funcionario("Bina Oliveira","123.123.32",endereco);
-		//fachada.cadastrarFuncionario(funcionario);
+		Funcionario funcionario = new Funcionario("Bina Oliveira","06958005450");
+		fachada.cadastrarFuncionario(funcionario);
 		//fachada.atualizarFuncionario(funcionario);
 		
 		//fachada.removerFuncionario(23);
 		
-		CadastroDeReserva cadastrodeReserva = new CadastroDeReserva(new Cliente("Joao paulo","09948766458","masculino", "(81)99192-0532"), endereco , "30/12/2015",new Carro(5,"POLO",2015,"KKK-6789",2,7560,"Popular"),2,150.00);
-		fachada.cadastrarCadastroDeReserva(cadastrodeReserva);
+		//CadastroDeReserva cadastrodeReserva = new CadastroDeReserva(new Cliente("Joao paulo","09948766458","masculino", "(81)99192-0532"), endereco , "30/12/2015",new Carro(5,"POLO",2015,"KKK-6789",2,7560,"Popular"),2,150.00);
+		//fachada.cadastrarCadastroDeReserva(cadastrodeReserva);
 		
 		*/
 		
