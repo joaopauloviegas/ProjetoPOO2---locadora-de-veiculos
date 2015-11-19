@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -13,17 +12,16 @@ import javax.swing.table.DefaultTableModel;
 import com.fafica.projeto.Fachada.Fachada;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.event.ActionEvent;
-import javax.swing.ListSelectionModel;
 
 public class TelaListarCliente {
 
+	private JFrame frame;
 	private JTable tableCliente;
 	private DefaultTableModel defaultTableModelCliente;
-	private JFrame frame;
-	private JButton btnListar;
-	private JTable tableClientes;
-
+	private Fachada fachada;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -44,6 +42,7 @@ public class TelaListarCliente {
 	 * Create the application.
 	 */
 	public TelaListarCliente() {
+		fachada = Fachada.getInstance();
 		initialize();
 	}
 
@@ -52,81 +51,62 @@ public class TelaListarCliente {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 802, 474);
+		frame.setBounds(100, 100, 746, 430);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		
-		JPanel panelTabelaCliente = new JPanel();
-		panelTabelaCliente.setBounds(10, 37, 766, 387);
-		frame.getContentPane().add(panelTabelaCliente);
-		panelTabelaCliente.setLayout(null);
-		
-		tableClientes = new JTable();
-		tableClientes.setToolTipText("");
-		tableClientes.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-		tableClientes.setModel(new DefaultTableModel(
-			new Object[][] {
-				{null, null, null, null, null, null, null, null, null},
-			},
-			new String[] {
-				"ID", "Nome", "CPF", "Sexo", "Telefone", "Rua", "Complemento", "Bairro", "Cidade"
-			}
-		));
-		tableClientes.setBounds(10, 11, 746, 365);
-		panelTabelaCliente.add(tableClientes);
-		
-		
-		
-		
-		/*JScrollPane scrollPaneTabelaCliente = new JScrollPane();
-		scrollPaneTabelaCliente.setBounds(10, 198, 613, 163);
-		frame.getContentPane().add(scrollPaneTabelaCliente);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 60, 710, 320);
+		frame.getContentPane().add(scrollPane);
 		
 		tableCliente = new JTable();
-		String colunaTabelaCliente[] = new String[] {"ID", "Nome", "CPF", "Sexo", "Telefone", "Rua","Complemento","Bairro","Cidade"};
+		String colunaTabelaCliente[] = new String[] {"Nome", "CPF", "Sexo", "Telefone", "Rua", "Numero","Complemento","Bairro","Cidade","CEP"};
 		defaultTableModelCliente = new DefaultTableModel(new Object[] []{ }, colunaTabelaCliente) {
 			public boolean isCellEditable(int row, int col) {
 				return false;
 			}
 		};
+	
 		tableCliente.setModel(defaultTableModelCliente);
-		scrollPaneTabelaCliente.setViewportView(tableCliente);
-		*/
+		scrollPane.setViewportView(tableCliente);
 		
-		btnListar = new JButton("listar");
-		btnListar.addActionListener(new ActionListener() {
+		JButton btnListarCliente = new JButton("Listar Clientes");
+		btnListarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			  listar();
+				try {
+					listarClientes();
+				} catch (SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
-		btnListar.setBounds(335, 11, 89, 23);
-		frame.getContentPane().add(btnListar);
+		btnListarCliente.setBounds(269, 11, 147, 23);
+		frame.getContentPane().add(btnListarCliente);
+	
+	
+	
+	
+	
+	
 	}
 	
-	private void limparTabelaCliente() {
-		defaultTableModelCliente.setNumRows(0);;
-	}
-	public void listar(){
-		Fachada fachada = new Fachada();
-		fachada.getInstance();
-		this.limparTabelaCliente();
+	public void listarClientes() throws SQLException{
+	
 		ArrayList<Cliente> clientes = fachada.listarCliente();
-		for (Cliente cliente : clientes) {
-			Vector vector = new Vector();
-			vector.add(cliente.getId());
-			vector.add(cliente.getNome());
-			vector.add(cliente.getCpf());
-			vector.add(cliente.getSexo());
-			vector.add(cliente.getNumeroTelefone());
-			vector.add(cliente.getEndereco().getRua());
-			vector.add(cliente.getEndereco().getComplemento());
-			vector.add(cliente.getEndereco().getBairro());
-			vector.add(cliente.getEndereco().getCidade());
-			tableClientes.add(vector);  
-			//defaultTableModelCliente.addRow(vector);
+		
+		try{
+			for (Cliente cliente : clientes) {
+				Vector vector =  new Vector<>();
+				vector.add(cliente.getNome());
+				vector.add(cliente.getCpf());
+				vector.add(cliente.getSexo());
+				vector.add(cliente.getNumeroTelefone());
+				defaultTableModelCliente.addRow(vector);
+			}// fim do fot
+		}catch(Exception e){
 			
-			
-		}
+		}//fim do try/catch
+	
 	}
-
-}
+}// fim da classe

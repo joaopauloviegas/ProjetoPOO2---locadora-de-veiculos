@@ -3,76 +3,27 @@ package com.fafica.projeto.Cliente;
 import com.fafica.projeto.Endereco.Endereco;
 
 public class Cliente {
-
-
-	private int id;
+	
     private String nome;
     private String cpf;
     private String sexo;
     private String numeroTelefone;
-    private Endereco endereco;
-	
-    public Cliente( String nome, String cpf, String sexo, String numeroTelefone, Endereco endereco) {
+  
+    public Cliente( String nome, String cpf, String sexo, String numeroTelefone) {
 		
 		this.nome = nome;
 		this.cpf = cpf;
 		this.sexo = sexo;
 		this.numeroTelefone = numeroTelefone;
-		this.endereco = endereco;
 	}// fim do construtor
     
-public Cliente( int id, String nome, String cpf, String sexo, String numeroTelefone) {
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.sexo = sexo;
-		this.numeroTelefone = numeroTelefone;
-		
-		
-	}// fim do construtor
-public Cliente( String nome, String cpf, String sexo, String numeroTelefone) {
-	
-	this.nome = nome;
-	this.cpf = cpf;
-	this.sexo = sexo;
-	this.numeroTelefone = numeroTelefone;
-	
-	
-}// fim do construtor
-    public Cliente(int id, String nome, String cpf, String sexo, String numeroTelefone, Endereco endereco) {
-		
-		this.id = id;
-		this.nome = nome;
-		this.cpf = cpf;
-		this.sexo = sexo;
-		this.numeroTelefone = numeroTelefone;
-		this.endereco = endereco;
-	}// fim do construtor
-    
-    public Cliente(String cpf) {
-		
-    	this.cpf = cpf;
-  		
-  	}// fim do construtor
- public Cliente(int id) {
-		
-    	this.id = id;
-  		
-  	}
-	 public Cliente(int id, String cpf) {
+    public Cliente( ) {
 			
-	 	this.id = id;
-		this.cpf = cpf;
-	}
+    
+    } 
     
     
-    
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
+
 	public String getNome() {
 		return nome;
 	}
@@ -85,12 +36,7 @@ public Cliente( String nome, String cpf, String sexo, String numeroTelefone) {
 	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+	
 	public String getSexo() {
 		return sexo;
 	}
@@ -105,10 +51,8 @@ public Cliente( String nome, String cpf, String sexo, String numeroTelefone) {
 	}
 	@Override
 	public String toString() {
-		return "codigo: " + id 
-				+ "\nnome: " + nome 
+		return  "\nnome: " + nome 
 				+ "\ncpf: " + cpf 
-				+ "\nendereco: " + endereco 
 				+ "\nsexo: "+ sexo 
 				+ "\nnumeroTelefone: " + numeroTelefone;
 	}

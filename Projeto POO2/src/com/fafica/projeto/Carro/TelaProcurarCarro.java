@@ -5,16 +5,23 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
 import com.fafica.projeto.Fachada.Fachada;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import java.awt.Font;
 
 public class TelaProcurarCarro {
 
-	public JFrame frame;
+	public JFrame frmTelaProcurarCarro;
 	private JTextField textPlaca;
 	private JTextField textId;
 	private JTextField textNome;
@@ -23,6 +30,12 @@ public class TelaProcurarCarro {
 	private JTextField textKm;
 	private JTextField textCategoria;
 	private Carro carro;
+	private JScrollPane scrollPane;
+	private JTable tableCarro;
+	private DefaultTableModel defaultTableModelCarro;
+	private Fachada fachada;
+	private JButton btnListar;
+	private JButton btnLimparTabela;
 
 	/**
 	 * Launch the application.
@@ -32,7 +45,7 @@ public class TelaProcurarCarro {
 			public void run() {
 				try {
 					TelaProcurarCarro window = new TelaProcurarCarro();
-					window.frame.setVisible(true);
+					window.frmTelaProcurarCarro.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -45,88 +58,138 @@ public class TelaProcurarCarro {
 	 */
 	public TelaProcurarCarro() {
 		initialize();
+		fachada = Fachada.getInstance();
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 366, 273);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmTelaProcurarCarro = new JFrame();
+		frmTelaProcurarCarro.setTitle("Tela Procurar Carro");
+		frmTelaProcurarCarro.setBounds(100, 100, 748, 261);
+		frmTelaProcurarCarro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaProcurarCarro.getContentPane().setLayout(null);
 		
 		JLabel lblPlaca = new JLabel("Placa:");
+		lblPlaca.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblPlaca.setBounds(10, 29, 46, 14);
-		frame.getContentPane().add(lblPlaca);
+		frmTelaProcurarCarro.getContentPane().add(lblPlaca);
 		
 		textPlaca = new JTextField();
 		textPlaca.setBounds(66, 26, 98, 20);
-		frame.getContentPane().add(textPlaca);
+		frmTelaProcurarCarro.getContentPane().add(textPlaca);
 		textPlaca.setColumns(10);
 		
 		JButton btnProcurar = new JButton("Procurar");
+		btnProcurar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				procurar();
 			}
 		});
-		btnProcurar.setBounds(174, 25, 89, 23);
-		frame.getContentPane().add(btnProcurar);
+		btnProcurar.setBounds(174, 25, 117, 23);
+		frmTelaProcurarCarro.getContentPane().add(btnProcurar);
 		
 		JLabel lblId = new JLabel("ID:");
+		lblId.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblId.setBounds(10, 95, 46, 14);
-		frame.getContentPane().add(lblId);
+		frmTelaProcurarCarro.getContentPane().add(lblId);
 		
 		textId = new JTextField();
 		textId.setBounds(76, 92, 64, 20);
-		frame.getContentPane().add(textId);
+		frmTelaProcurarCarro.getContentPane().add(textId);
 		textId.setColumns(10);
 		
 		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNome.setBounds(10, 126, 46, 14);
-		frame.getContentPane().add(lblNome);
+		frmTelaProcurarCarro.getContentPane().add(lblNome);
 		
 		textNome = new JTextField();
 		textNome.setBounds(76, 123, 255, 20);
-		frame.getContentPane().add(textNome);
+		frmTelaProcurarCarro.getContentPane().add(textNome);
 		textNome.setColumns(10);
 		
 		JLabel lblAno = new JLabel("Ano:");
+		lblAno.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblAno.setBounds(10, 151, 46, 14);
-		frame.getContentPane().add(lblAno);
+		frmTelaProcurarCarro.getContentPane().add(lblAno);
 		
 		JLabel lblNewLabel = new JLabel("Portas:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setBounds(245, 176, 46, 14);
-		frame.getContentPane().add(lblNewLabel);
+		frmTelaProcurarCarro.getContentPane().add(lblNewLabel);
 		
 		textAno = new JTextField();
 		textAno.setBounds(76, 148, 76, 20);
-		frame.getContentPane().add(textAno);
+		frmTelaProcurarCarro.getContentPane().add(textAno);
 		textAno.setColumns(10);
 		
 		textPorta = new JTextField();
 		textPorta.setBounds(292, 173, 39, 20);
-		frame.getContentPane().add(textPorta);
+		frmTelaProcurarCarro.getContentPane().add(textPorta);
 		textPorta.setColumns(10);
 		
 		JLabel lblKm = new JLabel("Km:");
+		lblKm.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblKm.setBounds(209, 151, 39, 14);
-		frame.getContentPane().add(lblKm);
+		frmTelaProcurarCarro.getContentPane().add(lblKm);
 		
 		textKm = new JTextField();
 		textKm.setBounds(245, 148, 86, 20);
-		frame.getContentPane().add(textKm);
+		frmTelaProcurarCarro.getContentPane().add(textKm);
 		textKm.setColumns(10);
 		
 		JLabel lblCategoria = new JLabel("Categoria:");
+		lblCategoria.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCategoria.setBounds(10, 176, 64, 14);
-		frame.getContentPane().add(lblCategoria);
+		frmTelaProcurarCarro.getContentPane().add(lblCategoria);
 		
 		textCategoria = new JTextField();
 		textCategoria.setBounds(76, 173, 125, 20);
-		frame.getContentPane().add(textCategoria);
+		frmTelaProcurarCarro.getContentPane().add(textCategoria);
 		textCategoria.setColumns(10);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(450, 11, 272, 145);
+		frmTelaProcurarCarro.getContentPane().add(scrollPane);
+		
+		tableCarro = new JTable();
+		String colunaTabelaCarro[] = new String[] {"Nome", "Placa"};
+		defaultTableModelCarro = new DefaultTableModel(new Object[] []{ }, colunaTabelaCarro) {
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			}
+		};
+		
+		tableCarro.setModel(defaultTableModelCarro);
+		scrollPane.setViewportView(tableCarro);
+		
+		btnListar = new JButton("Listar");
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					listar();
+				} catch (SQLException | CarroNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnListar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnListar.setBounds(633, 172, 89, 23);
+		frmTelaProcurarCarro.getContentPane().add(btnListar);
+		
+		btnLimparTabela = new JButton("Limpar tabela");
+		btnLimparTabela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparTabelaCarro();
+			}
+		});
+		btnLimparTabela.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnLimparTabela.setBounds(491, 171, 132, 23);
+		frmTelaProcurarCarro.getContentPane().add(btnLimparTabela);
 	}// fim do main
 	
 	public void procurar(){
@@ -155,4 +218,25 @@ public class TelaProcurarCarro {
 		}
 		
 	}// fim do metodo procurar
+	
+	public void listar() throws SQLException, CarroNaoEncontradoException{
+		limparTabelaCarro();
+		ArrayList<Carro> carros = fachada.listarCarro();
+
+		try{
+			for (Carro carro : carros) {
+				Vector vector = new Vector();
+				vector.add(carro.getNome());
+				vector.add(carro.getPlaca());
+				defaultTableModelCarro.addRow(vector);
+			}//fim do for
+		}catch(Exception e){
+			
+		}//fim do try/catch     
+		
+	}// fim do metodo listar
+	
+	private void limparTabelaCarro() {
+		  defaultTableModelCarro.setRowCount(0);
+		}
 }//fim da classe

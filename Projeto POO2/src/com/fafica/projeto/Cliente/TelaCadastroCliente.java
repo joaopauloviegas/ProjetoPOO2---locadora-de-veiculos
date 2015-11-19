@@ -32,6 +32,8 @@ public class TelaCadastroCliente {
 	private JTextField textComplemento;
 	private JTextField textBairro;
 	private JTextField textCidade;
+	private JTextField textCep;
+	private JTextField textNumero;
 
 	/**
 	 * Launch the application.
@@ -62,12 +64,12 @@ public class TelaCadastroCliente {
 	private void initialize() {
 		frmTelaCadastroCliente = new JFrame();
 		frmTelaCadastroCliente.setTitle("Tela Cadastro Cliente");
-		frmTelaCadastroCliente.setBounds(100, 100, 528, 288);
+		frmTelaCadastroCliente.setBounds(100, 100, 528, 374);
 		frmTelaCadastroCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaCadastroCliente.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 492, 227);
+		panel.setBounds(10, 11, 492, 296);
 		frmTelaCadastroCliente.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -123,31 +125,31 @@ public class TelaCadastroCliente {
 		
 		JLabel lblComplemento = new JLabel("COMPLEMENTO:");
 		lblComplemento.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblComplemento.setBounds(10, 111, 87, 14);
+		lblComplemento.setBounds(10, 136, 87, 14);
 		panel.add(lblComplemento);
 		
 		textComplemento = new JTextField();
-		textComplemento.setBounds(107, 108, 345, 20);
+		textComplemento.setBounds(107, 133, 345, 20);
 		panel.add(textComplemento);
 		textComplemento.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("BAIRRO:");
 		lblBairro.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblBairro.setBounds(10, 136, 56, 14);
+		lblBairro.setBounds(10, 168, 56, 14);
 		panel.add(lblBairro);
 		
 		textBairro = new JTextField();
-		textBairro.setBounds(76, 133, 376, 20);
+		textBairro.setBounds(76, 165, 376, 20);
 		panel.add(textBairro);
 		textBairro.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("CIDADE:");
 		lblCidade.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblCidade.setBounds(10, 161, 59, 14);
+		lblCidade.setBounds(10, 199, 59, 14);
 		panel.add(lblCidade);
 		
 		textCidade = new JTextField();
-		textCidade.setBounds(76, 158, 376, 20);
+		textCidade.setBounds(76, 196, 376, 20);
 		panel.add(textCidade);
 		textCidade.setColumns(10);
 		
@@ -158,7 +160,7 @@ public class TelaCadastroCliente {
 			}
 		});
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnCadastrar.setBounds(359, 193, 123, 23);
+		btnCadastrar.setBounds(359, 262, 123, 23);
 		panel.add(btnCadastrar);
 		
 		JButton btnLimpar = new JButton("LIMPAR");
@@ -168,8 +170,26 @@ public class TelaCadastroCliente {
 			}
 		});
 		btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnLimpar.setBounds(260, 194, 89, 23);
+		btnLimpar.setBounds(260, 262, 89, 23);
 		panel.add(btnLimpar);
+		
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setBounds(10, 111, 46, 14);
+		panel.add(lblCep);
+		
+		textCep = new JTextField();
+		textCep.setBounds(76, 105, 114, 20);
+		panel.add(textCep);
+		textCep.setColumns(10);
+		
+		JLabel lblNumero = new JLabel("Numero:");
+		lblNumero.setBounds(200, 108, 46, 14);
+		panel.add(lblNumero);
+		
+		textNumero = new JTextField();
+		textNumero.setBounds(260, 108, 86, 20);
+		panel.add(textNumero);
+		textNumero.setColumns(10);
 	}// fim do main
 	
 	public void limparCampos(){
@@ -181,6 +201,8 @@ public class TelaCadastroCliente {
 		textBairro.setText("");
 		textComplemento.setText("");
 		textCidade.setText("");
+		textNumero.setText("");
+		textCep.setText("");
 
 	}
 	public void cadastrarCliente(){
@@ -192,16 +214,19 @@ public class TelaCadastroCliente {
 		String bairro = textBairro.getText();
 		String complemento = textComplemento.getText();
 		String cidade = textCidade.getText();
+		String cep = textCep.getText();
+		String numero = textNumero.getText();
 		
 		Cliente cliente = new Cliente(nome, cpf, sexo, numeroTelefone);
-		Endereco endereco = new Endereco(rua, bairro, complemento, cidade);
-		cliente.setEndereco(endereco);
+		Endereco endereco = new Endereco(rua, cpf, numero, bairro, complemento, cidade, cep);
+		
 		
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
 		
 		try{
 			fachada.cadastarCliente(cliente);
+			fachada.cadastrarEndereco(endereco);
 			JOptionPane.showMessageDialog(null, "Cliente Cadastrado com sucesso!");
 			limparCampos();
 			
@@ -229,6 +254,4 @@ public class TelaCadastroCliente {
 		
 		
 	}// fim do metodo cadastrar cliente
-	
-	
 }// fim da classe

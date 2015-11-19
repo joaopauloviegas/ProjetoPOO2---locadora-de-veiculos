@@ -1,5 +1,6 @@
 package com.fafica.projeto.CadastroSaidaDeVeiculos;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto.Cliente.CampoObrigatorioException;
@@ -54,7 +55,7 @@ public class ControladorCadastroSaidaDeVeiculos {
 	
 	
 	//METODO LISTAR  
-	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaVeiculo(){
+	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaVeiculo() throws SQLException{
 		return this.repositorioCadastroSaidaVeiculoBD.listarSaidaDeVeiculo();
 	}
 }// fim da classe

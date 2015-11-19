@@ -231,6 +231,7 @@ public class TelaAtualizarCliente {
 		String cpf = textCPF.getText();
 		cliente = fachada.procurarCliente(cpf);
 		
+		
 		textNome.setText(cliente.getNome());
 		textTelefone.setText(cliente.getNumeroTelefone());
 		textSexo.setText(cliente.getSexo());

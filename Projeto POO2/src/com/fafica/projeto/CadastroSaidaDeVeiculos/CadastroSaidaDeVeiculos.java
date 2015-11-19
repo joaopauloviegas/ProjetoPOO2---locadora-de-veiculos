@@ -28,7 +28,7 @@ public class CadastroSaidaDeVeiculos {
 		this.combustivel = combustivel;
 	}
 	
-	public CadastroSaidaDeVeiculos(String nomeCliente,String nomeFuncionario, String data,String hora,String placa,double valor,String combustivel) {
+public CadastroSaidaDeVeiculos( String nomeCliente,String nomeFuncionario,String data,String hora,String placa,double valor,String combustivel) {
 		
 		
 		this.nomeCliente = nomeCliente;
@@ -38,6 +38,10 @@ public class CadastroSaidaDeVeiculos {
 		this.placa = placa;
 		this.valor = valor;
 		this.combustivel = combustivel;
+	}
+	
+	public CadastroSaidaDeVeiculos() {
+		
 	}
 	
 	

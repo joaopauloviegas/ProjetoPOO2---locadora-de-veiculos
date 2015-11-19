@@ -31,6 +31,15 @@ public class Main {
 		Fachada fachada = Fachada.getInstance();
 		 
 		
+		
+		
+		Cliente cliente = new Cliente("joao", "09948766458", "m", "99521-2279");
+		Endereco endereco = new Endereco("terra nova", "09948766458", "45","boa vista", "praça de areia", "caruaru","55038470");
+		
+		fachada.cadastarCliente(cliente);
+		fachada.cadastrarEndereco(endereco);
+		
+		
 	   	 //int id = 5;
 		 //String nome = "POLO";
 		 //int ano = 2015;
@@ -40,7 +49,7 @@ public class Main {
 		 //String categoria = "popular";
 		 //Carro carro = new Carro(id,nome,ano,placa,quantidadePorta,quilometragem,categoria);
 		 
-		fachada.listarCarro();
+//		fachada.listarCarro();
 		
 		 
 		 

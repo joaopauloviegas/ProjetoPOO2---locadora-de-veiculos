@@ -42,17 +42,16 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 	public void cadastrarCliente(Cliente cliente) {
 		
 		
-		String sql = "INSERT INTO cliente (ID,NOME,CPF,ENDERECO,SEXO,NUMEROTELEFONE) VALUES (?,?,?,?,?,?)" ;              
+		String sql = "INSERT INTO cliente (NOME,CPF,SEXO,NUMEROTELEFONE) VALUES (?,?,?,?)" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
 			
-			stm.setInt(1, cliente.getId());
-			stm.setString(2, cliente.getNome());
-			stm.setString(3, cliente.getCpf());
-			stm.setString(4, cliente.getEndereco().toString());
-			stm.setString(5, cliente.getSexo());
-			stm.setString(6, cliente.getNumeroTelefone());
+			
+			stm.setString(1, cliente.getNome());
+			stm.setString(2, cliente.getCpf());
+			stm.setString(3, cliente.getSexo());
+			stm.setString(4, cliente.getNumeroTelefone());
 						
 			stm.executeUpdate();
 			
@@ -71,7 +70,7 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 	@Override
 	public void atualizarCliente(Cliente cliente) {
 		
-		String sql = "update cliente set nome=?,cpf=?,sexo=?,numeroTelefone=?,endereco=? where cpf=?" ;              
+		String sql = "update cliente set nome=?,cpf=?,sexo=?,numeroTelefone=? where cpf=?" ;              
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(sql);
@@ -81,8 +80,7 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			stm.setString(2, cliente.getCpf());
 			stm.setString(3, cliente.getSexo());
 			stm.setString(4, cliente.getNumeroTelefone());
-			stm.setString(5, cliente.getEndereco().toString());
-			stm.setString(6, cliente.getCpf());
+			stm.setString(5, cliente.getCpf());
 			stm.executeUpdate();
 			
 		
@@ -133,7 +131,6 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			
 			ResultSet rs = stm.executeQuery();
 			
-			ArrayList<Cliente> procurar = new ArrayList<Cliente>();
 			
 	       while(rs.next()){
 	    	   
@@ -141,39 +138,22 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 	    	   String cpf1 = rs.getString("cpf");
 	    	   String sexo = rs.getString("sexo");
 	    	   String numeroTelefone = rs.getString("numeroTelefone");
-	    	   String endereco = rs.getString("endereco");
+	    	   
 	    	   //String bairro =rs.getString("bairro");
 	    	   //String complemento = rs.getString("complemento");
 	    	   //String cidade = rs.getString("cidade");
 	    	   
 	    	   Cliente cliente = new Cliente(nome, cpf1, sexo, numeroTelefone);
 	    	   
-	    	   System.out.println(cliente);
-	    	   //Endereco endereco = new Endereco(rua, bairro, complemento, cidade);
-	    	   //cliente.setEndereco(endereco);
+	    	   System.out.println(cliente);   	  
 	    	   
 	    	   return cliente;
-	    	   
-	    	   /*JOptionPane.showMessageDialog(null, rs.getString(1)+"\nNome: "+
-	        			                            rs.getString ("nome")+"\nCPF: "+
-	        			                            rs.getString("cpf")+"\nSexo: "+
-	        			                            rs.getString("sexo")+"\nTelefone: "+
-	        			                            rs.getString("numerotelefone")+"\n"+
-	        			                            rs.getString("endereco")); */
-	    	  // cliente = new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
-	    	   //procurar.add(cliente);
-	    	
-
 			
 	       }
-	       System.out.println(procurar);
 	       
-
-	       
+	      
 			stm.close();
 			rs.close();
-			
-			
 			
 		}catch(SQLException e){
 			System.out.println("Erro ao procurar"+e);
@@ -191,18 +171,23 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 	
 	// METOFO LISTAR CLIENTE
 	@Override
-	public ArrayList<Cliente> listarCliente() {
+	public ArrayList<Cliente> listarCliente() throws SQLException {
 		String sql = "select * from cliente";
 		conecta();
+		PreparedStatement stm = con.prepareStatement(sql);
+		ResultSet rs = stm.executeQuery();
+		
+		ArrayList<Cliente> lista = new ArrayList<Cliente>();
+		
 		try{
-			PreparedStatement stm = con.prepareStatement(sql);
-			ResultSet rs = stm.executeQuery();
-			
-			ArrayList<Cliente> lista = new ArrayList<Cliente>();
+
 			
 			while(rs.next()){
+			
 				Cliente cliente = new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
 				lista.add(cliente);
+			
+			
 			}// fim do while
 			System.out.println(lista);
 			stm.close();
@@ -212,7 +197,7 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 		}catch(Exception e){
 			
 		}
-		return null;
+		return lista;
 	}// FIM DO METODO LISTAR CLIENTES
 
 	

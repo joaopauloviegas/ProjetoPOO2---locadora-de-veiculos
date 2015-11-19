@@ -84,7 +84,7 @@ public class Fachada {
 	
 	
 	    //METODO CADASTRAR PARA CLIENTE
-		public void cadastarCliente(Cliente cliente) throws IllegalArgumentException, ClienteJaCadastradoException, CPFInvalidoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException {
+		public void cadastarCliente(Cliente cliente) throws IllegalArgumentException, ClienteJaCadastradoException, CPFInvalidoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, SQLException {
 			controladorCliente.cadastarCliente(cliente);
 		}
 		//METODO ATUAALIZAR PARA CLIENTE
@@ -101,7 +101,7 @@ public class Fachada {
 			return controladorCliente.procurarCliente(cpf);
 		}
 		//METODO LISTAR PARA CLIENTE
-		public ArrayList<Cliente> listarCliente(){
+		public ArrayList<Cliente> listarCliente() throws SQLException{
 			return this.controladorCliente.listarCliente();
 		}
 	
@@ -124,8 +124,8 @@ public class Fachada {
 			return controladorSaidaDeveiculos.procurarSaidaDeVeiculo(placa);
 		}
 		//METODO LISTAR PARA  CADASTRO SAIDA DE VEICULOS
-		public ArrayList<Carro> listar() throws SQLException, CarroNaoEncontradoException{
-			return this.controladorCarro.listarCarro();
+		public ArrayList<CadastroSaidaDeVeiculos> listarSaidaDeVeiculo() throws SQLException, CarroNaoEncontradoException{
+			return this.controladorSaidaDeveiculos.listarSaidaVeiculo();
 		}
 	
 	

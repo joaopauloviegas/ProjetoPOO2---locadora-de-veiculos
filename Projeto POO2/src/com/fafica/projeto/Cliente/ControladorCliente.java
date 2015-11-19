@@ -1,5 +1,6 @@
 package com.fafica.projeto.Cliente;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.fafica.projeto.Endereco.ControladorEndereco;
@@ -9,25 +10,25 @@ import com.fafica.projeto.util.ValidarCPF;
 public class ControladorCliente {
 
 	private IRepositorioCliente repositorioClienteBD;
-	private ControladorEndereco controladorEndereco;
+	
 	
 	//controlador
 	public ControladorCliente(){
 		this.repositorioClienteBD = new RepositorioClienteBD();
-		this.controladorEndereco = new ControladorEndereco();
+		
 	}
 	
 	//METODO CADASTRAR
 	public void cadastarCliente(Cliente cliente) throws ClienteJaCadastradoException, 
 														CPFInvalidoException,
 														CampoObrigatorioException,
-														IllegalArgumentException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException
+														IllegalArgumentException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, SQLException
 														{
 		if(!ValidarCPF.validaCPF(cliente.getCpf())) throw new CPFInvalidoException();
 		if(cliente == null) throw new IllegalArgumentException("Cliente invalido");
 		if(cliente.getNome().equals("")) throw new CampoObrigatorioException("nome");
 		this.repositorioClienteBD.cadastrarCliente(cliente);
-		this.controladorEndereco.adicionar(cliente.getEndereco());
+		
 	}
 	
 	
@@ -71,7 +72,7 @@ public class ControladorCliente {
 	
 	
 	//METODO LISTAR
-	public ArrayList<Cliente> listarCliente(){
+	public ArrayList<Cliente> listarCliente() throws SQLException{
 		
 		return this.repositorioClienteBD.listarCliente();
 		

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import com.fafica.projeto.Carro.Carro;
+import com.fafica.projeto.Carro.CarroNaoEncontradoException;
 import com.fafica.projeto.Cliente.Cliente;
 import com.fafica.projeto.Funcionario.Funcionario;
 
@@ -158,9 +160,40 @@ public class RepositorioCadastroSaidaDeVeiculosBD implements IRpositorioCadastro
 
 	//METODO PARA LISTAR SAIDA DE VEICULO
 	@Override
-	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaDeVeiculo() {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaDeVeiculo() throws SQLException {
+		String sql = "select * from saidaveiculo";
+		conecta();
+		PreparedStatement stm = con.prepareStatement(sql);
+	    ResultSet rs = stm.executeQuery();
+	    
+	    
+	   ArrayList<CadastroSaidaDeVeiculos> listaSaidaVeiculo = new ArrayList<CadastroSaidaDeVeiculos>();
+		
+		try{
+											
+							
+			while(rs.next()){
+				CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(rs.getInt("id"),
+																				   rs.getString("nomeCliente"),
+																				   rs.getString("nomeFuncionario"), 
+																			       rs.getString("data"), 
+																				   rs.getString("hora"), 
+																				   rs.getString("placa"),
+																				   rs.getDouble(" valor"), 
+																				   rs.getString("combustivel"));
+				
+				
+			listaSaidaVeiculo.add(saidaVeiculo);
+				
+			}// fim do while
+			
+						 
+			 
+		}catch(SQLException e){
+			System.out.println("Erro ao listar" + e);
+		}
+		return listaSaidaVeiculo ;
+		
 	}
 
 }

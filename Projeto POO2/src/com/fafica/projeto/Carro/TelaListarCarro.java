@@ -17,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class TelaListarCarro {
 
@@ -60,7 +61,7 @@ public class TelaListarCarro {
 		frame.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 99, 681, 276);
+		scrollPane.setBounds(10, 11, 681, 276);
 		frame.getContentPane().add(scrollPane);
 		
 		tableCarro = new JTable();
@@ -75,11 +76,12 @@ public class TelaListarCarro {
 		scrollPane.setViewportView(tableCarro);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 681, 71);
+		panel.setBounds(10, 304, 681, 71);
 		frame.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JButton btnListar = new JButton("Listar");
+		btnListar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnListar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -90,13 +92,23 @@ public class TelaListarCarro {
 				}
 			}
 		});
-		btnListar.setBounds(311, 5, 59, 23);
+		btnListar.setBounds(595, 27, 76, 23);
 		panel.add(btnListar);
+		
+		JButton btnLimparTabela = new JButton("Limpar tabela");
+		btnLimparTabela.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparTabelaCarro();
+			}
+		});
+		btnLimparTabela.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnLimparTabela.setBounds(446, 27, 139, 23);
+		panel.add(btnLimparTabela);
 		
 	}
 	
 	public void listar() throws SQLException, CarroNaoEncontradoException{
-		System.out.println("teste: " + fachada.listarCarro().size());
+		limparTabelaCarro();
 		ArrayList<Carro> carros = fachada.listarCarro();
 
 		try{
@@ -116,4 +128,8 @@ public class TelaListarCarro {
 		}//fim do try/catch     
 		
 	}// fim do metodo listar
+	
+	private void limparTabelaCarro() {
+		  defaultTableModelCarro.setRowCount(0);
+		}
 }// fim da classe

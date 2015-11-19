@@ -1,5 +1,6 @@
 package com.fafica.projeto.CadastroSaidaDeVeiculos;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IRpositorioCadastroSaidaDeVeiculos {
@@ -8,7 +9,7 @@ public interface IRpositorioCadastroSaidaDeVeiculos {
 	public void atualizarSaidaDeVeiculo(CadastroSaidaDeVeiculos saidaVeiculo);
 	public boolean removerSaidaDeVeiculo(int id);
 	public CadastroSaidaDeVeiculos procurarSaidaDeVeiculo(String placa);
-	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaDeVeiculo();
+	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaDeVeiculo() throws SQLException;
 	
 	
 	
