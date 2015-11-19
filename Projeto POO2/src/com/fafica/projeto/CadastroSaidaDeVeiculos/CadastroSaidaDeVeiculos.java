@@ -7,48 +7,51 @@ import com.fafica.projeto.Funcionario.Funcionario;
 public class CadastroSaidaDeVeiculos {
 
 	private int id;
-	private Cliente cliente;
-	private Funcionario funcionario;
+	private String nomeCliente;
+	private String nomeFuncionario;
 	private String data;
 	private String hora;
-	private Carro carro;
+	private String placa;
 	private double valor;
+	private String combustivel;
 	
 	
-	public CadastroSaidaDeVeiculos(int id, Cliente cliente,Funcionario funcionario,String data,String hora,Carro carro,double valor) {
+	public CadastroSaidaDeVeiculos(int id, String nomeCliente,String nomeFuncionario,String data,String hora,String placa,double valor,String combustivel) {
 		
 		this.id = id;
-		this.cliente = cliente;
-		this.funcionario = funcionario;
+		this.nomeCliente = nomeCliente;
+		this.nomeFuncionario = nomeFuncionario;
 		this.data = data;
 		this.hora = hora;
-		this.carro = carro;
+		this.placa = placa;
 		this.valor = valor;
+		this.combustivel = combustivel;
 	}
 	
-	public CadastroSaidaDeVeiculos(Cliente cliente,Funcionario funcionario, String data,String hora,Carro carro,double valor) {
+	public CadastroSaidaDeVeiculos(String nomeCliente,String nomeFuncionario, String data,String hora,String placa,double valor,String combustivel) {
 		
 		
-		this.cliente = cliente;
-		this.funcionario = funcionario;
+		this.nomeCliente = nomeCliente;
+		this.nomeFuncionario = nomeFuncionario;
 		this.data = data;
 		this.hora = hora;
-		this.carro = carro;
+		this.placa = placa;
 		this.valor = valor;
+		this.combustivel = combustivel;
 	}
 	
 	
 	public int getId() {
 		return id;
 	}
-	public void setCodigoLocacao(int id) {
+	public void setId(int id) {
 		this.id = id;
 	}
-	public Cliente getCliente() {
-		return cliente;
+	public String getNomeCliente() {
+		return nomeCliente;
 	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente= nomeCliente;
 	}
 	public String getData() {
 		return data;
@@ -62,11 +65,11 @@ public class CadastroSaidaDeVeiculos {
 	public void setHora(String hora) {
 		this.hora = hora;
 	}
-	public Carro getCarro() {
-		return carro;
+	public String getPlaca() {
+		return placa;
 	}
-	public void setCarro(Carro carro) {
-		this.carro = carro;
+	public void setPlaca(String placa) {
+		this.placa = placa;
 	}
 	public double getValor() {
 		return valor;
@@ -74,22 +77,33 @@ public class CadastroSaidaDeVeiculos {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	public Funcionario getFuncionario() {
-		return funcionario;
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
 	}
-    public void setFuncionario(Funcionario funcionario) {
-		this.funcionario = funcionario;
+    public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
 	}
 
+
+	public String getCombustivel() {
+		return combustivel;
+	}
+
+	public void setCombustivel(String combustivel) {
+		this.combustivel = combustivel;
+	}
 
 	@Override
 	public String toString() {
 		return "CadastroSaidaDeVeiculos "
-				+ "\nCodigo Locacao: " + id 
-				+ "\nCliente: " + cliente.getNome() 
+				+ "\nID: " + id 
+				+ "\nCliente: " + nomeCliente 
 				+ "\nData: " + data
+				+"\nHora: " + hora
+				+"\nPlaca: " + placa
 				+ "\nValor: " + valor
-				+"\nFuncionario: " + funcionario;
+				+"\nFuncionario: " + nomeFuncionario
+				+"\nCombustivel: "+ combustivel;
 	}
 	
 	

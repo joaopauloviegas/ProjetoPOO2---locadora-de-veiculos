@@ -23,7 +23,9 @@ public class ControladorCadastroSaidaDeVeiculos {
 		if(saidaVeiculo.getData().equals("")) throw new CampoObrigatorioException("data");
 		
 		
+		
 		this.repositorioCadastroSaidaVeiculoBD.cadastrarSaidaDeVeiculo(saidaVeiculo);
+		System.out.println("controlador");
 	}
 	
 	
@@ -37,17 +39,17 @@ public class ControladorCadastroSaidaDeVeiculos {
 	
 	
 	//METOFO REMOVER
-	public boolean removerSaidaDeVeiculo(CadastroSaidaDeVeiculos codigoLocacao){
-		return this.repositorioCadastroSaidaVeiculoBD.removerSaidaDeVeiculo(codigoLocacao);
+	public boolean removerSaidaDeVeiculo(int id){
+		return this.repositorioCadastroSaidaVeiculoBD.removerSaidaDeVeiculo(id);
 	}
 	
 	
 	//METOFO PROCURAR
-	public CadastroSaidaDeVeiculos procurarSaidaDeVeiculo(CadastroSaidaDeVeiculos codigoLocacao){
-		CadastroSaidaDeVeiculos locacao;
+	public CadastroSaidaDeVeiculos procurarSaidaDeVeiculo(String placa){
 		
-		locacao = this.repositorioCadastroSaidaVeiculoBD.procurarSaidaDeVeiculo(codigoLocacao);
-		return locacao;
+		
+		return this.repositorioCadastroSaidaVeiculoBD.procurarSaidaDeVeiculo(placa);
+		
 	}
 	
 	

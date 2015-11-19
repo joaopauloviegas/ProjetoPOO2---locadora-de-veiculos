@@ -6,8 +6,8 @@ public interface IRpositorioCadastroSaidaDeVeiculos {
 
 	public void cadastrarSaidaDeVeiculo(CadastroSaidaDeVeiculos saidaVeiculo);
 	public void atualizarSaidaDeVeiculo(CadastroSaidaDeVeiculos saidaVeiculo);
-	public boolean removerSaidaDeVeiculo(CadastroSaidaDeVeiculos codigoLocacao);
-	public CadastroSaidaDeVeiculos procurarSaidaDeVeiculo(CadastroSaidaDeVeiculos codigoLocacao);
+	public boolean removerSaidaDeVeiculo(int id);
+	public CadastroSaidaDeVeiculos procurarSaidaDeVeiculo(String placa);
 	public ArrayList<CadastroSaidaDeVeiculos> listarSaidaDeVeiculo();
 	
 	
