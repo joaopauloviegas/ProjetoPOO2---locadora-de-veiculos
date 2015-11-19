@@ -19,7 +19,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try{
-			 con = DriverManager.getConnection(url,"system","91835759ga");
+			 con = DriverManager.getConnection(url,"system","contabli123");
 			 
 		}catch(SQLException sql){
 			System.out.println("Erro na conexão" + sql);
@@ -35,8 +35,8 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do desconecta
 	
 	public void adicionar(Funcionario funcionario){
-		String query = "INSERT INTO funcionario(NOME,CPF)"
-							+"VALUES ('"+funcionario.getNome()+"', '"+funcionario.getCpf()+"')";
+		String query = "INSERT INTO funcionario1(NOME,CPF,SEXO,NUMEROTELEFONE)"
+							+"VALUES ('"+funcionario.getNome()+"', '"+funcionario.getCpf()+"' , '"+funcionario.getSexo()+"', '"+funcionario.getNumeroTelefone()+"')";
 		conecta();
 			try{
 				stm = con.createStatement();
@@ -82,18 +82,17 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 
 	@Override
 	public ArrayList<Funcionario> buscar(String cpf) {
-		ArrayList<Funcionario> lista = new ArrayList<>();
-		String query = "select * from FUNCIONARIO where CPF=?";
+		ArrayList<Funcionario> funcionarioBuscar = new ArrayList<>();
+		String query = "select nome,cpf,sexo,numeroTelefone from FUNCIONARIO1 where CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
 			stm.setString(1, cpf);
 			ResultSet rs = stm.executeQuery();
-			
 			while(rs.next()){
-				//Funcionario funcionario = new Funcionario(rs.getString("NOME"),rs.getString("CPF"), new Endereco(rs.getString("rua"),rs.getString("bairro"),rs.getString("complemento"),rs.getString("cidade")));
-				//lista.add(funcionario);	
-			}
+				funcionarioBuscar.add(new Funcionario(rs.getString("NOME"),rs.getString("CPF"),rs.getString("Sexo"),rs.getString("numeroTelefone")));
+				
+			}//fim do while
 			
 			stm.close();
 			rs.close();
@@ -101,7 +100,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 			System.out.println("Erro no Buscarr" +sql);
 		}//fim do try
 		desconecta();
-		return lista;
+		return funcionarioBuscar;
 	}//fim do buscar
 	
 	

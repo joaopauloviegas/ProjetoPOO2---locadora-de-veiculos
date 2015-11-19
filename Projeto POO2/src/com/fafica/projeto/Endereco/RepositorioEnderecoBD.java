@@ -16,7 +16,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try{
-			 con = DriverManager.getConnection(url,"system","91835759ga");
+			 con = DriverManager.getConnection(url,"system","contabli123");
 			 
 		}catch(SQLException sql){
 			System.out.println("Erro na conexão" + sql);
@@ -34,7 +34,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	@Override
 	public void adicionar(Endereco endereco) throws EnderecoJaCadastradoException, SQLException {
 		
-		String query = "INSERT INTO ENDERECO1(cpf,rua,numero,complemento,bairro,cidade,cep)" +
+		String query = "INSERT INTO ENDERECO(cpf,rua,numero,complemento,bairro,cidade,cep)" +
 				"VALUES ('"+endereco.getCpf()+"', '"+endereco.getRua()+"' , '"+endereco.getNumero()+"', '"+endereco.getComplemento()+"', '"+endereco.getBairro()+"' , '"+endereco.getCidade()+"' , '"+endereco.getCep()+"')";
 			
 		conecta();

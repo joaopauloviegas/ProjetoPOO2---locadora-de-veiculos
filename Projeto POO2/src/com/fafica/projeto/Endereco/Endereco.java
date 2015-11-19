@@ -11,15 +11,22 @@ public class Endereco {
 	private String cidade;
 	private String cep;
 	
-	public Endereco(String rua,String cpf,String bairro,String complemento,String cidade,String cep){
+	public Endereco(String rua,String cpf,String numero,String bairro,String complemento,String cidade,String cep){
 		this.id = 0;
 		this.rua = rua;
 		this.cpf = cpf;
+		this.numero = numero;
 		this.bairro = bairro;
 		this.complemento = complemento;
 		this.cidade = cidade;
 		this.cep = cep;
 	}//fim do construtor
+	
+	public Endereco(){
+		
+	}
+	
+	
 	
 	public String getCpf() {
 		return cpf;
@@ -45,14 +52,7 @@ public class Endereco {
 		this.cep = cep;
 	}
 
-	public Endereco(Integer id,String rua,String bairro,String complemento,String cidade){
-	   this.setId(id);
-	   this.rua = rua;
-	   this.bairro = bairro;
-	   this.complemento = complemento;
-	   this.cidade = cidade;
-	   
-	}//fim do construtor2
+	
 
 	public String getRua() {
 		return rua;
