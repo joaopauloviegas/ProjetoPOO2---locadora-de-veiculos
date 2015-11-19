@@ -8,9 +8,9 @@ public interface IRepositorioEndereco {
 	
 	public void adicionar(Endereco endereco)throws EnderecoJaCadastradoException, SQLException;
 	public void atualizar(Endereco endereco)throws EnderecoNaoEncontradoException;
-	public Endereco buscar(Integer id)throws EnderecoNaoEncontradoException;
-	public void remover(Integer id)throws EnderecoNaoEncontradoException;
+	public ArrayList<Endereco> buscar(String cpf)throws EnderecoNaoEncontradoException;
+	public void remover(String cpf)throws EnderecoNaoEncontradoException;
 	public ArrayList<Endereco> listar();
-	public boolean existe(Integer id);
+	
 	
 }

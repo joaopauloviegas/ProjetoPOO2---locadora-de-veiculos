@@ -139,8 +139,8 @@ public class Fachada {
 		this.controladorFuncionario.atualizar(funcionario);
 	    }//fim do atualizar
 		
-	    public void removerFuncionario(Integer id) throws EnderecoNaoEncontradoException{
-		this.controladorFuncionario.remover(id);
+	    public void removerFuncionario(String cpf) throws EnderecoNaoEncontradoException{
+		this.controladorFuncionario.remover(cpf);
 		
 	    }//fim do remover
 	
@@ -148,6 +148,12 @@ public class Fachada {
 		ArrayList<Funcionario> lista = null;
 		lista = this.controladorFuncionario.buscar(cpf);
 		return null;
+	    }
+	    
+	    public ArrayList<Funcionario> listarFuncionario(){
+	    	ArrayList<Funcionario> lista = null;
+			lista = this.controladorFuncionario.listar();
+			return lista;
 	    }
 	    
 	    //CADASTRODERESERVA
@@ -178,6 +184,30 @@ public class Fachada {
 	    //ENDERECO
 	    public void cadastrarEndereco(Endereco endereco) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, SQLException{
 	    	this.controladorEndereco.adicionar(endereco);
+	    }//fim do cadastrar
+	    
+	    //ATUALIAR ENDERECO
+	    public void atualizarEndereco(Endereco endereco) throws EnderecoNaoEncontradoException, com.fafica.projeto.Endereco.CampoObrigatorioException{
+	    	this.controladorEndereco.atualizar(endereco);
+	    }//fim do atualizar
+	    
+	    //REMOVER ENDERECO
+	    public void removerEndereco(String cpf) throws EnderecoNaoEncontradoException{
+	    	this.controladorEndereco.remover(cpf);
+	    }//fim do remover
+	    
+	    //BUSCAR ENDERECO
+	    public ArrayList<Endereco> buscarEndereco(String cpf) throws EnderecoNaoEncontradoException{
+	    	ArrayList<Endereco> listar = new ArrayList<>();
+	    	listar = this.controladorEndereco.buscar(cpf);
+	    	return listar;
+	    }
+	    
+	    //LISTAR ENDERECO
+	    public ArrayList<Endereco> listarEndereco(){
+	    	ArrayList<Endereco> listar = new ArrayList<>();
+	    	listar = this.controladorEndereco.listar();
+	    	return listar;
 	    }
 	
 }// fim da classe
