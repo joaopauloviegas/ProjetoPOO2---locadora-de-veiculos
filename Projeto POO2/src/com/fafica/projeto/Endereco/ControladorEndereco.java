@@ -26,16 +26,20 @@ public class ControladorEndereco {
 		this.repositorioEndereco.atualizar(endereco);
 	}//fim do atualizar
 	
-	public void remover(Integer id)throws EnderecoNaoEncontradoException{
-		this.repositorioEndereco.remover(id);
+	public void remover(String cpf)throws EnderecoNaoEncontradoException{
+		this.repositorioEndereco.remover(cpf);
 	}//fim do remover
 	
-	public Endereco buscar(Integer id)throws EnderecoNaoEncontradoException{
-		return this.repositorioEndereco.buscar(id);
+	public ArrayList<Endereco> buscar(String cpf)throws EnderecoNaoEncontradoException{
+		ArrayList<Endereco> lista = new ArrayList<>();
+		lista = this.repositorioEndereco.buscar(cpf);
+		return lista;
 	}//fim do buscar
 	
 	public ArrayList<Endereco> listar(){
-		return this.repositorioEndereco.listar();
+		ArrayList<Endereco> listar = new ArrayList<>();
+		listar = this.repositorioEndereco.listar();
+		return listar;
 	}//fim do listar
 	
 	

@@ -13,11 +13,11 @@ import com.fafica.projeto.util.ValidarCPF;
 public class ControladorFuncionario {
 	
 	private IRepositorioFuncionario repositorioFuncionario;
-	private ControladorEndereco controladorEndereco;
+	
 	
 	public ControladorFuncionario(){
 		this.repositorioFuncionario = new RepositorioFuncionarioBD();
-		this.controladorEndereco = new ControladorEndereco();
+		
 	}
 	
 	public void adicionar(Funcionario funcionario) throws IllegalArgumentException, EnderecoJaCadastradoException, CampoObrigatorioException, CPFInvalidoException, SQLException{
@@ -38,9 +38,9 @@ public class ControladorFuncionario {
 		
 	}
 	
-	public void remover(Integer id) throws EnderecoNaoEncontradoException{
-		this.repositorioFuncionario.remover(id);
-		this.controladorEndereco.remover(id);
+	public void remover(String cpf) throws EnderecoNaoEncontradoException{
+		this.repositorioFuncionario.remover(cpf);
+		
 	}//fim do remover
 	
 	public ArrayList<Funcionario> buscar(String cpf){
@@ -51,8 +51,8 @@ public class ControladorFuncionario {
 	
 	public ArrayList<Funcionario> listar(){
 		ArrayList<Funcionario> lista = null;
-		
-		return null;
+		lista = this.repositorioFuncionario.listar();
+		return lista;
 	}
 	
 

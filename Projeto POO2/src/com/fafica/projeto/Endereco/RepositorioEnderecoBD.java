@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
+import com.fafica.projeto.Funcionario.Funcionario;
+
 public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	
 	private Statement stm;
@@ -42,6 +46,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 			stm = con.createStatement();
 			stm.execute(query);
 			stm.close();
+			JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 		} catch(SQLException sql){
 			System.out.println("Erro no inserir Endereco "+sql);
 		}
@@ -51,7 +56,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 
 	@Override
 	public void atualizar(Endereco endereco) throws EnderecoNaoEncontradoException {
-		String query = "UPDATE FUNCIONARIO SET rua=?,numero=?,complemento=?,bairro=?,cidade=?,cep=? WHERE endereco_id=?";
+		String query = "UPDATE ENDERECO SET rua=?,numero=?,complemento=?,bairro=?,cidade=?,cep=? WHERE cpf=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -62,8 +67,9 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 			stm.setString(5, endereco.getCidade());
 			stm.setString(6, endereco.getCep());
 			stm.setString(7, endereco.getBairro());
-			stm.setInt(8, endereco.getId());
+			stm.setString(8, endereco.getCpf());
 			stm.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
 		} catch (SQLException sql){
 			System.out.println("Erro no atualizar" +sql);
 		}
@@ -71,19 +77,46 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	}//fim do atualiar
 
 	@Override
-	public Endereco buscar(Integer id) throws EnderecoNaoEncontradoException {
-		
-		return null;
-	}
-
-	@Override
-	public void remover(Integer id) throws EnderecoNaoEncontradoException {
-		String query = "DELETE FROM ENDERECO WHERE ENDERECO_ID=? ";
+	public ArrayList<Endereco> buscar(String cpf) throws EnderecoNaoEncontradoException {
+		ArrayList<Endereco> enderecoBuscar = new ArrayList<>();
+		String query = "select cpf,rua,numero,complemento,bairro,cidade,cep,bairro from endereco where CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
-			stm.setInt(1, id);
+			stm.setString(1, cpf);
+			ResultSet rs = stm.executeQuery();
+			while(rs.next()){
+				   String cpf1 = rs.getString("cpf");
+				   String rua = rs.getString("rua");
+		    	   String numero = rs.getString("numero");
+		    	   String complemento = rs.getString("complemento");
+		    	   String bairro = rs.getString("bairro");
+		    	   String cidade = rs.getString("cidade");
+		    	   String cep = rs.getString("cep");
+		    	   Endereco endereco = new Endereco(cpf1,rua,numero,complemento,bairro,cidade,cep);
+		    	   enderecoBuscar.add(endereco);
+		    	   System.out.println(enderecoBuscar);
+			}//fim do while
+			JOptionPane.showMessageDialog(null, "Busca efetuada com sucesso!");
+			stm.close();
+			rs.close();
+		} catch (SQLException sql){
+			System.out.println("Erro no Buscarr" +sql);
+		}//fim do try
+		desconecta();
+		return enderecoBuscar;
+		
+	}//fim do atualizar
+
+	@Override
+	public void remover(String cpf) throws EnderecoNaoEncontradoException {
+		String query = "DELETE FROM ENDERECO WHERE cpf=? ";
+		conecta();
+		try{
+			PreparedStatement stm = con.prepareStatement(query);
+			stm.setString(1, cpf);
 			stm.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Removido com sucesso!");
 		} catch (SQLException sql){
 			System.out.println("Erro no atualizar" +sql);
 		}
@@ -92,14 +125,27 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 
 	@Override
 	public ArrayList<Endereco> listar() {
-		// TODO Auto-generated method stub
-		return null;
-	}
+		ArrayList<Endereco> listar = new ArrayList<>();
+		String query = "select * from ENDERECO";
+		conecta();
+		try{
+		PreparedStatement stm = con.prepareStatement(query);
+		ResultSet rs = stm.executeQuery();
+		
+		while(rs.next()){
+			   Endereco endereco = new Endereco(rs.getString("cpf"),rs.getString("rua"),rs.getString("numero"),rs.getString("complemento"),rs.getString("bairro"),rs.getString("cidade"),rs.getString("cep"));
+	    	   listar.add(endereco);
+		}//fim do while
+		for(Endereco endereco : listar){
+			System.out.println(endereco);
+		}
+		} catch(SQLException sql){
+			System.out.println("Erro no listar:" + sql);
+		}//fim do catch
+		desconecta();
+		return listar;
+	}//fim do listar
 
-	@Override
-	public boolean existe(Integer id) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+	
 
 }

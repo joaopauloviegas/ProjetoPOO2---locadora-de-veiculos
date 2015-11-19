@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.fafica.projeto.Endereco.Endereco;
 
 public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
@@ -42,6 +44,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 				stm = con.createStatement();
 				stm.execute(query);
 				stm.close();
+				JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 			} catch(SQLException sql){
 				System.out.println("Erro no inserir"+sql);
 			}
@@ -63,13 +66,14 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do atualizar
 
 	@Override
-	public void remover(Integer id) {
-		String query = "DELETE FROM FUNCIONARIO WHERE CODIGO=? ";
+	public void remover(String cpf) {
+		String query = "DELETE FROM FUNCIONARIO WHERE CPF=? ";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
-			stm.setInt(1, id);
+			stm.setString(1, cpf);
 			stm.executeUpdate();
+			JOptionPane.showMessageDialog(null, "Removido com sucesso!");
 		} catch (SQLException sql){
 			System.out.println("Erro no atualizar" +sql);
 		}
@@ -77,7 +81,27 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 
 	@Override
 	public ArrayList<Funcionario> listar() {
-		return null;
+		ArrayList<Funcionario> listar = new ArrayList<>();
+		String query = "select * from FUNCIONARIO1";
+		conecta();
+		try{
+		PreparedStatement stm = con.prepareStatement(query);
+		ResultSet rs = stm.executeQuery();
+		
+		while(rs.next()){
+			   
+	    	   Funcionario funcionario = new Funcionario(rs.getString("NOME"),rs.getString("CPF"),rs.getString("Sexo"),rs.getString("numeroTelefone"));
+	    	   listar.add(funcionario);
+	    	   
+		}//fim do while
+		for(Funcionario funcionario : listar){
+			System.out.println(funcionario);
+		}
+		} catch(SQLException sql){
+			System.out.println("Erro no listar:" + sql);
+		}//fim do catch
+		desconecta();
+		return listar;
 	}//fim do listar
 
 	@Override
@@ -90,10 +114,15 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 			stm.setString(1, cpf);
 			ResultSet rs = stm.executeQuery();
 			while(rs.next()){
-				funcionarioBuscar.add(new Funcionario(rs.getString("NOME"),rs.getString("CPF"),rs.getString("Sexo"),rs.getString("numeroTelefone")));
-				
+				String nome = rs.getString("nome");
+		    	   String cpf1 = rs.getString("cpf");
+		    	   String sexo = rs.getString("sexo");
+		    	   String numeroTelefone = rs.getString("numeroTelefone");
+		    	   Funcionario funcionario = new Funcionario(nome,cpf1,sexo,numeroTelefone);
+		    	   funcionarioBuscar.add(funcionario);
+		    	   System.out.println(funcionarioBuscar);
 			}//fim do while
-			
+			JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
 			stm.close();
 			rs.close();
 		} catch (SQLException sql){
