@@ -10,6 +10,7 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import javax.swing.JTextField;
 
+import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -71,6 +72,9 @@ public class TelaRemoverCliente {
 				} catch (ClienteNaoEncontradoException e) {
 					
 					e.printStackTrace();
+				} catch (EnderecoNaoEncontradoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 				
 			}
@@ -90,12 +94,13 @@ public class TelaRemoverCliente {
 		textCPF.setColumns(10);
 	}
 	
-	public void remover() throws ClienteNaoEncontradoException{
+	public void remover() throws ClienteNaoEncontradoException, EnderecoNaoEncontradoException{
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
 		try{
-			
-			fachada.removerCliente(textCPF.getText());
+			String cpf = textCPF.getText();
+			fachada.removerCliente(cpf);
+			fachada.removerEndereco(cpf);
 			//JOptionPane.showMessageDialog(null,"cliente removido com sucesso");
 			
 		}catch( CPFInvalidoException e){
@@ -104,5 +109,5 @@ public class TelaRemoverCliente {
 		
 				
 			
-	}
+    }// fim do metodo remover 
 }

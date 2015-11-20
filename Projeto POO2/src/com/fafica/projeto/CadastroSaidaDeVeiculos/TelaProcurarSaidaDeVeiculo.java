@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaProcurarSaidaDeVeiculo {
 
-	private JFrame frmTelaAtualizarSaida;
+	public JFrame frmTelaAtualizarSaida;
 	private JTextField textPlaca;
 	private JTextField textNomeCliente;
 	private JTextField textNomeFuncionario;

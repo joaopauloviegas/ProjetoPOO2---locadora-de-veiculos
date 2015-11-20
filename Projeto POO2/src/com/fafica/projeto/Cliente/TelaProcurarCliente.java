@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
+import com.fafica.projeto.Endereco.Endereco;
 import com.fafica.projeto.Fachada.Fachada;
 import javax.swing.JLabel;
 import java.awt.BorderLayout;
@@ -16,7 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaProcurarCliente {
 
-	private JFrame frmTelaProcurarCliente;
+	public JFrame frmTelaProcurarCliente;
 	
 	private JTextField textCPF;
 	private JTextField textSexo;
@@ -26,6 +27,11 @@ public class TelaProcurarCliente {
 	private JTextField textBairro;
 	private JTextField textCidade;
 	private JTextField textNome;
+	private JTextField textNumero;
+	private JTextField textCep;
+	private Cliente cliente;
+	private Endereco endereco;
+	private Fachada fachada;
 
 	/**
 	 * Launch the application.
@@ -48,6 +54,7 @@ public class TelaProcurarCliente {
 	 */
 	public TelaProcurarCliente() {
 		initialize();
+		fachada = Fachada.getInstance();
 	}
 
 	/**
@@ -61,38 +68,44 @@ public class TelaProcurarCliente {
 		frmTelaProcurarCliente.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 711, 332);
+		panel.setBounds(10, 33, 711, 310);
 		frmTelaProcurarCliente.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("CPF:");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNewLabel.setBounds(10, 31, 39, 14);
 		panel.add(lblNewLabel);
 		
 		textCPF = new JTextField();
-		textCPF.setBounds(59, 28, 163, 20);
+		textCPF.setToolTipText("Digite CPF que deseja remover");
+		textCPF.setBounds(122, 29, 163, 20);
 		panel.add(textCPF);
 		textCPF.setColumns(10);
 		
 		JButton btnProcurar = new JButton("Procurar");
+		btnProcurar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				procurar();
 			}
 		});
-		btnProcurar.setBounds(232, 27, 89, 23);
+		btnProcurar.setBounds(311, 28, 102, 23);
 		panel.add(btnProcurar);
 		
 		JLabel lblNome = new JLabel("Nome:");
+		lblNome.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblNome.setBounds(10, 84, 46, 14);
 		panel.add(lblNome);
 		
 		JLabel lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(244, 112, 46, 14);
+		lblSexo.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblSexo.setBounds(314, 109, 46, 14);
 		panel.add(lblSexo);
 		
 		JLabel lblTelefone = new JLabel("Telefone:");
-		lblTelefone.setBounds(3, 109, 46, 14);
+		lblTelefone.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblTelefone.setBounds(10, 109, 67, 14);
 		panel.add(lblTelefone);
 		
 		JLabel lblRua = new JLabel("Rua:");
@@ -100,82 +113,125 @@ public class TelaProcurarCliente {
 		panel.add(lblRua);
 		
 		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(10, 265, 46, 14);
+		lblBairro.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblBairro.setBounds(10, 188, 46, 14);
 		panel.add(lblBairro);
 		
 		JLabel lblComplemento = new JLabel("Complemento:");
-		lblComplemento.setBounds(10, 240, 89, 14);
+		lblComplemento.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblComplemento.setBounds(10, 163, 102, 14);
 		panel.add(lblComplemento);
 		
 		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(10, 290, 46, 14);
+		lblCidade.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCidade.setBounds(10, 213, 67, 14);
 		panel.add(lblCidade);
 		
 		JLabel lblRua_1 = new JLabel("Rua:");
-		lblRua_1.setBounds(10, 215, 46, 14);
+		lblRua_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblRua_1.setBounds(10, 138, 46, 14);
 		panel.add(lblRua_1);
 		
 		textSexo = new JTextField();
+		textSexo.setToolTipText("Digite o sexo");
 		textSexo.setText("");
-		textSexo.setBounds(300, 109, 86, 20);
+		textSexo.setBounds(370, 107, 62, 20);
 		panel.add(textSexo);
 		textSexo.setColumns(10);
 		
 		textTelefone = new JTextField();
+		textTelefone.setToolTipText("Digite o telefone");
 		textTelefone.setText("");
-		textTelefone.setBounds(59, 106, 143, 20);
+		textTelefone.setBounds(122, 107, 143, 20);
 		panel.add(textTelefone);
 		textTelefone.setColumns(10);
 		
 		textRua = new JTextField();
-		textRua.setBounds(59, 212, 631, 20);
+		textRua.setToolTipText("Digite o nome da rua");
+		textRua.setBounds(122, 135, 568, 20);
 		panel.add(textRua);
 		textRua.setColumns(10);
 		
 		textComplemento = new JTextField();
-		textComplemento.setBounds(105, 237, 585, 20);
+		textComplemento.setToolTipText("Digite o complemento");
+		textComplemento.setBounds(122, 161, 568, 20);
 		panel.add(textComplemento);
 		textComplemento.setColumns(10);
 		
 		textBairro = new JTextField();
-		textBairro.setBounds(66, 262, 624, 20);
+		textBairro.setToolTipText("Digite o bairro");
+		textBairro.setBounds(122, 186, 568, 20);
 		panel.add(textBairro);
 		textBairro.setColumns(10);
 		
 		textCidade = new JTextField();
-		textCidade.setBounds(66, 287, 624, 20);
+		textCidade.setToolTipText("Digite o nome da cidade");
+		textCidade.setBounds(122, 210, 568, 20);
 		panel.add(textCidade);
 		textCidade.setColumns(10);
 		
-		JLabel lblEndereo = new JLabel("Endere\u00E7o");
-		lblEndereo.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblEndereo.setBounds(10, 177, 78, 14);
-		panel.add(lblEndereo);
-		
 		JLabel lblDadosCadastrais = new JLabel("Dados Cadastrais");
-		lblDadosCadastrais.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDadosCadastrais.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblDadosCadastrais.setBounds(10, 59, 120, 14);
 		panel.add(lblDadosCadastrais);
 		
 		textNome = new JTextField();
-		textNome.setBounds(59, 81, 327, 20);
+		textNome.setToolTipText("Digite o nome");
+		textNome.setBounds(122, 82, 568, 20);
 		panel.add(textNome);
 		textNome.setColumns(10);
+		
+		JLabel lblNumero = new JLabel("Numero:");
+		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNumero.setBounds(10, 238, 67, 14);
+		panel.add(lblNumero);
+		
+		textNumero = new JTextField();
+		textNumero.setToolTipText("Digite o numero");
+		textNumero.setBounds(122, 236, 86, 20);
+		panel.add(textNumero);
+		textNumero.setColumns(10);
+		
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCep.setBounds(258, 241, 46, 14);
+		panel.add(lblCep);
+		
+		textCep = new JTextField();
+		textCep.setToolTipText("Digite o CEP");
+		textCep.setBounds(311, 236, 118, 20);
+		panel.add(textCep);
+		textCep.setColumns(10);
+		
+		JLabel lblNewLabel_1 = new JLabel("Digite o CPF que deseja procurar");
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblNewLabel_1.setBounds(228, 8, 266, 22);
+		frmTelaProcurarCliente.getContentPane().add(lblNewLabel_1);
 	}
 	
 	public void procurar(){
-		Fachada fachada = new Fachada();
-		fachada.getInstance();
+	
 		try{
 			
 			String cpf = textCPF.getText();
-			Cliente cliente = fachada.procurarCliente(cpf);
+			cliente = fachada.procurarCliente(cpf);
+			//endereco = fachada.buscarEndereco(cpf);
 			
 			
 			textNome.setText(cliente.getNome());
 			textTelefone.setText(cliente.getNumeroTelefone());
 			textSexo.setText(cliente.getSexo());
 			
+			endereco = fachada.buscarEndereco(cpf);
+			
+			textRua.setText(endereco.getRua());
+			textBairro.setText(endereco.getBairro());
+			textCidade.setText(endereco.getCidade());
+			textComplemento.setText(endereco.getComplemento());
+			textCep.setText(endereco.getCep());
+			textNumero.setText(endereco.getNumero());
+
+					
 			// ta faltando retornar o endereco e setar no text
 			/*textRua.setText(cliente.getEndereco().getRua());
 			textComplemento.setText(cliente.getEndereco().getComplemento());

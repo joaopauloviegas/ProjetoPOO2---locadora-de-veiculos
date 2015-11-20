@@ -12,19 +12,28 @@ import java.awt.ScrollPane;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
+import com.fafica.projeto.Carro.Carro;
+import com.fafica.projeto.Carro.CarroNaoEncontradoException;
 import com.fafica.projeto.Endereco.Endereco;
+import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.Panel;
 import java.awt.Button;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TelaAtualizarCliente {
 
-	private JFrame frmTelaAtualizarCliente;
+	public JFrame frmTelaAtualizarCliente;
 	private JTextField textNome;
 	private JTextField textCPF;
 	private JTextField textSexo;
@@ -35,7 +44,11 @@ public class TelaAtualizarCliente {
 	private JTextField textCidade;
 	private Fachada fachada;
 	private Cliente cliente;
-
+	private Endereco endereco;
+	private JTextField textNumero;
+	private JTextField textCep;
+	private JTable tableCliente;
+	private DefaultTableModel defaultTableModelCliente;
 	/**
 	 * Launch the application.
 	 */
@@ -66,7 +79,7 @@ public class TelaAtualizarCliente {
 	private void initialize() {
 		frmTelaAtualizarCliente = new JFrame();
 		frmTelaAtualizarCliente.setTitle("Tela Atualizar Cliente");
-		frmTelaAtualizarCliente.setBounds(100, 100, 520, 434);
+		frmTelaAtualizarCliente.setBounds(100, 100, 827, 435);
 		frmTelaAtualizarCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaAtualizarCliente.getContentPane().setLayout(null);
 		
@@ -96,11 +109,14 @@ public class TelaAtualizarCliente {
 				} catch (CPFInvalidoException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
+				} catch (EnderecoNaoEncontradoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
 			}
 		});
 		btnProcurar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnProcurar.setBounds(232, 18, 89, 23);
+		btnProcurar.setBounds(232, 18, 105, 23);
 		panel.add(btnProcurar);
 		
 		JPanel panel_1 = new JPanel();
@@ -140,51 +156,71 @@ public class TelaAtualizarCliente {
 		
 		JLabel label_4 = new JLabel("RUA: ");
 		label_4.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_4.setBounds(10, 86, 46, 14);
+		label_4.setBounds(10, 67, 46, 14);
 		panel_1.add(label_4);
 		
 		textRua = new JTextField();
 		textRua.setColumns(10);
-		textRua.setBounds(76, 83, 376, 20);
+		textRua.setBounds(76, 64, 376, 20);
 		panel_1.add(textRua);
 		
 		JLabel label_5 = new JLabel("COMPLEMENTO:");
 		label_5.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_5.setBounds(10, 111, 87, 14);
+		label_5.setBounds(10, 92, 87, 14);
 		panel_1.add(label_5);
 		
 		textComplemento = new JTextField();
 		textComplemento.setColumns(10);
-		textComplemento.setBounds(107, 108, 345, 20);
+		textComplemento.setBounds(107, 89, 345, 20);
 		panel_1.add(textComplemento);
 		
 		JLabel label_6 = new JLabel("BAIRRO:");
 		label_6.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_6.setBounds(10, 136, 56, 14);
+		label_6.setBounds(10, 117, 56, 14);
 		panel_1.add(label_6);
 		
 		textBairro = new JTextField();
 		textBairro.setColumns(10);
-		textBairro.setBounds(76, 133, 376, 20);
+		textBairro.setBounds(76, 114, 376, 20);
 		panel_1.add(textBairro);
 		
 		JLabel label_7 = new JLabel("CIDADE:");
 		label_7.setFont(new Font("Tahoma", Font.BOLD, 11));
-		label_7.setBounds(10, 161, 59, 14);
+		label_7.setBounds(10, 148, 59, 14);
 		panel_1.add(label_7);
 		
 		textCidade = new JTextField();
 		textCidade.setColumns(10);
-		textCidade.setBounds(76, 158, 376, 20);
+		textCidade.setBounds(76, 145, 376, 20);
 		panel_1.add(textCidade);
 		
+		JLabel lblNumero = new JLabel("Numero:");
+		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNumero.setBounds(10, 173, 56, 14);
+		panel_1.add(lblNumero);
+		
+		textNumero = new JTextField();
+		textNumero.setBounds(76, 171, 86, 20);
+		panel_1.add(textNumero);
+		textNumero.setColumns(10);
+		
+		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCep.setBounds(206, 174, 46, 14);
+		panel_1.add(lblCep);
+		
+		textCep = new JTextField();
+		textCep.setBounds(262, 171, 99, 20);
+		panel_1.add(textCep);
+		textCep.setColumns(10);
+		
 		Panel panel_2 = new Panel();
-		panel_2.setBounds(10, 331, 484, 54);
+		panel_2.setBounds(10, 331, 791, 54);
 		frmTelaAtualizarCliente.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		JButton btnAtualizar = new JButton("ATUALIZAR");
-		btnAtualizar.setBounds(345, 10, 124, 25);
+		btnAtualizar.setBounds(326, 10, 124, 25);
 		panel_2.add(btnAtualizar);
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -205,7 +241,7 @@ public class TelaAtualizarCliente {
 		btnAtualizar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		
 		JButton button_1 = new JButton("LIMPAR");
-		button_1.setBounds(232, 11, 89, 23);
+		button_1.setBounds(227, 11, 89, 23);
 		panel_2.add(button_1);
 		button_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -213,6 +249,36 @@ public class TelaAtualizarCliente {
 			}
 		});
 		button_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		
+		JButton btnNewButton = new JButton("LISTAR");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					listar();
+				} catch (SQLException | CarroNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnNewButton.setBounds(692, 12, 89, 23);
+		panel_2.add(btnNewButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(542, 32, 259, 293);
+		frmTelaAtualizarCliente.getContentPane().add(scrollPane);
+		
+		tableCliente = new JTable();
+		String colunaTabelaCliente[] = new String[] {"Nome", "CPF"};
+		defaultTableModelCliente = new DefaultTableModel(new Object[] []{ }, colunaTabelaCliente) {
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			}
+		};
+		
+		tableCliente.setModel(defaultTableModelCliente);
+		scrollPane.setViewportView(tableCliente);
 	}// fim do main
 	
 	public void limparCampos(){
@@ -224,17 +290,28 @@ public class TelaAtualizarCliente {
 		textBairro.setText("");
 		textComplemento.setText("");
 		textCidade.setText("");
+		textNumero.setText("");
+		textCep.setText("");
 
 	}
 	
-	public void procurar() throws ClienteNaoEncontradoException, CPFInvalidoException{
+	public void procurar() throws ClienteNaoEncontradoException, CPFInvalidoException, EnderecoNaoEncontradoException{
 		String cpf = textCPF.getText();
 		cliente = fachada.procurarCliente(cpf);
+		endereco = fachada.buscarEndereco(cpf);
+		
 		
 		
 		textNome.setText(cliente.getNome());
 		textTelefone.setText(cliente.getNumeroTelefone());
 		textSexo.setText(cliente.getSexo());
+		textRua.setText(endereco.getRua());
+		textBairro.setText(endereco.getBairro());
+		textComplemento.setText(endereco.getComplemento());
+		textCidade.setText(endereco.getCidade());
+		textNumero.setText(endereco.getNumero());
+		textCep.setText(endereco.getCep());
+		
 		
 	}
 	public void atualizar() throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException {
@@ -243,10 +320,20 @@ public class TelaAtualizarCliente {
 		String sexo = textSexo.getText();
 		String telefone = textTelefone.getText();
 		String cpf = textCPF.getText();
+		
+		String rua = textRua.getText();
+		String bairro = textBairro.getText();
+		String complemento = textComplemento.getText();
+		String cidade = textCidade.getText(); 
+		String numero = textNumero.getText();
+		String cep = textCep.getText();
 		try{
 			
 			cliente = new Cliente(nome,cpf,sexo,telefone);
 			fachada.atualizarCliente(cliente);
+			
+			endereco = new Endereco(rua,cpf, numero, bairro, complemento, cidade, cep);
+			fachada.atualizarEndereco(endereco);
 			
 		JOptionPane.showMessageDialog(null, "Cliente Atualizado com Sucesso");
 		limparCampos();
@@ -260,4 +347,28 @@ public class TelaAtualizarCliente {
 	public void preencherDados(){
 		 textNome.setText("");
 	}
+	
+	public void listar() throws SQLException, CarroNaoEncontradoException{
+		limparTabelaCarro();
+		ArrayList<Cliente> clientes = fachada.listarCliente();
+
+		try{
+			for (Cliente cliente : clientes) {
+				Vector vector = new Vector();
+				vector.add(cliente.getNome());
+				vector.add(cliente.getCpf());
+				
+				defaultTableModelCliente.addRow(vector);
+			}//fim do for
+		}catch(Exception e){
+			
+		}//fim do try/catch     
+		
+	}// fim do metodo listar
+	
+	private void limparTabelaCarro() {
+		defaultTableModelCliente.setRowCount(0);
+	}
+	
+	
 }// fim da classe

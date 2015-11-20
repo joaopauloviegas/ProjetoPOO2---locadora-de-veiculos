@@ -8,16 +8,25 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 
+import com.fafica.projeto.Carro.Carro;
+import com.fafica.projeto.Carro.CarroNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TelaAtualizarSaidaDeVeiculo {
 
-	private JFrame frmTelaAtualizarSaida;
+	public JFrame frmTelaAtualizarSaida;
 	private JTextField textPlaca;
 	private JTextField textNomeCliente;
 	private JTextField textNomeFuncionario;
@@ -27,6 +36,8 @@ public class TelaAtualizarSaidaDeVeiculo {
 	private JTextField textValorTotal;
 	private Fachada fachada;
 	private CadastroSaidaDeVeiculos saidaVeiculo;
+	private JTable tableCarro;
+	private DefaultTableModel defaultTableModelCarro;
 
 	/**
 	 * Launch the application.
@@ -58,7 +69,7 @@ public class TelaAtualizarSaidaDeVeiculo {
 	private void initialize() {
 		frmTelaAtualizarSaida = new JFrame();
 		frmTelaAtualizarSaida.setTitle("Tela Atualizar Saida de Veiculo");
-		frmTelaAtualizarSaida.setBounds(100, 100, 713, 422);
+		frmTelaAtualizarSaida.setBounds(100, 100, 713, 485);
 		frmTelaAtualizarSaida.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaAtualizarSaida.getContentPane().setLayout(null);
 		
@@ -68,109 +79,149 @@ public class TelaAtualizarSaidaDeVeiculo {
 		panel.setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Placa:");
-		lblNewLabel.setBounds(10, 11, 46, 14);
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel.setBounds(10, 11, 56, 14);
 		panel.add(lblNewLabel);
 		
 		textPlaca = new JTextField();
-		textPlaca.setBounds(66, 8, 97, 20);
+		textPlaca.setBounds(76, 9, 97, 20);
 		panel.add(textPlaca);
 		textPlaca.setColumns(10);
 		
 		JButton btnProcurar = new JButton("Procurar");
+		btnProcurar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				procurar();
+				procurarCarro();
 			}
 		});
-		btnProcurar.setBounds(212, 7, 103, 23);
+		btnProcurar.setBounds(204, 7, 111, 23);
 		panel.add(btnProcurar);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 98, 677, 216);
+		panel_1.setBounds(10, 98, 677, 279);
 		frmTelaAtualizarSaida.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
 		JLabel lblCliente = new JLabel("Cliente:");
-		lblCliente.setBounds(10, 11, 46, 14);
+		lblCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCliente.setBounds(10, 11, 71, 14);
 		panel_1.add(lblCliente);
 		
 		JLabel lblFuncionario = new JLabel("Funcionario:");
-		lblFuncionario.setBounds(10, 36, 71, 14);
+		lblFuncionario.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblFuncionario.setBounds(10, 36, 86, 14);
 		panel_1.add(lblFuncionario);
 		
 		JLabel lblData = new JLabel("Data:");
+		lblData.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblData.setBounds(10, 61, 46, 14);
 		panel_1.add(lblData);
 		
 		JLabel lblHora = new JLabel("Hora:");
-		lblHora.setBounds(10, 86, 46, 14);
+		lblHora.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblHora.setBounds(240, 61, 46, 14);
 		panel_1.add(lblHora);
 		
 		JLabel lblNewLabel_1 = new JLabel("Combustivel:");
-		lblNewLabel_1.setBounds(10, 111, 71, 14);
+		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel_1.setBounds(418, 61, 103, 14);
 		panel_1.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Valor Total");
-		lblNewLabel_2.setBounds(10, 136, 71, 14);
+		JLabel lblNewLabel_2 = new JLabel("Valor Total:");
+		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblNewLabel_2.setBounds(10, 86, 109, 14);
 		panel_1.add(lblNewLabel_2);
 		
 		textNomeCliente = new JTextField();
-		textNomeCliente.setBounds(91, 8, 86, 20);
+		textNomeCliente.setBounds(116, 9, 551, 20);
 		panel_1.add(textNomeCliente);
 		textNomeCliente.setColumns(10);
 		
 		textNomeFuncionario = new JTextField();
-		textNomeFuncionario.setBounds(91, 33, 86, 20);
+		textNomeFuncionario.setBounds(116, 33, 551, 20);
 		panel_1.add(textNomeFuncionario);
 		textNomeFuncionario.setColumns(10);
 		
 		textData = new JTextField();
-		textData.setBounds(91, 58, 86, 20);
+		textData.setBounds(116, 59, 94, 20);
 		panel_1.add(textData);
 		textData.setColumns(10);
 		
 		textHora = new JTextField();
-		textHora.setBounds(91, 83, 86, 20);
+		textHora.setBounds(296, 59, 86, 20);
 		panel_1.add(textHora);
 		textHora.setColumns(10);
 		
 		textCombustivel = new JTextField();
-		textCombustivel.setBounds(91, 108, 86, 20);
+		textCombustivel.setBounds(531, 59, 86, 20);
 		panel_1.add(textCombustivel);
 		textCombustivel.setColumns(10);
 		
 		textValorTotal = new JTextField();
-		textValorTotal.setBounds(91, 133, 86, 20);
+		textValorTotal.setBounds(116, 84, 94, 20);
 		panel_1.add(textValorTotal);
 		textValorTotal.setColumns(10);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(10, 111, 265, 157);
+		panel_1.add(scrollPane);
+		
+		tableCarro = new JTable();
+		String colunaTabelaCarro[] = new String[] {"Nome", "Placa"};
+		defaultTableModelCarro = new DefaultTableModel(new Object[] []{ }, colunaTabelaCarro) {
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			}
+		};
+		
+		tableCarro.setModel(defaultTableModelCarro);
+		scrollPane.setViewportView(tableCarro);
+		
+		JButton btnListarPlacas = new JButton("Listar placas");
+		btnListarPlacas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					listar();
+				} catch (SQLException | CarroNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnListarPlacas.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnListarPlacas.setBounds(282, 245, 119, 23);
+		panel_1.add(btnListarPlacas);
+		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(10, 325, 677, 47);
+		panel_2.setBounds(10, 388, 677, 47);
 		frmTelaAtualizarSaida.getContentPane().add(panel_2);
 		panel_2.setLayout(null);
 		
 		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				atualizar();
 			}
 		});
-		btnAtualizar.setBounds(577, 11, 90, 23);
+		btnAtualizar.setBounds(539, 11, 128, 23);
 		panel_2.add(btnAtualizar);
 		
 		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				limparCampos();
 			}
 		});
-		btnLimpar.setBounds(478, 11, 89, 23);
+		btnLimpar.setBounds(440, 11, 89, 23);
 		panel_2.add(btnLimpar);
 	}// fim do main
 
 	
 	
-	public void procurar(){
+	public void procurarCarro(){
 		try{
 		String placa = textPlaca.getText();
 		saidaVeiculo = fachada.procurarSaidaDeVeiculos(placa);
@@ -203,7 +254,10 @@ public class TelaAtualizarSaidaDeVeiculo {
 			
 			CadastroSaidaDeVeiculos saidaDeVeiculo = new CadastroSaidaDeVeiculos(nomeCliente, nomeFuncionario, data, hora, placa, valor, combustivel);
 			fachada.atualizarSaidaDeVeiculos(saidaDeVeiculo);
-			
+			JOptionPane.showMessageDialog(null, "Saida de veiculo atualizada com sucesso!");
+			limparCampos();
+			limparTabelaCarro();
+			listar();
 			
 		}catch(Exception e ){
 			
@@ -220,5 +274,28 @@ public class TelaAtualizarSaidaDeVeiculo {
 		textPlaca.setText("");
 		textValorTotal.setText("");
 		
+	}
+	
+	public void listar() throws SQLException, CarroNaoEncontradoException{
+		limparTabelaCarro();
+		ArrayList<CadastroSaidaDeVeiculos> carros = fachada.listarSaidaDeVeiculo();
+
+		try{
+			for (CadastroSaidaDeVeiculos carro : carros) {
+				Vector vector = new Vector();
+				
+				vector.add(carro.getNomeCliente());
+				vector.add(carro.getPlaca());
+				
+				defaultTableModelCarro.addRow(vector);
+			}//fim do for
+		}catch(Exception e){
+			
+		}//fim do try/catch     
+		
+	}// fim do metodo listar
+	
+	private void limparTabelaCarro() {
+		defaultTableModelCarro.setRowCount(0);
 	}
 }// fim da classe

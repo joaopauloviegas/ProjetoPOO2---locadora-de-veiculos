@@ -173,13 +173,13 @@ public class RepositorioCadastroSaidaDeVeiculosBD implements IRpositorioCadastro
 											
 							
 			while(rs.next()){
-				CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(rs.getInt("id"),
+				CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(rs.getInt("ID"),
 																				   rs.getString("nomeCliente"),
 																				   rs.getString("nomeFuncionario"), 
 																			       rs.getString("data"), 
 																				   rs.getString("hora"), 
 																				   rs.getString("placa"),
-																				   rs.getDouble(" valor"), 
+																				   rs.getDouble("valor"), 
 																				   rs.getString("combustivel"));
 				
 				

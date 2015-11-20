@@ -17,16 +17,18 @@ import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
 import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.security.acl.Group;
 import java.awt.event.ActionEvent;
+import javax.swing.JRadioButton;
 
 public class TelaCadastroCliente {
 
 	public JFrame frmTelaCadastroCliente;
 	private JTextField textNome;
 	private JTextField textCPF;
-	private JTextField textSexo;
 	private JTextField textTelefone;
 	private JTextField textRua;
 	private JTextField textComplemento;
@@ -34,6 +36,9 @@ public class TelaCadastroCliente {
 	private JTextField textCidade;
 	private JTextField textCep;
 	private JTextField textNumero;
+	private ButtonGroup grupo = new ButtonGroup();
+	private JRadioButton rdbtnM;
+	private JRadioButton rdbtnF;
 
 	/**
 	 * Launch the application.
@@ -97,11 +102,6 @@ public class TelaCadastroCliente {
 		lblSexo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblSexo.setBounds(253, 39, 46, 14);
 		panel.add(lblSexo);
-		
-		textSexo = new JTextField();
-		textSexo.setBounds(309, 33, 143, 20);
-		panel.add(textSexo);
-		textSexo.setColumns(10);
 		
 		JLabel lblTelefone = new JLabel("TELEFONE: ");
 		lblTelefone.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -174,6 +174,7 @@ public class TelaCadastroCliente {
 		panel.add(btnLimpar);
 		
 		JLabel lblCep = new JLabel("CEP:");
+		lblCep.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblCep.setBounds(10, 111, 46, 14);
 		panel.add(lblCep);
 		
@@ -183,19 +184,32 @@ public class TelaCadastroCliente {
 		textCep.setColumns(10);
 		
 		JLabel lblNumero = new JLabel("Numero:");
-		lblNumero.setBounds(200, 108, 46, 14);
+		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNumero.setBounds(200, 108, 56, 14);
 		panel.add(lblNumero);
 		
 		textNumero = new JTextField();
-		textNumero.setBounds(260, 108, 86, 20);
+		textNumero.setBounds(266, 108, 86, 20);
 		panel.add(textNumero);
 		textNumero.setColumns(10);
-	}// fim do main
+		
+		 rdbtnM = new JRadioButton("M");
+		rdbtnM.setBounds(303, 35, 46, 23);
+		panel.add(rdbtnM);
+		
+		 rdbtnF = new JRadioButton("F");
+		rdbtnF.setBounds(359, 35, 46, 23);
+		panel.add(rdbtnF);
+		
+		grupo.add(rdbtnM);
+		grupo.add(rdbtnF);
+	}
+	
+
 	
 	public void limparCampos(){
 		textNome.setText("");
 		textCPF.setText("");
-		textSexo.setText("");
 		textTelefone.setText("");
 		textRua.setText("");
 		textBairro.setText("");
@@ -205,10 +219,18 @@ public class TelaCadastroCliente {
 		textCep.setText("");
 
 	}
+	private String selecionarSexo(){
+		String sexo = "";
+		if(rdbtnM.isSelected()) sexo = "M";
+		if(rdbtnF.isSelected()) sexo = "F";
+		return sexo;
+		
+	}
 	public void cadastrarCliente(){
+		
 		String nome = textNome.getText();
 		String cpf = textCPF.getText();
-		String sexo =  textSexo.getText();
+		String sexo =  selecionarSexo();
 		String numeroTelefone = textTelefone.getText();
 		String rua = textRua.getText();
 		String bairro = textBairro.getText();
@@ -216,7 +238,7 @@ public class TelaCadastroCliente {
 		String cidade = textCidade.getText();
 		String cep = textCep.getText();
 		String numero = textNumero.getText();
-		
+
 		Cliente cliente = new Cliente(nome, cpf, sexo, numeroTelefone);
 		Endereco endereco = new Endereco(rua, cpf, numero, bairro, complemento, cidade, cep);
 		
@@ -227,7 +249,7 @@ public class TelaCadastroCliente {
 		try{
 			fachada.cadastarCliente(cliente);
 			fachada.cadastrarEndereco(endereco);
-			JOptionPane.showMessageDialog(null, "Cliente Cadastrado com sucesso!");
+		
 			limparCampos();
 			
 		}catch (IllegalArgumentException e) {

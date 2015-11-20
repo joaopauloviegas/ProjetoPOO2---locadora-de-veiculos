@@ -32,7 +32,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaCadastroSaidaVeiculo {
 
-	private JFrame frmTelaCadastroSaida;
+	public JFrame frmTelaCadastroSaida;
 	private JTextField textCombustivel;
 	private JTextField textValorDiaria;
 	private JTextField textDiasComCarro;
@@ -177,6 +177,7 @@ public class TelaCadastroSaidaVeiculo {
 		String placa = textPlaca.getText();
 		String combustivel = textCombustivel.getText();
 		
+		  
 		
 		//pegando data e hora
 		 String data1 = "dd/MM/yyyy";  
@@ -189,12 +190,9 @@ public class TelaCadastroSaidaVeiculo {
 		 formata = new SimpleDateFormat(hora1);  
 		 hora = formata.format(agora);
 		 
-		 int id = 0;
-		 ++id;
-		 
 
 		 try{
-			 CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(id,nomeCliente, nomeFuncionario, data, hora, placa, valorTotal, combustivel);
+			 CadastroSaidaDeVeiculos saidaVeiculo = new CadastroSaidaDeVeiculos(nomeCliente, nomeFuncionario, data, hora, placa, valorTotal, combustivel);
 
 			 fachada.cadastarSaidaDeVeiculos(saidaVeiculo);
 			 textValorTotal.setText(valorTotalString);

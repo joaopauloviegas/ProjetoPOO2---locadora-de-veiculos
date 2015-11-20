@@ -9,15 +9,21 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import com.fafica.projeto.Endereco.Endereco;
 import com.fafica.projeto.Fachada.Fachada;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
 
 public class TelaListarCliente {
 
-	private JFrame frame;
+	public JFrame frmTelaListarClientes;
 	private JTable tableCliente;
 	private DefaultTableModel defaultTableModelCliente;
 	private Fachada fachada;
@@ -30,7 +36,7 @@ public class TelaListarCliente {
 			public void run() {
 				try {
 					TelaListarCliente window = new TelaListarCliente();
-					window.frame.setVisible(true);
+					window.frmTelaListarClientes.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -50,14 +56,15 @@ public class TelaListarCliente {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 746, 430);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmTelaListarClientes = new JFrame();
+		frmTelaListarClientes.setTitle("Tela Listar Clientes");
+		frmTelaListarClientes.setBounds(100, 100, 746, 430);
+		frmTelaListarClientes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaListarClientes.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 60, 710, 320);
-		frame.getContentPane().add(scrollPane);
+		frmTelaListarClientes.getContentPane().add(scrollPane);
 		
 		tableCliente = new JTable();
 		String colunaTabelaCliente[] = new String[] {"Nome", "CPF", "Sexo", "Telefone", "Rua", "Numero","Complemento","Bairro","Cidade","CEP"};
@@ -71,6 +78,7 @@ public class TelaListarCliente {
 		scrollPane.setViewportView(tableCliente);
 		
 		JButton btnListarCliente = new JButton("Listar Clientes");
+		btnListarCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnListarCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -82,7 +90,7 @@ public class TelaListarCliente {
 			}
 		});
 		btnListarCliente.setBounds(269, 11, 147, 23);
-		frame.getContentPane().add(btnListarCliente);
+		frmTelaListarClientes.getContentPane().add(btnListarCliente);
 	
 	
 	
@@ -91,22 +99,41 @@ public class TelaListarCliente {
 	
 	}
 	
-	public void listarClientes() throws SQLException{
 	
+	public void listarClientes() throws SQLException{
+	    limparTabelaCarro();
 		ArrayList<Cliente> clientes = fachada.listarCliente();
-		
+		ArrayList<Endereco> enderecos = fachada.listarEndereco();
 		try{
+			Vector vector = null;
 			for (Cliente cliente : clientes) {
-				Vector vector =  new Vector<>();
-				vector.add(cliente.getNome());
-				vector.add(cliente.getCpf());
-				vector.add(cliente.getSexo());
-				vector.add(cliente.getNumeroTelefone());
+				
+				for (Endereco endereco : enderecos) {
+					
+					vector =  new Vector();
+					vector.add(cliente.getNome());
+					vector.add(cliente.getCpf());
+					vector.add(cliente.getSexo());
+					vector.add(cliente.getNumeroTelefone());
+					vector.add(endereco.getRua());
+					vector.add(endereco.getNumero());
+					vector.add(endereco.getComplemento());
+					vector.add(endereco.getBairro());
+					vector.add(endereco.getCidade());
+					vector.add(endereco.getCep());
+					//defaultTableModelCliente.addRow(vector);
+				}
+				
 				defaultTableModelCliente.addRow(vector);
-			}// fim do fot
+			}// fim do for  
+			
 		}catch(Exception e){
 			
 		}//fim do try/catch
 	
 	}
+	
+	private void limparTabelaCarro() {
+		  defaultTableModelCliente.setRowCount(0);
+		}
 }// fim da classe

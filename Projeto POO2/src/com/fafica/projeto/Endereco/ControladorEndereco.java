@@ -30,10 +30,10 @@ public class ControladorEndereco {
 		this.repositorioEndereco.remover(cpf);
 	}//fim do remover
 	
-	public ArrayList<Endereco> buscar(String cpf)throws EnderecoNaoEncontradoException{
-		ArrayList<Endereco> lista = new ArrayList<>();
-		lista = this.repositorioEndereco.buscar(cpf);
-		return lista;
+	public Endereco buscar(String cpf)throws EnderecoNaoEncontradoException{
+		//ArrayList<Endereco> lista = new ArrayList<>();
+		return  this.repositorioEndereco.buscar(cpf);
+		//return lista;
 	}//fim do buscar
 	
 	public ArrayList<Endereco> listar(){

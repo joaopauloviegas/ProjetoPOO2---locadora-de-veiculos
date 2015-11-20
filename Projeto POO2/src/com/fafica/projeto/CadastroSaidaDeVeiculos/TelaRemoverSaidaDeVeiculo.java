@@ -14,7 +14,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaRemoverSaidaDeVeiculo {
 
-	private JFrame frmTelaRemoverSaida;
+	public JFrame frmTelaRemoverSaida;
 	private JTextField textID;
 
 	/**

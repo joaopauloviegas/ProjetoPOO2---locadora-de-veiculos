@@ -21,7 +21,7 @@ import java.awt.Font;
 
 public class TelaListarCarro {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTable tableCarro;
 	private DefaultTableModel defaultTableModelCarro;
 	private Fachada fachada;

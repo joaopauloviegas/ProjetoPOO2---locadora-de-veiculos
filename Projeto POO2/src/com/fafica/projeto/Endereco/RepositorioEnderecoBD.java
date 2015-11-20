@@ -46,7 +46,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 			stm = con.createStatement();
 			stm.execute(query);
 			stm.close();
-			JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
+			//JOptionPane.showMessageDialog(null, "Cadastrado com sucesso!");
 		} catch(SQLException sql){
 			System.out.println("Erro no inserir Endereco "+sql);
 		}
@@ -77,8 +77,8 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	}//fim do atualiar
 
 	@Override
-	public ArrayList<Endereco> buscar(String cpf) throws EnderecoNaoEncontradoException {
-		ArrayList<Endereco> enderecoBuscar = new ArrayList<>();
+	public Endereco buscar(String cpf) throws EnderecoNaoEncontradoException {
+		//ArrayList<Endereco> enderecoBuscar = new ArrayList<>();
 		String query = "select cpf,rua,numero,complemento,bairro,cidade,cep,bairro from endereco where CPF=?";
 		conecta();
 		try{
@@ -93,9 +93,10 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 		    	   String bairro = rs.getString("bairro");
 		    	   String cidade = rs.getString("cidade");
 		    	   String cep = rs.getString("cep");
-		    	   Endereco endereco = new Endereco(cpf1,rua,numero,complemento,bairro,cidade,cep);
-		    	   enderecoBuscar.add(endereco);
-		    	   System.out.println(enderecoBuscar);
+		    	   Endereco endereco = new Endereco(rua,numero,complemento,bairro,cidade,cep);
+		    	  // enderecoBuscar.add(endereco);
+		    	   //System.out.println(enderecoBuscar);
+		    	   return endereco;
 			}//fim do while
 			JOptionPane.showMessageDialog(null, "Busca efetuada com sucesso!");
 			stm.close();
@@ -104,7 +105,8 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 			System.out.println("Erro no Buscarr" +sql);
 		}//fim do try
 		desconecta();
-		return enderecoBuscar;
+		return null;
+		
 		
 	}//fim do atualizar
 
@@ -116,9 +118,9 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 			PreparedStatement stm = con.prepareStatement(query);
 			stm.setString(1, cpf);
 			stm.executeUpdate();
-			JOptionPane.showMessageDialog(null, "Removido com sucesso!");
+			//JOptionPane.showMessageDialog(null, "Removido com sucesso!");
 		} catch (SQLException sql){
-			System.out.println("Erro no atualizar" +sql);
+			//System.out.println("Erro no remover" +sql);
 		}
 		
 	}

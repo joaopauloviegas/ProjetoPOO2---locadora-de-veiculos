@@ -197,10 +197,11 @@ public class Fachada {
 	    }//fim do remover
 	    
 	    //BUSCAR ENDERECO
-	    public ArrayList<Endereco> buscarEndereco(String cpf) throws EnderecoNaoEncontradoException{
-	    	ArrayList<Endereco> listar = new ArrayList<>();
-	    	listar = this.controladorEndereco.buscar(cpf);
-	    	return listar;
+	    public Endereco buscarEndereco(String cpf) throws EnderecoNaoEncontradoException{
+	    	//ArrayList<Endereco> listar = new ArrayList<>();
+	    	//listar = this.controladorEndereco.buscar(cpf);
+	    	//return listar;
+	    	return this.controladorEndereco.buscar(cpf);
 	    }
 	    
 	    //LISTAR ENDERECO

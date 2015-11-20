@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JOptionPane;
 
@@ -55,12 +56,12 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 						
 			stm.executeUpdate();
 			
-			System.out.println("Clinte Cadastrado com sucesso!");
+			JOptionPane.showMessageDialog(null,"Clinte Cadastrado com sucesso!");
 			
 			
 		}catch(SQLException e){
-			JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR"
-					+ "\nVerifique se todos os dados estão escritos corretamente","ERRO", JOptionPane.ERROR_MESSAGE);
+			//JOptionPane.showMessageDialog(null,"ERRO AO CADASTRAR"
+				//	+ "\nVerifique se todos os dados estão escritos corretamente","ERRO", JOptionPane.ERROR_MESSAGE);
 		}
 		desconecta();
 	}// fim do metodo cadastrar
@@ -105,7 +106,7 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			stm.executeUpdate();
 		
 		}catch(SQLException e){
-			JOptionPane.showMessageDialog(null, "Erro ao remover!"+e,"ERRO", JOptionPane.ERROR_MESSAGE);
+			//JOptionPane.showMessageDialog(null, "Erro ao remover!"+e,"ERRO", JOptionPane.ERROR_MESSAGE);
 			
 		}
 		JOptionPane.showMessageDialog(null, "Cliente removido com sucesso!");
@@ -172,7 +173,8 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 	// METOFO LISTAR CLIENTE
 	@Override
 	public ArrayList<Cliente> listarCliente() throws SQLException {
-		String sql = "select * from cliente";
+		//String sql = "select * from cliente";
+		String sql = "SELECT cliente.nome, cliente.cpf, cliente.sexo, cliente.numerotelefone, endereco.rua, endereco.numero, endereco.complemento, endereco.bairro, endereco.cidade, endereco.cep  FROM   cliente, endereco WHERE cliente.cpf = endereco.cpf  ";
 		conecta();
 		PreparedStatement stm = con.prepareStatement(sql);
 		ResultSet rs = stm.executeQuery();
@@ -184,9 +186,10 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 			
 			while(rs.next()){
 			
+				//Cliente cliente = new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
 				Cliente cliente = new Cliente(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numerotelefone"));
 				lista.add(cliente);
-			
+				
 			
 			}// fim do while
 			System.out.println(lista);
@@ -199,6 +202,8 @@ public class RepositorioClienteBD implements IRepositorioCliente {
 		}
 		return lista;
 	}// FIM DO METODO LISTAR CLIENTES
+
+
 
 	
 	

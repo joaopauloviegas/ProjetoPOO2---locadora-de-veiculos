@@ -20,7 +20,7 @@ import java.awt.Font;
 
 public class TelaListarSaidaDeVeiculo {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTable tableSaidaVeiculo;
 	private DefaultTableModel defaultTableModelSaidaVeiculo;
 	private Fachada fachada;
@@ -64,7 +64,7 @@ public class TelaListarSaidaDeVeiculo {
 		frame.getContentPane().add(scrollPane);
 		
 		tableSaidaVeiculo = new JTable();
-		String colunaTabelaSaidaVeiculo[] = new String[] {"ID", "Cliente", "Funcionario", "Data", "Hora", "Valor", "Placa","Combustivel"};
+		String colunaTabelaSaidaVeiculo[] = new String[] {"ID", "Cliente", "Funcionario", "Data", "Hora", "Placa", "Valor","Combustivel"};
 		defaultTableModelSaidaVeiculo = new DefaultTableModel(new Object[] []{ }, colunaTabelaSaidaVeiculo) {
 			public boolean isCellEditable(int row, int col) {
 				return false;
@@ -102,8 +102,8 @@ public class TelaListarSaidaDeVeiculo {
 				vector.add(cadastroSaidaDeVeiculos.getNomeFuncionario());
 				vector.add(cadastroSaidaDeVeiculos.getData());
 				vector.add(cadastroSaidaDeVeiculos.getHora());
-				vector.add(cadastroSaidaDeVeiculos.getValor());
 				vector.add(cadastroSaidaDeVeiculos.getPlaca());
+				vector.add(cadastroSaidaDeVeiculos.getValor());
 				vector.add(cadastroSaidaDeVeiculos.getCombustivel());
 				defaultTableModelSaidaVeiculo.addRow(vector);
 			

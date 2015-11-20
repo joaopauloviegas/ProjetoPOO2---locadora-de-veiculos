@@ -21,6 +21,8 @@ public class ControladorCarro {
 												  IllegalArgumentException, 
 												  SQLException {
 	
+
+		    
 		if(carro == null) throw new IllegalAccessError("Carro Invalido");
 		if(carro.getPlaca().equals(""))throw new CampoObrigatorioException("placa");
 		if(carro.getNome().equals(""))throw new CampoObrigatorioException("nome");

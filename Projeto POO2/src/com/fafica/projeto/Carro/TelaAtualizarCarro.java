@@ -97,7 +97,7 @@ public class TelaAtualizarCarro {
 				procurar();
 			}
 		});
-		btnProcurar.setBounds(174, 56, 89, 23);
+		btnProcurar.setBounds(174, 56, 105, 23);
 		panel.add(btnProcurar);
 		
 		JPanel panel_1 = new JPanel();

@@ -8,7 +8,7 @@ public class Cliente {
     private String cpf;
     private String sexo;
     private String numeroTelefone;
-  
+    private Endereco endereco;
     public Cliente( String nome, String cpf, String sexo, String numeroTelefone) {
 		
 		this.nome = nome;
@@ -16,8 +16,9 @@ public class Cliente {
 		this.sexo = sexo;
 		this.numeroTelefone = numeroTelefone;
 	}// fim do construtor
-    
-    public Cliente( ) {
+   
+
+	public Cliente( ) {
 			
     
     } 
