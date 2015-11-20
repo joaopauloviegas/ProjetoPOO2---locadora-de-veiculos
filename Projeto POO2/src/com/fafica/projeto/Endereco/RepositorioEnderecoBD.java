@@ -56,19 +56,17 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 
 	@Override
 	public void atualizar(Endereco endereco) throws EnderecoNaoEncontradoException {
-		String query = "UPDATE ENDERECO SET rua=?,cpf,numero=?,complemento=?,bairro=?,cidade=?,cep=? WHERE cpf=?";
+		String query = "UPDATE ENDERECO SET rua=?,numero=?,complemento=?,bairro=?,cidade=?,cep=? WHERE cpf=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
 			stm.setString(1, endereco.getRua());
-			stm.setString(2, endereco.getCpf());
-			stm.setString(3, endereco.getNumero());
-			stm.setString(4, endereco.getComplemento());
-			stm.setString(5, endereco.getBairro());
-			stm.setString(6, endereco.getCidade());
-			stm.setString(7, endereco.getCep());
-			stm.setString(8, endereco.getBairro());
-			stm.setString(9, endereco.getCpf());
+			stm.setString(2, endereco.getNumero());
+			stm.setString(3, endereco.getComplemento());
+			stm.setString(4, endereco.getBairro());
+			stm.setString(5, endereco.getCidade());
+			stm.setString(6, endereco.getCep());
+			stm.setString(7, endereco.getCpf());
 			stm.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
 		} catch (SQLException sql){

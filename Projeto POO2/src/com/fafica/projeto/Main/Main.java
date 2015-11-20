@@ -36,7 +36,7 @@ public class Main {
 		Cliente cliente = new Cliente("joao", "09948766458", "m", "99521-2279");
 		//Endereco endereco = new Endereco("terra nova", "09948766458", "45","boa vista", "praça de areia", "caruaru","55038470");
 		
-		fachada.cadastarCliente(cliente);
+		//fachada.cadastarCliente(cliente);
 		//fachada.cadastrarEndereco(endereco);
 		
 		
@@ -128,8 +128,9 @@ public class Main {
 		//fachada.buscarFuncionario("5958005459");
 		//fachada.listarFuncionario();
 		
-		//Endereco endereco = new Endereco("Travessa Pau Brasil","5958005459","254","1 Andar","Kennedy","Caruaru", "5507897987");
+		Endereco endereco = new Endereco("Travessa Pau","5958005459","254","1 Andar","Kennedy","Caruaru", "5507897987");
 		//fachada.cadastrarEndereco(endereco);
+		fachada.atualizarEndereco(endereco);
 		//fachada.buscarEndereco("5958005459");
 		//fachada.listarEndereco();
 		
