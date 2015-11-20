@@ -101,7 +101,7 @@ public class TelaListarCliente {
 	
 	
 	public void listarClientes() throws SQLException{
-	    limparTabelaCarro();
+	    limparTabelaCliente();
 		ArrayList<Cliente> clientes = fachada.listarCliente();
 		ArrayList<Endereco> enderecos = fachada.listarEndereco();
 		try{
@@ -133,7 +133,7 @@ public class TelaListarCliente {
 	
 	}
 	
-	private void limparTabelaCarro() {
+	private void limparTabelaCliente() {
 		  defaultTableModelCliente.setRowCount(0);
 		}
 }// fim da classe

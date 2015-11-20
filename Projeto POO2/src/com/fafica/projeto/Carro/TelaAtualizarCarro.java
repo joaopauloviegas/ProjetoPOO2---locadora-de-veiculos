@@ -86,6 +86,7 @@ public class TelaAtualizarCarro {
 		panel.add(lblPlaca);
 		
 		textPlaca = new JTextField();
+		textPlaca.setToolTipText("Digite a placa");
 		textPlaca.setBounds(66, 57, 86, 20);
 		panel.add(textPlaca);
 		textPlaca.setColumns(10);
@@ -111,6 +112,7 @@ public class TelaAtualizarCarro {
 		panel_1.add(lblNome);
 		
 		textNome = new JTextField();
+		textNome.setToolTipText("Digite o nome do carro");
 		textNome.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		textNome.setBounds(66, 8, 285, 20);
 		panel_1.add(textNome);
@@ -122,6 +124,7 @@ public class TelaAtualizarCarro {
 		panel_1.add(lblAno);
 		
 		textAno = new JTextField();
+		textAno.setToolTipText("Digite o ano");
 		textAno.setBounds(437, 33, 66, 20);
 		panel_1.add(textAno);
 		textAno.setColumns(10);
@@ -132,6 +135,7 @@ public class TelaAtualizarCarro {
 		panel_1.add(lblPortas);
 		
 		textPorta = new JTextField();
+		textPorta.setToolTipText("Digite a quantidade dde portas");
 		textPorta.setBounds(66, 33, 66, 20);
 		panel_1.add(textPorta);
 		textPorta.setColumns(10);
@@ -142,6 +146,7 @@ public class TelaAtualizarCarro {
 		panel_1.add(lblNewLabel);
 		
 		textCategoria = new JTextField();
+		textCategoria.setToolTipText("Digite aa categoria do carro");
 		textCategoria.setBounds(437, 8, 176, 20);
 		panel_1.add(textCategoria);
 		textCategoria.setColumns(10);
@@ -152,6 +157,7 @@ public class TelaAtualizarCarro {
 		panel_1.add(lblKm);
 		
 		textKm = new JTextField();
+		textKm.setToolTipText("Digite a quilometragem");
 		textKm.setBounds(230, 33, 121, 20);
 		panel_1.add(textKm);
 		textKm.setColumns(10);

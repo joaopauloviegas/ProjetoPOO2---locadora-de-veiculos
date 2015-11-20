@@ -84,6 +84,7 @@ public class TelaAtualizarSaidaDeVeiculo {
 		panel.add(lblNewLabel);
 		
 		textPlaca = new JTextField();
+		textPlaca.setToolTipText("Digite placa");
 		textPlaca.setBounds(76, 9, 97, 20);
 		panel.add(textPlaca);
 		textPlaca.setColumns(10);
@@ -134,21 +135,25 @@ public class TelaAtualizarSaidaDeVeiculo {
 		panel_1.add(lblNewLabel_2);
 		
 		textNomeCliente = new JTextField();
+		textNomeCliente.setToolTipText("Digite o nome do cliente");
 		textNomeCliente.setBounds(116, 9, 551, 20);
 		panel_1.add(textNomeCliente);
 		textNomeCliente.setColumns(10);
 		
 		textNomeFuncionario = new JTextField();
+		textNomeFuncionario.setToolTipText("Digite o nome do funcionario");
 		textNomeFuncionario.setBounds(116, 33, 551, 20);
 		panel_1.add(textNomeFuncionario);
 		textNomeFuncionario.setColumns(10);
 		
 		textData = new JTextField();
+		textData.setToolTipText("Digite a data");
 		textData.setBounds(116, 59, 94, 20);
 		panel_1.add(textData);
 		textData.setColumns(10);
 		
 		textHora = new JTextField();
+		textHora.setToolTipText("Digite a hora");
 		textHora.setBounds(296, 59, 86, 20);
 		panel_1.add(textHora);
 		textHora.setColumns(10);
@@ -159,6 +164,7 @@ public class TelaAtualizarSaidaDeVeiculo {
 		textCombustivel.setColumns(10);
 		
 		textValorTotal = new JTextField();
+		textValorTotal.setToolTipText("Digite o valor total");
 		textValorTotal.setBounds(116, 84, 94, 20);
 		panel_1.add(textValorTotal);
 		textValorTotal.setColumns(10);

@@ -20,6 +20,7 @@ import com.fafica.projeto.Endereco.Endereco;
 import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -30,13 +31,13 @@ import java.awt.Panel;
 import java.awt.Button;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JRadioButton;
 
 public class TelaAtualizarCliente {
 
 	public JFrame frmTelaAtualizarCliente;
 	private JTextField textNome;
 	private JTextField textCPF;
-	private JTextField textSexo;
 	private JTextField textTelefone;
 	private JTextField textRua;
 	private JTextField textComplemento;
@@ -49,6 +50,9 @@ public class TelaAtualizarCliente {
 	private JTextField textCep;
 	private JTable tableCliente;
 	private DefaultTableModel defaultTableModelCliente;
+	private ButtonGroup grupo = new ButtonGroup();
+	private JRadioButton rdbtnM;
+	private JRadioButton rdbtnF;
 	/**
 	 * Launch the application.
 	 */
@@ -94,7 +98,8 @@ public class TelaAtualizarCliente {
 		label_1.setFont(new Font("Tahoma", Font.BOLD, 11));
 		
 		textCPF = new JTextField();
-		textCPF.setBounds(66, 19, 143, 20);
+		textCPF.setToolTipText("Digite o CPF");
+		textCPF.setBounds(74, 19, 135, 20);
 		panel.add(textCPF);
 		textCPF.setColumns(10);
 		
@@ -130,6 +135,7 @@ public class TelaAtualizarCliente {
 		panel_1.add(label);
 		
 		textNome = new JTextField();
+		textNome.setToolTipText("Digite o nome");
 		textNome.setColumns(10);
 		textNome.setBounds(76, 8, 376, 20);
 		panel_1.add(textNome);
@@ -139,17 +145,13 @@ public class TelaAtualizarCliente {
 		label_2.setBounds(253, 39, 46, 14);
 		panel_1.add(label_2);
 		
-		textSexo = new JTextField();
-		textSexo.setColumns(10);
-		textSexo.setBounds(309, 33, 143, 20);
-		panel_1.add(textSexo);
-		
 		JLabel label_3 = new JLabel("TELEFONE: ");
 		label_3.setFont(new Font("Tahoma", Font.BOLD, 11));
 		label_3.setBounds(10, 36, 69, 14);
 		panel_1.add(label_3);
 		
 		textTelefone = new JTextField();
+		textTelefone.setToolTipText("Digite o telefone");
 		textTelefone.setColumns(10);
 		textTelefone.setBounds(76, 33, 143, 20);
 		panel_1.add(textTelefone);
@@ -160,6 +162,7 @@ public class TelaAtualizarCliente {
 		panel_1.add(label_4);
 		
 		textRua = new JTextField();
+		textRua.setToolTipText("Digite o nome da rua");
 		textRua.setColumns(10);
 		textRua.setBounds(76, 64, 376, 20);
 		panel_1.add(textRua);
@@ -170,6 +173,7 @@ public class TelaAtualizarCliente {
 		panel_1.add(label_5);
 		
 		textComplemento = new JTextField();
+		textComplemento.setToolTipText("Digite o complemento");
 		textComplemento.setColumns(10);
 		textComplemento.setBounds(107, 89, 345, 20);
 		panel_1.add(textComplemento);
@@ -180,6 +184,7 @@ public class TelaAtualizarCliente {
 		panel_1.add(label_6);
 		
 		textBairro = new JTextField();
+		textBairro.setToolTipText("Digite o nome do bairro");
 		textBairro.setColumns(10);
 		textBairro.setBounds(76, 114, 376, 20);
 		panel_1.add(textBairro);
@@ -190,6 +195,7 @@ public class TelaAtualizarCliente {
 		panel_1.add(label_7);
 		
 		textCidade = new JTextField();
+		textCidade.setToolTipText("Digite o nome da cidade");
 		textCidade.setColumns(10);
 		textCidade.setBounds(76, 145, 376, 20);
 		panel_1.add(textCidade);
@@ -200,6 +206,7 @@ public class TelaAtualizarCliente {
 		panel_1.add(lblNumero);
 		
 		textNumero = new JTextField();
+		textNumero.setToolTipText("Digite o numero da residencia");
 		textNumero.setBounds(76, 171, 86, 20);
 		panel_1.add(textNumero);
 		textNumero.setColumns(10);
@@ -210,9 +217,21 @@ public class TelaAtualizarCliente {
 		panel_1.add(lblCep);
 		
 		textCep = new JTextField();
+		textCep.setToolTipText("Digite o cep");
 		textCep.setBounds(262, 171, 99, 20);
 		panel_1.add(textCep);
 		textCep.setColumns(10);
+		
+		rdbtnM = new JRadioButton("M");
+		rdbtnM.setBounds(304, 35, 46, 23);
+		panel_1.add(rdbtnM);
+		
+		rdbtnF = new JRadioButton("F");
+		rdbtnF.setBounds(369, 35, 56, 23);
+		panel_1.add(rdbtnF);
+		
+		grupo.add(rdbtnM);
+		grupo.add(rdbtnF);
 		
 		Panel panel_2 = new Panel();
 		panel_2.setBounds(10, 331, 791, 54);
@@ -226,6 +245,7 @@ public class TelaAtualizarCliente {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					atualizar();
+					atualizarEndereco();
 				} catch (ClienteNaoEncontradoException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -284,7 +304,6 @@ public class TelaAtualizarCliente {
 	public void limparCampos(){
 		textNome.setText("");
 		textCPF.setText("");
-		textSexo.setText("");
 		textTelefone.setText("");
 		textRua.setText("");
 		textBairro.setText("");
@@ -304,7 +323,6 @@ public class TelaAtualizarCliente {
 		
 		textNome.setText(cliente.getNome());
 		textTelefone.setText(cliente.getNumeroTelefone());
-		textSexo.setText(cliente.getSexo());
 		textRua.setText(endereco.getRua());
 		textBairro.setText(endereco.getBairro());
 		textComplemento.setText(endereco.getComplemento());
@@ -314,12 +332,9 @@ public class TelaAtualizarCliente {
 		
 		
 	}
-	public void atualizar() throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException {
+	
+		public void atualizarEndereco() throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException {
 		
-		String nome = textNome.getText();
-		String sexo = textSexo.getText();
-		String telefone = textTelefone.getText();
-		String cpf = textCPF.getText();
 		
 		String rua = textRua.getText();
 		String bairro = textBairro.getText();
@@ -327,15 +342,41 @@ public class TelaAtualizarCliente {
 		String cidade = textCidade.getText(); 
 		String numero = textNumero.getText();
 		String cep = textCep.getText();
+		String cpf = textCPF.getText();
+		
+		try{
+			endereco = new Endereco(rua,cpf, numero, bairro, complemento, cidade, cep);
+			fachada.atualizarEndereco(endereco);
+			
+		
+		limparCampos();
+		
+		}catch (Exception e) {
+			
+		}
+	}
+	public void atualizar() throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException {
+		
+		String nome = textNome.getText();
+		String sexo = selecionarSexo();
+		String telefone = textTelefone.getText();
+		String cpf = textCPF.getText();
+		
+		/*String rua = textRua.getText();
+		String bairro = textBairro.getText();
+		String complemento = textComplemento.getText();
+		String cidade = textCidade.getText(); 
+		String numero = textNumero.getText();
+		String cep = textCep.getText();*/
 		try{
 			
 			cliente = new Cliente(nome,cpf,sexo,telefone);
 			fachada.atualizarCliente(cliente);
 			
-			endereco = new Endereco(rua,cpf, numero, bairro, complemento, cidade, cep);
-			fachada.atualizarEndereco(endereco);
+			//endereco = new Endereco(rua,cpf, numero, bairro, complemento, cidade, cep);
+			//fachada.atualizarEndereco(endereco);
 			
-		JOptionPane.showMessageDialog(null, "Cliente Atualizado com Sucesso");
+		
 		limparCampos();
 		
 		}catch (Exception e) {
@@ -370,5 +411,11 @@ public class TelaAtualizarCliente {
 		defaultTableModelCliente.setRowCount(0);
 	}
 	
-	
+	private String selecionarSexo(){
+		String sexo = "";
+		if(rdbtnM.isSelected()) sexo = "M";
+		if(rdbtnF.isSelected()) sexo = "F";
+		return sexo;
+		
+	}
 }// fim da classe

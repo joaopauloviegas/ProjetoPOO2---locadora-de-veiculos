@@ -193,11 +193,11 @@ public class TelaCadastroCliente {
 		panel.add(textNumero);
 		textNumero.setColumns(10);
 		
-		 rdbtnM = new JRadioButton("M");
+		rdbtnM = new JRadioButton("M");
 		rdbtnM.setBounds(303, 35, 46, 23);
 		panel.add(rdbtnM);
 		
-		 rdbtnF = new JRadioButton("F");
+		rdbtnF = new JRadioButton("F");
 		rdbtnF.setBounds(359, 35, 46, 23);
 		panel.add(rdbtnF);
 		
