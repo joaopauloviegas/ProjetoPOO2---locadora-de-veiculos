@@ -4,8 +4,16 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+
+import com.fafica.projeto.Cliente.CPFInvalidoException;
+import com.fafica.projeto.Endereco.CampoObrigatorioException;
+import com.fafica.projeto.Endereco.Endereco;
+import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
+import com.fafica.projeto.Fachada.Fachada;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -147,26 +155,80 @@ public class TelaCadastroFuncionario {
 		textCEP.setColumns(10);
 		
 		JButton btnNewButton = new JButton("Cadastrar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
 		btnNewButton.setBounds(334, 275, 97, 25);
 		frmCadastroFuncionario.getContentPane().add(btnNewButton);
 		
 		JButton btnLimpar = new JButton("Limpar");
 		btnLimpar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-			textNome.setText("");
-			textCPF.setText("");
-			textSexo.setText("");
-			textTelefone.setText("");
-			textRua.setText("");
-			textBairro.setText("");
-			textNumero.setText("");
-			textComplemento.setText("");
-			textCidade.setText("");
-			textCEP.setText("");
 			
+			limparCampos();
 			}
 		});
 		btnLimpar.setBounds(216, 275, 97, 25);
 		frmCadastroFuncionario.getContentPane().add(btnLimpar);
+	}
+	
+	public void limparCampos(){
+		textNome.setText("");
+		textCPF.setText("");
+		textSexo.setText("");
+		textTelefone.setText("");
+		textRua.setText("");
+		textBairro.setText("");
+		textNumero.setText("");
+		textComplemento.setText("");
+		textCidade.setText("");
+		textCEP.setText("");
+		
+	}
+	
+	public void cadastrar(){
+		String nome = textNome.getText();
+		String cpf = textCPF.getText();
+		String sexo = textSexo.getText();
+		String telefone = textTelefone.getText();
+		String rua = textRua.getText();
+		String bairro = textBairro.getText();
+		String numero = textNumero.getText();
+		String complemento = textComplemento.getText();
+		String cidade = textCidade.getText();
+		String cep = textCEP.getText();
+		
+		Funcionario funcionario = new Funcionario(nome, cpf, sexo, telefone);
+		Endereco endereco = new Endereco(rua,bairro,numero,complemento,cidade,cep);
+		
+		Fachada fachada = new Fachada();
+		fachada.getInstance();
+		
+		try{
+			fachada.cadastrarFuncionario(funcionario);
+			fachada.cadastrarEndereco(endereco);
+		
+			limparCampos();
+			
+		}catch (IllegalArgumentException e) {
+			
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (CPFInvalidoException e) {
+			
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (CampoObrigatorioException e) {
+			
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (EnderecoJaCadastradoException e) {
+			
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (RuntimeException e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			JOptionPane.showMessageDialog(null, e.getMessage(), "ERRO", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 }
