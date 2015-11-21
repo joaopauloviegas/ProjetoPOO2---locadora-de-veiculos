@@ -157,6 +157,7 @@ public class TelaCadastroFuncionario {
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				cadastrar();
 			}
 		});
 		btnNewButton.setBounds(334, 275, 97, 25);
@@ -200,7 +201,7 @@ public class TelaCadastroFuncionario {
 		String cep = textCEP.getText();
 		
 		Funcionario funcionario = new Funcionario(nome, cpf, sexo, telefone);
-		Endereco endereco = new Endereco(rua,bairro,numero,complemento,cidade,cep);
+		Endereco endereco = new Endereco(rua,cpf,bairro,numero,complemento,cidade,cep);
 		
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
@@ -208,7 +209,7 @@ public class TelaCadastroFuncionario {
 		try{
 			fachada.cadastrarFuncionario(funcionario);
 			fachada.cadastrarEndereco(endereco);
-		
+					
 			limparCampos();
 			
 		}catch (IllegalArgumentException e) {

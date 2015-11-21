@@ -29,7 +29,7 @@ public class ControladorFuncionario {
 		
 	}
 	
-	public void atualizar(Funcionario funcionario) throws EnderecoNaoEncontradoException, CampoObrigatorioException, CPFInvalidoException{
+	public void atualizar(Funcionario funcionario) throws  CampoObrigatorioException, CPFInvalidoException{
 		if(funcionario == null) throw new IllegalArgumentException("Cliente inv[alido");
 		if(!ValidarCPF.validaCPF(funcionario.getCpf())) throw new CPFInvalidoException();
 		if(funcionario.getNome().equals("")) throw new CampoObrigatorioException();
@@ -38,7 +38,8 @@ public class ControladorFuncionario {
 		
 	}
 	
-	public void remover(String cpf) throws EnderecoNaoEncontradoException{
+	public void remover(String cpf) throws CPFInvalidoException,FuncionarioNaoEncontradoException {
+		
 		this.repositorioFuncionario.remover(cpf);
 		
 	}//fim do remover

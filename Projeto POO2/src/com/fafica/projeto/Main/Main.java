@@ -130,7 +130,7 @@ public class Main {
 		
 		Endereco endereco = new Endereco("Travessa Pau","5958005459","254","1 Andar","Kennedy","Caruaru", "5507897987");
 		//fachada.cadastrarEndereco(endereco);
-		fachada.atualizarEndereco(endereco);
+		//fachada.atualizarEndereco(endereco);
 		//fachada.buscarEndereco("5958005459");
 		//fachada.listarEndereco();
 		

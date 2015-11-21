@@ -26,6 +26,7 @@ import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
 import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Funcionario.ControladorFuncionario;
 import com.fafica.projeto.Funcionario.Funcionario;
+import com.fafica.projeto.Funcionario.FuncionarioNaoEncontradoException;
 
 public class Fachada {
 
@@ -139,7 +140,7 @@ public class Fachada {
 		this.controladorFuncionario.atualizar(funcionario);
 	    }//fim do atualizar
 		
-	    public void removerFuncionario(String cpf) throws EnderecoNaoEncontradoException{
+	    public void removerFuncionario(String cpf) throws EnderecoNaoEncontradoException, CPFInvalidoException, FuncionarioNaoEncontradoException{
 		this.controladorFuncionario.remover(cpf);
 		
 	    }//fim do remover
