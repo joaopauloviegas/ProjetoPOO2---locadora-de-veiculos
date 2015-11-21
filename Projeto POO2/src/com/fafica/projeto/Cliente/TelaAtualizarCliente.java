@@ -240,12 +240,12 @@ public class TelaAtualizarCliente {
 		
 		JButton btnAtualizar = new JButton("ATUALIZAR");
 		btnAtualizar.setBounds(326, 10, 124, 25);
-		panel_2.add(btnAtualizar);
+		panel_2.add(btnAtualizar); 
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					atualizar();
-					atualizarEndereco();
+					//atualizarEndereco();
 				} catch (ClienteNaoEncontradoException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -333,28 +333,7 @@ public class TelaAtualizarCliente {
 		
 	}
 	
-		public void atualizarEndereco() throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException {
-		
-		
-		String rua = textRua.getText();
-		String bairro = textBairro.getText();
-		String complemento = textComplemento.getText();
-		String cidade = textCidade.getText(); 
-		String numero = textNumero.getText();
-		String cep = textCep.getText();
-		String cpf = textCPF.getText();
-		
-		try{
-			endereco = new Endereco(rua,cpf, numero, bairro, complemento, cidade, cep);
-			fachada.atualizarEndereco(endereco);
-			
-		
-		limparCampos();
-		
-		}catch (Exception e) {
-			
-		}
-	}
+	
 	public void atualizar() throws ClienteNaoEncontradoException, CPFInvalidoException, CampoObrigatorioException {
 		
 		String nome = textNome.getText();
@@ -362,19 +341,19 @@ public class TelaAtualizarCliente {
 		String telefone = textTelefone.getText();
 		String cpf = textCPF.getText();
 		
-		/*String rua = textRua.getText();
+		String rua = textRua.getText();
 		String bairro = textBairro.getText();
 		String complemento = textComplemento.getText();
 		String cidade = textCidade.getText(); 
 		String numero = textNumero.getText();
-		String cep = textCep.getText();*/
+		String cep = textCep.getText();
 		try{
 			
 			cliente = new Cliente(nome,cpf,sexo,telefone);
 			fachada.atualizarCliente(cliente);
 			
-			//endereco = new Endereco(rua,cpf, numero, bairro, complemento, cidade, cep);
-			//fachada.atualizarEndereco(endereco);
+			endereco = new Endereco(rua,cpf, numero, bairro, complemento, cidade, cep);
+			fachada.atualizarEndereco(endereco);
 			
 		
 		limparCampos();

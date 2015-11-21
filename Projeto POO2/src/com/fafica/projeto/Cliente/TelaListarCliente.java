@@ -58,16 +58,16 @@ public class TelaListarCliente {
 	private void initialize() {
 		frmTelaListarClientes = new JFrame();
 		frmTelaListarClientes.setTitle("Tela Listar Clientes");
-		frmTelaListarClientes.setBounds(100, 100, 746, 430);
+		frmTelaListarClientes.setBounds(100, 100, 847, 430);
 		frmTelaListarClientes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaListarClientes.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 60, 710, 320);
+		scrollPane.setBounds(10, 60, 811, 320);
 		frmTelaListarClientes.getContentPane().add(scrollPane);
 		
 		tableCliente = new JTable();
-		String colunaTabelaCliente[] = new String[] {"Nome", "CPF", "Sexo", "Telefone", "Rua", "Numero","Complemento","Bairro","Cidade","CEP"};
+		String colunaTabelaCliente[] = new String[] {"Nome", "CPF", "Sexo", "Telefone", "Rua", "Numero","Bairro","Complemento","Cidade","CEP"};
 		defaultTableModelCliente = new DefaultTableModel(new Object[] []{ }, colunaTabelaCliente) {
 			public boolean isCellEditable(int row, int col) {
 				return false;
@@ -124,8 +124,9 @@ public class TelaListarCliente {
 					//defaultTableModelCliente.addRow(vector);
 				}
 				
-				defaultTableModelCliente.addRow(vector);
+				//defaultTableModelCliente.addRow(vector);
 			}// fim do for  
+			
 			
 		}catch(Exception e){
 			

@@ -61,7 +61,7 @@ public class TelaRemoverCliente {
 	private void initialize() {
 		frmTelaRemoverCliente = new JFrame();
 		frmTelaRemoverCliente.setTitle("Tela Remover Cliente");
-		frmTelaRemoverCliente.setBounds(100, 100, 447, 335);
+		frmTelaRemoverCliente.setBounds(100, 100, 558, 338);
 		frmTelaRemoverCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaRemoverCliente.getContentPane().setLayout(null);
 		
@@ -90,8 +90,8 @@ public class TelaRemoverCliente {
 				
 			}
 		});
-		btnRemover.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnRemover.setBounds(304, 57, 89, 23);
+		btnRemover.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnRemover.setBounds(222, 57, 100, 23);
 		panel.add(btnRemover);
 		
 		JLabel lblCpf = new JLabel("CPF:");
@@ -101,7 +101,7 @@ public class TelaRemoverCliente {
 		
 		textCPF = new JTextField();
 		textCPF.setToolTipText("Digite o CPF do cliente que deseja remover");
-		textCPF.setBounds(80, 58, 132, 20);
+		textCPF.setBounds(66, 59, 132, 20);
 		panel.add(textCPF);
 		textCPF.setColumns(10);
 		
@@ -132,13 +132,23 @@ public class TelaRemoverCliente {
 			}
 		});
 		btnListar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnListar.setBounds(284, 262, 89, 23);
+		btnListar.setBounds(432, 265, 100, 23);
 		frmTelaRemoverCliente.getContentPane().add(btnListar);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setBounds(327, 262, 89, 23);
+		frmTelaRemoverCliente.getContentPane().add(btnLimpar);
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				limparCampos();
+			}
+		});
+		btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 13));
 	}
 	
 	public void remover() throws ClienteNaoEncontradoException, EnderecoNaoEncontradoException{
-		Fachada fachada = new Fachada();
-		fachada.getInstance();
+		//Fachada fachada = new Fachada();
+		//fachada.getInstance();
 		try{
 			String cpf = textCPF.getText();
 			fachada.removerCliente(cpf);
@@ -178,5 +188,10 @@ public class TelaRemoverCliente {
 	
 	private void limparTabelaCliente() {
 		  defaultTableModelCliente.setRowCount(0);
-		}
+	}
+	
+	public void limparCampos(){
+		textCPF.setText("");
+		limparTabelaCliente();
+	}
 }

@@ -26,20 +26,27 @@ import javax.swing.JComboBox;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.imageio.ImageTranscoder;
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Font;
+import javax.swing.JRadioButton;
 
 public class TelaCadastroSaidaVeiculo {
 
 	public JFrame frmTelaCadastroSaida;
-	private JTextField textCombustivel;
 	private JTextField textValorDiaria;
 	private JTextField textDiasComCarro;
 	private JTextField textValorTotal;
 	private JTextField textPlaca;
 	private JTextField textNomeCliente;
 	private JTextField textNomeFuncionario;
+	private ButtonGroup grupo = new ButtonGroup();
+	private JRadioButton rdbtnSeco;
+	private JRadioButton rdbtnMeio;
+	private JRadioButton rdbtnCheio;
+	private JButton btnAtualizar;
 	
 	/**
 	 * Launch the application.
@@ -73,65 +80,67 @@ public class TelaCadastroSaidaVeiculo {
 	private void initialize() {
 		frmTelaCadastroSaida = new JFrame();
 		frmTelaCadastroSaida.setTitle("Tela Cadastro Saida de Veiculo");
-		frmTelaCadastroSaida.setBounds(100, 100, 738, 432);
+		frmTelaCadastroSaida.setBounds(100, 100, 738, 361);
 		frmTelaCadastroSaida.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaCadastroSaida.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 11, 702, 203);
+		panel.setBounds(10, 11, 702, 300);
 		frmTelaCadastroSaida.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JLabel lblCliente = new JLabel("Cliente:");
-		lblCliente.setBounds(10, 11, 46, 14);
+		lblCliente.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblCliente.setBounds(10, 11, 78, 14);
 		panel.add(lblCliente);
 		
-		JLabel lblVeiculo = new JLabel("Placa do veiculo:");
+		JLabel lblVeiculo = new JLabel("Placa:");
+		lblVeiculo.setFont(new Font("Tahoma", Font.BOLD, 13));
 		lblVeiculo.setBounds(10, 62, 108, 14);
 		panel.add(lblVeiculo);
 		
 		JLabel lblTanqueCombustivel = new JLabel("Tanque Combustivel:");
-		lblTanqueCombustivel.setBounds(303, 11, 118, 14);
+		lblTanqueCombustivel.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblTanqueCombustivel.setBounds(10, 87, 149, 14);
 		panel.add(lblTanqueCombustivel);
 		
-		textCombustivel = new JTextField();
-		textCombustivel.setBounds(431, 8, 138, 20);
-		panel.add(textCombustivel);
-		textCombustivel.setColumns(10);
-		
 		JLabel lblValorDiaria = new JLabel("Valor diaria:");
-		lblValorDiaria.setBounds(10, 90, 88, 14);
+		lblValorDiaria.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblValorDiaria.setBounds(10, 116, 108, 14);
 		panel.add(lblValorDiaria);
 		
 		textValorDiaria = new JTextField();
-		textValorDiaria.setBounds(98, 87, 86, 20);
+		textValorDiaria.setBounds(144, 114, 86, 20);
 		panel.add(textValorDiaria);
 		textValorDiaria.setColumns(10);
 		
 		JLabel lblPevis = new JLabel("Dias com carro:");
-		lblPevis.setBounds(10, 118, 88, 14);
+		lblPevis.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblPevis.setBounds(262, 116, 108, 14);
 		panel.add(lblPevis);
 		
 		textDiasComCarro = new JTextField();
-		textDiasComCarro.setBounds(117, 115, 67, 20);
+		textDiasComCarro.setBounds(380, 114, 67, 20);
 		panel.add(textDiasComCarro);
 		textDiasComCarro.setColumns(10);
 		
 		JLabel lblValorTotal = new JLabel("Valor Total:");
-		lblValorTotal.setBounds(10, 143, 78, 14);
+		lblValorTotal.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblValorTotal.setBounds(10, 172, 108, 14);
 		panel.add(lblValorTotal);
 		
 		textValorTotal = new JTextField();
-		textValorTotal.setBounds(98, 140, 86, 20);
+		textValorTotal.setBounds(144, 170, 86, 20);
 		panel.add(textValorTotal);
 		textValorTotal.setColumns(10);
 		
 		textPlaca = new JTextField();
-		textPlaca.setBounds(128, 59, 131, 20);
+		textPlaca.setBounds(144, 60, 86, 20);
 		panel.add(textPlaca);
 		textPlaca.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				try {
@@ -144,24 +153,69 @@ public class TelaCadastroSaidaVeiculo {
 				
 			}
 		});
-		btnCadastrar.setBounds(584, 169, 108, 23);
+		btnCadastrar.setBounds(584, 266, 108, 23);
 		panel.add(btnCadastrar);
 		
 		textNomeCliente = new JTextField();
-		textNomeCliente.setBounds(98, 8, 161, 20);
+		textNomeCliente.setBounds(144, 8, 502, 20);
 		panel.add(textNomeCliente);
 		textNomeCliente.setColumns(10);
 		
 		JLabel lblFuncionario = new JLabel("Funcionario:");
-		lblFuncionario.setBounds(10, 37, 86, 14);
+		lblFuncionario.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblFuncionario.setBounds(10, 37, 88, 14);
 		panel.add(lblFuncionario);
 		
 		textNomeFuncionario = new JTextField();
-		textNomeFuncionario.setBounds(98, 34, 161, 20);
+		textNomeFuncionario.setBounds(144, 35, 502, 20);
 		panel.add(textNomeFuncionario);
 		textNomeFuncionario.setColumns(10);
+		
+		rdbtnSeco = new JRadioButton("Seco");
+		rdbtnSeco.setBounds(154, 84, 67, 23);
+		panel.add(rdbtnSeco);
+		
+		rdbtnMeio = new JRadioButton("Meio");
+		rdbtnMeio.setBounds(223, 84, 67, 23);
+		panel.add(rdbtnMeio);
+		
+		rdbtnCheio = new JRadioButton("Cheio");
+		rdbtnCheio.setBounds(292, 84, 67, 23);
+		panel.add(rdbtnCheio);
+		
+		grupo.add(rdbtnSeco);
+		grupo.add(rdbtnMeio);
+		grupo.add(rdbtnCheio);
+		
+		btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				valorTotal();
+			}
+		});
+		btnAtualizar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnAtualizar.setBounds(262, 169, 127, 23);
+		panel.add(btnAtualizar);
+		
 	}//  fim do main
 	
+	private String selecionarCombustivel(){
+		String combustivel = "";
+		if(rdbtnSeco.isSelected()) combustivel = "Seco";
+		if(rdbtnMeio.isSelected()) combustivel = "Meio";
+		if(rdbtnCheio.isSelected()) combustivel = "Cheio";
+		return combustivel;
+		
+	}
+	private int valorTotal(){
+		int valorDiaria = Integer.parseInt(textValorDiaria.getText());
+		int diasComCarro = Integer.parseInt(textDiasComCarro.getText());
+		int valorTotal = valorDiaria * diasComCarro;
+		String valorTotalString = Integer.toString(valorTotal);
+		textValorTotal.setText(valorTotalString);
+		return valorTotal;
+		
+	}
 	public void cadastro() throws ClienteNaoEncontradoException, CPFInvalidoException, CarroNaoEncontradoException, CampoObrigatorioException{
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
@@ -169,13 +223,13 @@ public class TelaCadastroSaidaVeiculo {
 		
 		int valorDiaria = Integer.parseInt(textValorDiaria.getText());
 		int diasComCarro = Integer.parseInt(textDiasComCarro.getText());
-		int valorTotal = valorDiaria * diasComCarro;
+		int valorTotal = valorTotal();
 		
 		String valorTotalString = Integer.toString(valorTotal);
 		String nomeCliente = textNomeCliente.getText();
 		String nomeFuncionario = textNomeFuncionario.getText();
 		String placa = textPlaca.getText();
-		String combustivel = textCombustivel.getText();
+		String combustivel = selecionarCombustivel();
 		
 		  
 		
@@ -211,5 +265,4 @@ public class TelaCadastroSaidaVeiculo {
 		
 		
 	}// fim do metodo
-	
 }// fim da classe

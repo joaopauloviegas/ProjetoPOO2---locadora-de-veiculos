@@ -86,18 +86,8 @@ public class TelaRemoverCarro {
 				remover();
 			}
 		});
-		btnRemover.setBounds(307, 42, 111, 23);
+		btnRemover.setBounds(178, 42, 111, 23);
 		panel.add(btnRemover);
-		
-		JButton btnLimpar = new JButton("Limpar");
-		btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 13));
-		btnLimpar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				limparCampos();
-			}
-		});
-		btnLimpar.setBounds(188, 42, 89, 23);
-		panel.add(btnLimpar);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(216, 11, 406, 35);
@@ -136,6 +126,16 @@ public class TelaRemoverCarro {
 		btnListar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnListar.setBounds(654, 393, 96, 23);
 		frmTelaRemoverCarro.getContentPane().add(btnListar);
+		
+		JButton btnLimpar = new JButton("Limpar");
+		btnLimpar.setBounds(555, 393, 89, 23);
+		frmTelaRemoverCarro.getContentPane().add(btnLimpar);
+		btnLimpar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnLimpar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				limparCampos();
+			}
+		});
 		
 		
 	}// fim do main
