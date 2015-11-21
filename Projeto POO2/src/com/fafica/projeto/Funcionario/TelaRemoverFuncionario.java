@@ -125,10 +125,12 @@ public class TelaRemoverFuncionario {
 	}
 	
 	public void remover() throws EnderecoNaoEncontradoException, CPFInvalidoException, FuncionarioNaoEncontradoException {
-		String cpf = textCpf.getText();
+		Fachada fachada = new Fachada();
+		fachada.getInstance();
 		try{		
-		fachada.removerFuncionario(cpf);
+		String cpf = textCpf.getText();
 		fachada.removerEndereco(cpf);
+		fachada.removerFuncionario(cpf);
 		limparTabelaFuncionario();
 		} catch(Exception e) {
 			

@@ -52,7 +52,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do adicionar
 	
 	public void atualizar(Funcionario funcionario){
-		String query = "UPDATE FUNCIONARIO SET NOME=?,CPF=? WHERE CPF=?";
+		String query = "UPDATE FUNCIONARIO1 SET NOME=?,CPF=? WHERE CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -67,7 +67,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 
 	@Override
 	public void remover(String cpf) {
-		String query = "DELETE FROM FUNCIONARIO WHERE CPF=? ";
+		String query = "DELETE FROM FUNCIONARIO1 WHERE CPF=? ";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -75,7 +75,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 			stm.executeUpdate();
 			JOptionPane.showMessageDialog(null, "Removido com sucesso!");
 		} catch (SQLException sql){
-			System.out.println("Erro no atualizar" +sql);
+			System.out.println("Erro no remover Funcionario" +sql);
 		}
 	}//fim do remover
 

@@ -38,8 +38,8 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	@Override
 	public void adicionar(Endereco endereco) throws EnderecoJaCadastradoException, SQLException {
 		
-		String query = "INSERT INTO ENDERECO(cpf,rua,numero,complemento,bairro,cidade,cep)" +
-				"VALUES ('"+endereco.getCpf()+"', '"+endereco.getRua()+"' , '"+endereco.getNumero()+"', '"+endereco.getComplemento()+"', '"+endereco.getBairro()+"' , '"+endereco.getCidade()+"' , '"+endereco.getCep()+"')";
+		String query = "INSERT INTO ENDERECO(cpf,rua,numero,bairro,complemento,cidade,cep)" +
+				"VALUES ('"+endereco.getCpf()+"', '"+endereco.getRua()+"' , '"+endereco.getNumero()+"', '"+endereco.getBairro()+"', '"+endereco.getComplemento()+"' , '"+endereco.getCidade()+"' , '"+endereco.getCep()+"')";
 			
 		conecta();
 		try{
@@ -134,7 +134,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 		ResultSet rs = stm.executeQuery();
 		
 		while(rs.next()){
-			   Endereco endereco = new Endereco(rs.getString("cpf"),rs.getString("rua"),rs.getString("numero"),rs.getString("complemento"),rs.getString("bairro"),rs.getString("cidade"),rs.getString("cep"));
+			   Endereco endereco = new Endereco(rs.getString("rua"),rs.getString("cpf"),rs.getString("numero"),rs.getString("complemento"),rs.getString("bairro"),rs.getString("cidade"),rs.getString("cep"));
 	    	   listar.add(endereco);
 		}//fim do while
 		for(Endereco endereco : listar){

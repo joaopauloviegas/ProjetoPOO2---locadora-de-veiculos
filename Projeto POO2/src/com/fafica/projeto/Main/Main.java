@@ -23,10 +23,11 @@ import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
 import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 import com.fafica.projeto.Funcionario.Funcionario;
+import com.fafica.projeto.Funcionario.FuncionarioNaoEncontradoException;
 
 public class Main {
 
-	public static void main(String[] args) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, EnderecoNaoEncontradoException, SQLException, CarroNaoEncontradoException, ClienteJaCadastradoException, CPFInvalidoException, ClienteNaoEncontradoException, SaidaDeVeiculosJaCadastradaException, CadastroDeReservaJaCadastradaException, com.fafica.projeto.CadastroDeReserva.CampoObrigatorioException {
+	public static void main(String[] args) throws IllegalArgumentException, CarroJaCadastradoException, CampoObrigatorioException, EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, EnderecoNaoEncontradoException, SQLException, CarroNaoEncontradoException, ClienteJaCadastradoException, CPFInvalidoException, ClienteNaoEncontradoException, SaidaDeVeiculosJaCadastradaException, CadastroDeReservaJaCadastradaException, com.fafica.projeto.CadastroDeReserva.CampoObrigatorioException, FuncionarioNaoEncontradoException {
 		 
 		Fachada fachada = Fachada.getInstance();
 		 
@@ -125,6 +126,7 @@ public class Main {
 		
 		Funcionario funcionario = new Funcionario("Bina Oliveira","5958005459","Masculino","371211212");
 		//fachada.cadastrarFuncionario(funcionario);
+		fachada.removerFuncionario("5958005459");
 		//fachada.buscarFuncionario("5958005459");
 		//fachada.listarFuncionario();
 		
@@ -133,7 +135,7 @@ public class Main {
 		//fachada.atualizarEndereco(endereco);
 		//fachada.buscarEndereco("5958005459");
 		//fachada.listarEndereco();
-		
+		//fachada.removerEndereco("5958005459");
 		//CadastroDeReserva cadastrodeReserva = new CadastroDeReserva(new Cliente("Joao paulo","09948766458","masculino", "(81)99192-0532"), endereco , "30/12/2015",new Carro(5,"POLO",2015,"KKK-6789",2,7560,"Popular"),2,150.00);
 		//fachada.cadastrarCadastroDeReserva(cadastrodeReserva);
 		

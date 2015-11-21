@@ -201,7 +201,7 @@ public class TelaCadastroFuncionario {
 		String cep = textCEP.getText();
 		
 		Funcionario funcionario = new Funcionario(nome, cpf, sexo, telefone);
-		Endereco endereco = new Endereco(rua,cpf,bairro,numero,complemento,cidade,cep);
+		Endereco endereco = new Endereco(rua,cpf,numero,bairro,complemento,cidade,cep);
 		
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
