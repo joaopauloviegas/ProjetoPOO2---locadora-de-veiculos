@@ -44,10 +44,8 @@ public class ControladorFuncionario {
 		
 	}//fim do remover
 	
-	public ArrayList<Funcionario> buscar(String cpf){
-		ArrayList<Funcionario> lista = null;
-		lista = this.repositorioFuncionario.buscar(cpf);
-		return lista;
+	public Funcionario buscar(String cpf){
+		return repositorioFuncionario.buscar(cpf);
 	}//fim do buscar
 	
 	public ArrayList<Funcionario> listar(){

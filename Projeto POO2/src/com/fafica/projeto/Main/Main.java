@@ -126,8 +126,8 @@ public class Main {
 		
 		Funcionario funcionario = new Funcionario("Bina Oliveira","5958005459","Masculino","371211212");
 		//fachada.cadastrarFuncionario(funcionario);
-		fachada.removerFuncionario("5958005459");
-		//fachada.buscarFuncionario("5958005459");
+		//fachada.removerFuncionario("5958005459");
+		//fachada.buscarFuncionario("70711645418");
 		//fachada.listarFuncionario();
 		
 		Endereco endereco = new Endereco("Travessa Pau","5958005459","254","1 Andar","Kennedy","Caruaru", "5507897987");

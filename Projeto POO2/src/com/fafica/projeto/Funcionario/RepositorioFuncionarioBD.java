@@ -105,9 +105,8 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do listar
 
 	@Override
-	public ArrayList<Funcionario> buscar(String cpf) {
-		ArrayList<Funcionario> funcionarioBuscar = new ArrayList<>();
-		String query = "select nome,cpf,sexo,numeroTelefone from FUNCIONARIO1 where CPF=?";
+	public Funcionario buscar(String cpf) {
+				String query = "select nome,cpf,sexo,numeroTelefone from FUNCIONARIO1 where CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -119,17 +118,17 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 		    	   String sexo = rs.getString("sexo");
 		    	   String numeroTelefone = rs.getString("numeroTelefone");
 		    	   Funcionario funcionario = new Funcionario(nome,cpf1,sexo,numeroTelefone);
-		    	   funcionarioBuscar.add(funcionario);
-		    	   System.out.println(funcionarioBuscar);
+		    	   
+		    	   System.out.println(funcionario);
 			}//fim do while
-			JOptionPane.showMessageDialog(null, "Atualizado com sucesso!");
+			JOptionPane.showMessageDialog(null, "Busca efetuada com sucesso!");
 			stm.close();
 			rs.close();
 		} catch (SQLException sql){
-			System.out.println("Erro no Buscarr" +sql);
+			JOptionPane.showConfirmDialog(null, "Erro no buscar"+sql);
 		}//fim do try
 		desconecta();
-		return funcionarioBuscar;
+		return null;
 	}//fim do buscar
 	
 	

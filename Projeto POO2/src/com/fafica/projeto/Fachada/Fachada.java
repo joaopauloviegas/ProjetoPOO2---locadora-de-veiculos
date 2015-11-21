@@ -145,10 +145,8 @@ public class Fachada {
 		
 	    }//fim do remover
 	
-	    public ArrayList<Funcionario> buscarFuncionario(String cpf){
-		ArrayList<Funcionario> lista = null;
-		lista = this.controladorFuncionario.buscar(cpf);
-		return null;
+	    public Funcionario buscarFuncionario(String cpf){
+				return controladorFuncionario.buscar(cpf);
 	    }
 	    
 	    public ArrayList<Funcionario> listarFuncionario(){
