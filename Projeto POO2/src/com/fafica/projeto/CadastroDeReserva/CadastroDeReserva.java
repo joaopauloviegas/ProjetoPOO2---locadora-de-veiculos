@@ -8,31 +8,25 @@ import com.fafica.projeto.Endereco.Endereco;
 public class CadastroDeReserva {
 	
 	private int id;
-	private Cliente cliente;
-	private Endereco endereco;
+	private String nomeCliente;
+	private String nomeFuncionario;
 	private String data;
 	private Carro carro;
 	private int quantidade;
 	private double valor;
 	
-	public CadastroDeReserva(int id, Cliente cliente, Endereco endereco, String data, Carro carro, int quantidade, double valor){
+	public CadastroDeReserva( String nomeCliente, String nomeFuncionario, String data, Carro carro, int quantidade, double valor){
 		this.id = 0;
-		this.cliente = cliente;
-		this.endereco = endereco;
+		this.nomeCliente = nomeCliente;
+		this.nomeCliente = nomeCliente;
 		this.data = data;
 		this.carro = carro;
 		this.quantidade = quantidade;
 		this.valor = valor;
 	}
 	
-	public CadastroDeReserva( Cliente cliente, Endereco endereco, String data, Carro carro, int quantidade, double valor){
-		this.setId(id);
-		this.cliente = cliente;
-		this.endereco = endereco;
-		this.data = data;
-		this.carro = carro;
-		this.quantidade = quantidade;
-		this.valor = valor;
+	public CadastroDeReserva(){
+		
 	}
 	
 	
@@ -42,18 +36,7 @@ public class CadastroDeReserva {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Cliente getCliente() {
-		return cliente;
-	}
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
+		
 	public String getData() {
 		return data;
 	}
@@ -78,19 +61,29 @@ public class CadastroDeReserva {
 	public void setValor(double valor) {
 		this.valor = valor;
 	}
-	@Override
-	public String toString() {
-		return "CadastroDeReserva [id=" + id + ", cliente=" + cliente
-				+ ", endereco=" + endereco + ", data=" + data + ", carro="
-				+ carro + ", quantidade=" + quantidade + ", valor=" + valor
-				+ "]";
+
+	public String getNomeCliente() {
+		return nomeCliente;
+	}
+
+	public void setNomeCliente(String nomeCliente) {
+		this.nomeCliente = nomeCliente;
+	}
+
+	public String getNomeFuncionario() {
+		return nomeFuncionario;
+	}
+
+	public void setNomeFuncionario(String nomeFuncionario) {
+		this.nomeFuncionario = nomeFuncionario;
 	}
 	
-	
-	
-	
-	
-	
-	
+	@Override
+	public String toString() {
+		return "CadastroDeReserva [id=" + id + ", nomeCliente=" + nomeCliente
+				+ ", nomeFuncionario=" + nomeFuncionario + ", data=" + data
+				+ ", carro=" + carro + ", quantidade=" + quantidade
+				+ ", valor=" + valor + "]";
+	}
 
 }

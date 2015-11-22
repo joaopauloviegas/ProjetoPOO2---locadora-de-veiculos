@@ -7,7 +7,7 @@ public interface IRepositorioCadastroDeReserva {
 	public void adicionar(CadastroDeReserva cadastrodeReserva) throws CadastroDeReservaJaCadastradaException;
 	public void remover(Integer id) throws CadastroDeReservaNaoEncontradoException;
 	public void atualizar(CadastroDeReserva cadastrodeReserva) throws CadastroDeReservaNaoEncontradoException;
-	public ArrayList<CadastroDeReserva> buscar(Integer id) throws CadastroDeReservaNaoEncontradoException;
+	public CadastroDeReserva buscar(Integer id) throws CadastroDeReservaNaoEncontradoException;
 	public ArrayList<CadastroDeReserva> listar();
 
 }
