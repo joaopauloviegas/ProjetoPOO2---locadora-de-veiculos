@@ -33,8 +33,8 @@ public class RepositorioCadastroDeReservaBD implements IRepositorioCadastroDeRes
 	}//fim do desconecta
 	
 	public void adicionar(CadastroDeReserva cadastrodeReserva){
-		String query = "INSERT INTO CADASTRODERESERVA(CLIENTE,ENDERECO,DATA,CARRO,QUANTIDADE,VALOR)"
-				+"VALUES ('"+cadastrodeReserva.getCliente().toString()+"', '"+cadastrodeReserva.getEndereco().toString()+"' , '"+cadastrodeReserva.getData()+"', '"+cadastrodeReserva.getCarro().toString()+"' , '"+cadastrodeReserva.getQuantidade()+"' , '"+cadastrodeReserva.getValor()+"')";
+		String query = "INSERT INTO CADASTRODERESERVA(nomeCliente,nomeFuncionario,DATA,CARRO,QUANTIDADE,VALOR)"
+				+"VALUES ('""')";
 		conecta();
 		try{
 			stm = con.createStatement();

@@ -11,16 +11,17 @@ public class CadastroDeReserva {
 	private String nomeCliente;
 	private String nomeFuncionario;
 	private String data;
-	private Carro carro;
+	private String placa;
 	private int quantidade;
+	private int diascomCarro;
 	private double valor;
 	
-	public CadastroDeReserva( String nomeCliente, String nomeFuncionario, String data, Carro carro, int quantidade, double valor){
+	public CadastroDeReserva( String nomeCliente, String nomeFuncionario, String data, String placa,int quantidade, double valor){
 		this.id = 0;
 		this.nomeCliente = nomeCliente;
 		this.nomeCliente = nomeCliente;
 		this.data = data;
-		this.carro = carro;
+		this.placa = placa;
 		this.quantidade = quantidade;
 		this.valor = valor;
 	}
@@ -43,11 +44,11 @@ public class CadastroDeReserva {
 	public void setData(String data) {
 		this.data = data;
 	}
-	public Carro getCarro() {
-		return carro;
+	public String getPlaca() {
+		return placa;
 	}
-	public void setCarro(Carro carro) {
-		this.carro = carro;
+	public void setPlaca(String placa) {
+		this.placa = placa;
 	}
 	public int getQuantidade() {
 		return quantidade;
@@ -77,13 +78,23 @@ public class CadastroDeReserva {
 	public void setNomeFuncionario(String nomeFuncionario) {
 		this.nomeFuncionario = nomeFuncionario;
 	}
-	
+
+	public int getDiascomCarro() {
+		return diascomCarro;
+	}
+
+	public void setDiascomCarro(int diascomCarro) {
+		this.diascomCarro = diascomCarro;
+	}
+
 	@Override
 	public String toString() {
 		return "CadastroDeReserva [id=" + id + ", nomeCliente=" + nomeCliente
 				+ ", nomeFuncionario=" + nomeFuncionario + ", data=" + data
-				+ ", carro=" + carro + ", quantidade=" + quantidade
-				+ ", valor=" + valor + "]";
+				+ ", placa=" + placa + ", quantidade=" + quantidade
+				+ ", diascomCarro=" + diascomCarro + ", valor=" + valor + "]";
 	}
+	
+	
 
 }
