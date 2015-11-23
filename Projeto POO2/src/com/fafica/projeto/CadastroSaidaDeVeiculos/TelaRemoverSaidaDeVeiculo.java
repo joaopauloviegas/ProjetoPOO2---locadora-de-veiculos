@@ -5,6 +5,7 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
 
@@ -66,7 +67,7 @@ public class TelaRemoverSaidaDeVeiculo {
 		frmTelaRemoverSaida.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 27, 774, 105);
+		panel.setBounds(10, 44, 774, 89);
 		frmTelaRemoverSaida.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -76,6 +77,7 @@ public class TelaRemoverSaidaDeVeiculo {
 		panel.add(lblNewLabel);
 		
 		textID = new JTextField();
+		textID.setToolTipText("Digite o ID que deseja remover");
 		textID.setBounds(66, 30, 86, 20);
 		panel.add(textID);
 		textID.setColumns(10);
@@ -91,7 +93,8 @@ public class TelaRemoverSaidaDeVeiculo {
 		panel.add(btnRemover);
 		
 		JLabel lblDigiteOId = new JLabel("Digite o ID que deseja remover:");
-		lblDigiteOId.setBounds(64, 11, 245, 14);
+		lblDigiteOId.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDigiteOId.setBounds(270, 11, 256, 22);
 		frmTelaRemoverSaida.getContentPane().add(lblDigiteOId);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -136,6 +139,7 @@ public class TelaRemoverSaidaDeVeiculo {
 	}
 
 	public void remover(){
+		limparTabelaSaidaVeiculo();
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
 				
@@ -147,6 +151,19 @@ public class TelaRemoverSaidaDeVeiculo {
 		}catch(Exception e){
 			
 		}// fim do try/catch
+		JOptionPane.showMessageDialog(null, "Removido com sucesso!");
+			try {
+				listarSaidaVeiculo();
+			} catch (SQLException | CarroNaoEncontradoException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+				try {
+					listarSaidaVeiculo();
+				} catch (SQLException | CarroNaoEncontradoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 	}// fim do metodo remover
 	
 	public void listarSaidaVeiculo() throws SQLException, CarroNaoEncontradoException{

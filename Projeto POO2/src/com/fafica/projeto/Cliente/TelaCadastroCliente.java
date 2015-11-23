@@ -179,13 +179,13 @@ public class TelaCadastroCliente {
 		panel.add(lblCep);
 		
 		textCep = new JTextField();
-		textCep.setBounds(76, 105, 114, 20);
+		textCep.setBounds(76, 108, 114, 20);
 		panel.add(textCep);
 		textCep.setColumns(10);
 		
 		JLabel lblNumero = new JLabel("Numero:");
 		lblNumero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNumero.setBounds(200, 108, 56, 14);
+		lblNumero.setBounds(200, 111, 56, 14);
 		panel.add(lblNumero);
 		
 		textNumero = new JTextField();
@@ -240,7 +240,7 @@ public class TelaCadastroCliente {
 		String numero = textNumero.getText();
 
 		Cliente cliente = new Cliente(nome, cpf, sexo, numeroTelefone);
-		Endereco endereco = new Endereco(rua, cpf, numero, bairro, complemento, cidade, cep);
+		Endereco endereco = new Endereco(rua, cpf, numero,bairro, complemento, cidade, cep);
 		
 		
 		Fachada fachada = new Fachada();

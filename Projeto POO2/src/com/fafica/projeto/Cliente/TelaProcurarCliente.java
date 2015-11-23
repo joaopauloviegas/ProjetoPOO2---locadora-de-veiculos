@@ -10,10 +10,16 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Vector;
 import java.awt.event.ActionEvent;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class TelaProcurarCliente {
 
@@ -31,7 +37,9 @@ public class TelaProcurarCliente {
 	private JTextField textCep;
 	private Cliente cliente;
 	private Endereco endereco;
+	private DefaultTableModel defaultTableModelCliente;
 	private Fachada fachada;
+	private JTable tableCliente;
 
 	/**
 	 * Launch the application.
@@ -63,12 +71,12 @@ public class TelaProcurarCliente {
 	private void initialize() {
 		frmTelaProcurarCliente = new JFrame();
 		frmTelaProcurarCliente.setTitle("Tela Procurar Cliente");
-		frmTelaProcurarCliente.setBounds(100, 100, 747, 393);
+		frmTelaProcurarCliente.setBounds(100, 100, 747, 365);
 		frmTelaProcurarCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaProcurarCliente.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 33, 711, 310);
+		panel.setBounds(10, 33, 711, 284);
 		frmTelaProcurarCliente.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -148,25 +156,25 @@ public class TelaProcurarCliente {
 		
 		textRua = new JTextField();
 		textRua.setToolTipText("Digite o nome da rua");
-		textRua.setBounds(122, 135, 568, 20);
+		textRua.setBounds(122, 135, 310, 20);
 		panel.add(textRua);
 		textRua.setColumns(10);
 		
 		textComplemento = new JTextField();
 		textComplemento.setToolTipText("Digite o complemento");
-		textComplemento.setBounds(122, 161, 568, 20);
+		textComplemento.setBounds(122, 161, 310, 20);
 		panel.add(textComplemento);
 		textComplemento.setColumns(10);
 		
 		textBairro = new JTextField();
 		textBairro.setToolTipText("Digite o bairro");
-		textBairro.setBounds(122, 186, 568, 20);
+		textBairro.setBounds(122, 186, 310, 20);
 		panel.add(textBairro);
 		textBairro.setColumns(10);
 		
 		textCidade = new JTextField();
 		textCidade.setToolTipText("Digite o nome da cidade");
-		textCidade.setBounds(122, 210, 568, 20);
+		textCidade.setBounds(122, 210, 310, 20);
 		panel.add(textCidade);
 		textCidade.setColumns(10);
 		
@@ -177,7 +185,7 @@ public class TelaProcurarCliente {
 		
 		textNome = new JTextField();
 		textNome.setToolTipText("Digite o nome");
-		textNome.setBounds(122, 82, 568, 20);
+		textNome.setBounds(122, 82, 310, 20);
 		panel.add(textNome);
 		textNome.setColumns(10);
 		
@@ -199,9 +207,39 @@ public class TelaProcurarCliente {
 		
 		textCep = new JTextField();
 		textCep.setToolTipText("Digite o CEP");
-		textCep.setBounds(311, 236, 118, 20);
+		textCep.setBounds(314, 236, 118, 20);
 		panel.add(textCep);
 		textCep.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(446, 30, 255, 200);
+		panel.add(scrollPane);
+		
+		tableCliente = new JTable();
+		String colunaTabelaCliente[] = new String[] {"Nome", "CPF"};
+		defaultTableModelCliente = new DefaultTableModel(new Object[] []{ }, colunaTabelaCliente) {
+			public boolean isCellEditable(int row, int col) {
+				return false;
+			}
+		};
+	
+		tableCliente.setModel(defaultTableModelCliente);
+		scrollPane.setViewportView(tableCliente);
+		
+		JButton btnListar = new JButton("Listar");
+		btnListar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					listarClientes();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnListar.setFont(new Font("Tahoma", Font.BOLD, 13));
+		btnListar.setBounds(612, 235, 89, 23);
+		panel.add(btnListar);
 		
 		JLabel lblNewLabel_1 = new JLabel("Digite o CPF que deseja procurar");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 14));
@@ -215,7 +253,7 @@ public class TelaProcurarCliente {
 			
 			String cpf = textCPF.getText();
 			cliente = fachada.procurarCliente(cpf);
-			//endereco = fachada.buscarEndereco(cpf);
+			
 			
 			
 			textNome.setText(cliente.getNome());
@@ -231,16 +269,36 @@ public class TelaProcurarCliente {
 			textCep.setText(endereco.getCep());
 			textNumero.setText(endereco.getNumero());
 
-					
-			// ta faltando retornar o endereco e setar no text
-			/*textRua.setText(cliente.getEndereco().getRua());
-			textComplemento.setText(cliente.getEndereco().getComplemento());
-			textBairro.setText(cliente.getEndereco().getBairro());
-			textCidade.setText(cliente.getEndereco().getCidade());*/
+			
 			
 		}catch(Exception e){
 			
 		}
 		
 	}// fim do metodo procurar
+	
+
+	public void listarClientes() throws SQLException{
+	    limparTabelaCliente();
+		ArrayList<Cliente> clientes = fachada.listarCliente();
+		
+		try{
+			Vector vector = null;
+			for (Cliente cliente : clientes) {
+					vector =  new Vector();
+					vector.add(cliente.getNome());
+					vector.add(cliente.getCpf());
+					defaultTableModelCliente.addRow(vector);
+			}// fim do for  
+			
+			
+		}catch(Exception e){
+			
+		}//fim do try/catch
+	
+	}
+	
+	private void limparTabelaCliente() {
+		  defaultTableModelCliente.setRowCount(0);
+	}
 }// fim da classe

@@ -91,7 +91,7 @@ public class TelaListarSaidaDeVeiculo {
 	}
 	
 	public void listarSaidaVeiculo() throws SQLException, CarroNaoEncontradoException{
-
+		limparTabelaSaidaVei();
 		ArrayList<CadastroSaidaDeVeiculos> saidaVeiculo = fachada.listarSaidaDeVeiculo();
 
 		try{
@@ -115,5 +115,9 @@ public class TelaListarSaidaDeVeiculo {
 		}//fim do try/catch     
 		
 	}// fim do metodo listar
+	
+	private void limparTabelaSaidaVei() {
+		  defaultTableModelSaidaVeiculo.setRowCount(0);
+	}
 
 }// fim da classe

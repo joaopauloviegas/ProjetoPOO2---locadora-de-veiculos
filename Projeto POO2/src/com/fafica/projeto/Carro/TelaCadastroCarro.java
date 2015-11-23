@@ -10,6 +10,7 @@ import javax.swing.JTextField;
 
 import com.fafica.projeto.Fachada.Fachada;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -23,10 +24,13 @@ public class TelaCadastroCarro {
 	private JTextField textNome;
 	private JTextField textPlaca;
 	private JTextField textAno;
-	private JTextField textPortas;
 	private JTextField textKm;
-	private JTextField textCategoria;
-
+	private ButtonGroup grupo = new ButtonGroup();
+	private ButtonGroup grupo2 = new ButtonGroup();
+	private JRadioButton radioButton2portas;
+	private JRadioButton radioButton4portas;
+	private JRadioButton rdbtnPopular;
+	private JRadioButton rdbtnLuxo;
 	/**
 	 * Launch the application.
 	 */
@@ -106,24 +110,14 @@ public class TelaCadastroCarro {
 		textPlaca.setColumns(10);
 		
 		textAno = new JTextField();
-		textAno.setBounds(87, 103, 124, 20);
+		textAno.setBounds(87, 103, 103, 20);
 		panel.add(textAno);
 		textAno.setColumns(10);
 		
-		textPortas = new JTextField();
-		textPortas.setBounds(87, 78, 46, 20);
-		panel.add(textPortas);
-		textPortas.setColumns(10);
-		
 		textKm = new JTextField();
-		textKm.setBounds(87, 128, 124, 20);
+		textKm.setBounds(87, 128, 103, 20);
 		panel.add(textKm);
 		textKm.setColumns(10);
-		
-		textCategoria = new JTextField();
-		textCategoria.setBounds(87, 153, 281, 20);
-		panel.add(textCategoria);
-		textCategoria.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setFont(new Font("Tahoma", Font.BOLD, 13));
@@ -144,24 +138,61 @@ public class TelaCadastroCarro {
 		});
 		btnLimpar.setBounds(268, 219, 89, 23);
 		panel.add(btnLimpar);
+		
+		radioButton2portas = new JRadioButton("2");
+		radioButton2portas.setBounds(87, 77, 46, 23);
+		panel.add(radioButton2portas);
+		
+		radioButton4portas = new JRadioButton("4");
+		radioButton4portas.setBounds(135, 77, 46, 23);
+		panel.add(radioButton4portas);
+		
+		rdbtnPopular = new JRadioButton("Popular");
+		rdbtnPopular.setBounds(87, 152, 89, 23);
+		panel.add(rdbtnPopular);
+		
+		rdbtnLuxo = new JRadioButton("Luxo");
+		rdbtnLuxo.setBounds(178, 152, 109, 23);
+		panel.add(rdbtnLuxo);
+		
+		grupo.add(radioButton2portas);
+		grupo.add(radioButton4portas);
+		grupo2.add(rdbtnPopular);
+		grupo2.add(rdbtnLuxo);
+		
+		
 	}// fim do main
 	
+	private String selecionarPortas(){
+		String portas = "";
+		if(radioButton2portas.isSelected()) portas = "2";
+		if(radioButton4portas.isSelected()) portas = "4";
+		return portas;
+		
+	}
+	
+	private String selecionarCategoria(){
+		String categoria = "";
+		if(rdbtnPopular.isSelected()) categoria = "popular";
+		if(rdbtnLuxo.isSelected()) categoria = "luxo";
+		return categoria;
+		
+	}
 	public void limparCampos(){
 		textNome.setText("");
 		textAno.setText("");
-		textCategoria.setText("");
 		textKm.setText("");
 		textPlaca.setText("");
-		textPortas.setText("");
+		
 	}
 	
 	public void cadastrar(){
 		String nome = textNome.getText();
 		String placa = textPlaca.getText();
 		int ano = Integer.parseInt(textAno.getText());
-		int quantidadePorta = Integer.parseInt(textPortas.getText());
+		int quantidadePorta = Integer.parseInt(selecionarPortas());
 		double quilometragem = Double.parseDouble(textKm.getText());
-		String categoria = textCategoria.getText();
+		String categoria = selecionarCategoria();
 	
 		Carro carro =  new Carro(nome, ano, placa, quantidadePorta, quilometragem, categoria);
 		Fachada fachada = new Fachada();
