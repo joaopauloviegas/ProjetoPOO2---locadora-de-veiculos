@@ -16,13 +16,14 @@ public class CadastroDeReserva {
 	private int diascomCarro;
 	private double valor;
 	
-	public CadastroDeReserva( String nomeCliente, String nomeFuncionario, String data, String placa,int quantidade, double valor){
+	public CadastroDeReserva( String nomeCliente, String nomeFuncionario, String data, String placa,int quantidade,int diascomCarro, double valor){
 		this.id = 0;
 		this.nomeCliente = nomeCliente;
 		this.nomeCliente = nomeCliente;
 		this.data = data;
 		this.placa = placa;
 		this.quantidade = quantidade;
+		this.diascomCarro = diascomCarro;
 		this.valor = valor;
 	}
 	
