@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaListarCadastroDeReserva {
 
-	private JFrame frmListagemCadastroDe;
+	public JFrame frmListagemCadastroDe;
 	private JTable table;
 	private DefaultTableModel DefaultTablecadastrodeReserva;
 	private Fachada fachada;

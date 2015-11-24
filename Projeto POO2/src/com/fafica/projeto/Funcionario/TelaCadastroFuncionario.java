@@ -19,7 +19,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaCadastroFuncionario {
 
-	private JFrame frmCadastroFuncionario;
+	public JFrame frmCadastroFuncionario;
 	private JTextField textNome;
 	private JTextField textCPF;
 	private JTextField textSexo;

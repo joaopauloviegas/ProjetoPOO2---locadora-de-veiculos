@@ -18,7 +18,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaListarFuncionario {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTable tableFuncionario;
 	private DefaultTableModel defaultTableModelFuncionario;
 	private Fachada fachada;

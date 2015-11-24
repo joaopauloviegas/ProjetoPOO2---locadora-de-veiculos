@@ -17,7 +17,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaBuscarFuncionario {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField textCPF;
 	private JTextField textNome;
 	private JTextField textTelefone;

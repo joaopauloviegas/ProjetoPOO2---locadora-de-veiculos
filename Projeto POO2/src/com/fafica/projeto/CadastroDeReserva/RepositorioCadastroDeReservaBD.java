@@ -59,7 +59,7 @@ public class RepositorioCadastroDeReservaBD implements IRepositorioCadastroDeRes
 
 	@Override
 	public void atualizar(CadastroDeReserva cadastrodeReserva) {
-		String query = "UPDATE CADASTRODERESERVA SET nome_cliente=?,nome_funcionario=?,data1=?, quantidade=?,diascomCarro=? WHERE placa=?";
+		String query = "UPDATE CADASTRODERESERVA SET nome_cliente=?,nome_funcionario=?,data1=?, quantidade=?,diascomCarro=?,valor=? WHERE placa=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -112,7 +112,8 @@ public class RepositorioCadastroDeReservaBD implements IRepositorioCadastroDeRes
 		    			   													   quantidade11,
 		    			   													   DiasComCarro,
 		    			   													   valor);
-		    	   System.out.println(cadastrodeReserva);
+		    	   return cadastrodeReserva;
+		    	   //System.out.println(cadastrodeReserva);
 			}//fim do while
 			JOptionPane.showMessageDialog(null, "Busca efetuada com sucesso!");
 			stm.close();

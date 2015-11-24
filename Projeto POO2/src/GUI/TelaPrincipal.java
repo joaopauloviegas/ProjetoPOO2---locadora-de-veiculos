@@ -6,6 +6,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 
+import com.fafica.projeto.CadastroDeReserva.TelaAtualizarCadastroDeReserva;
+import com.fafica.projeto.CadastroDeReserva.TelaBuscarCadastroDeReserva;
+import com.fafica.projeto.CadastroDeReserva.TelaCadastroDeReserva;
+import com.fafica.projeto.CadastroDeReserva.TelaListarCadastroDeReserva;
+import com.fafica.projeto.CadastroDeReserva.TelaRemoverCadastroDeReserva;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.TelaAtualizarSaidaDeVeiculo;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.TelaCadastroSaidaVeiculo;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.TelaListarSaidaDeVeiculo;
@@ -21,12 +26,20 @@ import com.fafica.projeto.Cliente.TelaCadastroCliente;
 import com.fafica.projeto.Cliente.TelaListarCliente;
 import com.fafica.projeto.Cliente.TelaProcurarCliente;
 import com.fafica.projeto.Cliente.TelaRemoverCliente;
+import com.fafica.projeto.Funcionario.TelaAtualizarFuncionario;
+import com.fafica.projeto.Funcionario.TelaBuscarFuncionario;
+import com.fafica.projeto.Funcionario.TelaCadastroFuncionario;
+import com.fafica.projeto.Funcionario.TelaListarFuncionario;
+import com.fafica.projeto.Funcionario.TelaRemoverFuncionario;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 import javax.swing.JLabel;
+
 import java.awt.Font;
 
 public class TelaPrincipal {
@@ -107,6 +120,24 @@ public class TelaPrincipal {
 		});
 		mnCadastrar.add(mntmSaidaDeVeiculo);
 		
+		JMenuItem mntmFuncionario = new JMenuItem("Funcionario");
+		mntmFuncionario.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaCadastroFuncionario tlf = new TelaCadastroFuncionario();
+				tlf.frmCadastroFuncionario.setVisible(true);
+			}
+		});
+		mnCadastrar.add(mntmFuncionario);
+		
+		JMenuItem mntmCadastrodereserva = new JMenuItem("Cadastro de Reserva");
+		mntmCadastrodereserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastroDeReserva tcdr = new TelaCadastroDeReserva();
+				tcdr.frmCadastroDeReserva.setVisible(true);
+			}
+		});
+		mnCadastrar.add(mntmCadastrodereserva);
+		
 		JMenu mnAtualizar = new JMenu("ATUALIZAR");
 		menuBar.add(mnAtualizar);
 		
@@ -136,6 +167,24 @@ public class TelaPrincipal {
 			}
 		});
 		mnAtualizar.add(mntmSaidaDeVeiculo_1);
+		
+		JMenuItem mntmFuncionario_1 = new JMenuItem("Funcionario");
+		mntmFuncionario_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaAtualizarFuncionario taf = new TelaAtualizarFuncionario();
+				taf.frame.setVisible(true);
+			}
+		});
+		mnAtualizar.add(mntmFuncionario_1);
+		
+		JMenuItem mntmCadastrodereserva_1 = new JMenuItem("Cadastro de Reserva");
+		mntmCadastrodereserva_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaAtualizarCadastroDeReserva tacdr = new TelaAtualizarCadastroDeReserva();
+				tacdr.frame.setVisible(true);
+			}
+		});
+		mnAtualizar.add(mntmCadastrodereserva_1);
 		
 		JMenu mnRemover = new JMenu("REMOVER");
 		menuBar.add(mnRemover);
@@ -168,6 +217,25 @@ public class TelaPrincipal {
 		});
 		mnRemover.add(mntmSaidaDeVeiculo_2);
 		
+		JMenuItem mntmFuncionario_2 = new JMenuItem("Funcionario");
+		mntmFuncionario_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaRemoverFuncionario trf = new TelaRemoverFuncionario();
+				trf.frmRemoverFuncionario.setVisible(true);
+				
+			}
+		});
+		mnRemover.add(mntmFuncionario_2);
+		
+		JMenuItem mntmCadastroDeReserva = new JMenuItem("Cadastro de Reserva");
+		mntmCadastroDeReserva.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			TelaRemoverCadastroDeReserva trcdr = new TelaRemoverCadastroDeReserva();
+			trcdr.frame.setVisible(true);
+			}
+		});
+		mnRemover.add(mntmCadastroDeReserva);
+		
 		JMenu mnProcurar = new JMenu("PROCURAR");
 		menuBar.add(mnProcurar);
 		
@@ -198,6 +266,25 @@ public class TelaPrincipal {
 		});
 		mnProcurar.add(mntmSaidaDeVeiculo_3);
 		
+		JMenuItem mntmFuncionario_3 = new JMenuItem("Funcionario");
+		mntmFuncionario_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaBuscarFuncionario tbf = new TelaBuscarFuncionario();
+				tbf.frame.setVisible(true);
+			}
+		});
+		mnProcurar.add(mntmFuncionario_3);
+		
+		JMenuItem mntmCadastroDeReserva_1 = new JMenuItem("Cadastro de Reserva");
+		mntmCadastroDeReserva_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaBuscarCadastroDeReserva tbcdr = new TelaBuscarCadastroDeReserva();
+				tbcdr.frame.setVisible(true);
+				
+			}
+		});
+		mnProcurar.add(mntmCadastroDeReserva_1);
+		
 		JMenu mnListar = new JMenu("LISTAR");
 		menuBar.add(mnListar);
 		
@@ -227,6 +314,24 @@ public class TelaPrincipal {
 			}
 		});
 		mnListar.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmFuncionario_4 = new JMenuItem("Funcionario");
+		mntmFuncionario_4.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			TelaListarFuncionario tlf = new TelaListarFuncionario();
+			tlf.frame.setVisible(true);
+			}
+		});
+		mnListar.add(mntmFuncionario_4);
+		
+		JMenuItem mntmCadastroDeReserva_2 = new JMenuItem("Cadastro de Reserva");
+		mntmCadastroDeReserva_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaListarCadastroDeReserva tlcdr = new TelaListarCadastroDeReserva();
+				tlcdr.frmListagemCadastroDe.setVisible(true);
+			}
+		});
+		mnListar.add(mntmCadastroDeReserva_2);
 		
 		JLabel lblNewLabel = new JLabel("Locadora de veiculos");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 43));

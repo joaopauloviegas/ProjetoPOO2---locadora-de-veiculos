@@ -15,7 +15,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaBuscarCadastroDeReserva {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTextField textPlaca;
 	private JTextField textNomeCliente;
 	private JTextField textNomeFuncionario;

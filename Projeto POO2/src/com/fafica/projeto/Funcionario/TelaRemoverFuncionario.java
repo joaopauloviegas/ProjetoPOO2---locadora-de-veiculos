@@ -28,7 +28,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaRemoverFuncionario {
 
-	private JFrame frmRemoverFuncionario;
+	public JFrame frmRemoverFuncionario;
 	private JTextField textCpf;
 	private JTable tableFuncionario;
 	private DefaultTableModel defaultTableModelFuncionario;

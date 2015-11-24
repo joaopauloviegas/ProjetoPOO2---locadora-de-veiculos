@@ -52,13 +52,14 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do adicionar
 	
 	public void atualizar(Funcionario funcionario){
-		String query = "UPDATE FUNCIONARIO1 SET NOME=?,CPF=? WHERE CPF=?";
+		String query = "UPDATE FUNCIONARIO1 SET NOME=?,Sexo=?,numeroTelefone=? WHERE CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
 			stm.setString(1, funcionario.getNome());
-			stm.setString(2, funcionario.getCpf());
-			stm.setString(3, funcionario.getCpf());
+			stm.setString(2, funcionario.getSexo());
+			stm.setString(3, funcionario.getNumeroTelefone());
+			stm.setString(4, funcionario.getCpf());
 			stm.executeUpdate();
 		} catch (SQLException sql){
 			System.out.println("Erro no atualizar" +sql);
@@ -118,8 +119,8 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 		    	   String sexo = rs.getString("sexo");
 		    	   String numeroTelefone = rs.getString("numeroTelefone");
 		    	   Funcionario funcionario = new Funcionario(nome,cpf1,sexo,numeroTelefone);
-		    	   
-		    	   System.out.println(funcionario);
+		    	   return funcionario;
+		    	  // System.out.println(funcionario);
 			}//fim do while
 			JOptionPane.showMessageDialog(null, "Busca efetuada com sucesso!");
 			stm.close();

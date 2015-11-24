@@ -22,7 +22,7 @@ import java.awt.event.ActionEvent;
 
 public class TelaRemoverCadastroDeReserva {
 
-	private JFrame frame;
+	public JFrame frame;
 	private JTable table;
 	private JTextField textPlaca;
 	private DefaultTableModel DefaultTableCadastroDeReserva;
