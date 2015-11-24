@@ -73,11 +73,11 @@ public class TelaProcurarCarro {
 		
 		JLabel lblPlaca = new JLabel("Placa:");
 		lblPlaca.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPlaca.setBounds(10, 29, 46, 14);
+		lblPlaca.setBounds(10, 43, 46, 14);
 		frmTelaProcurarCarro.getContentPane().add(lblPlaca);
 		
 		textPlaca = new JTextField();
-		textPlaca.setBounds(66, 26, 98, 20);
+		textPlaca.setBounds(76, 40, 98, 20);
 		frmTelaProcurarCarro.getContentPane().add(textPlaca);
 		textPlaca.setColumns(10);
 		
@@ -88,7 +88,7 @@ public class TelaProcurarCarro {
 				procurar();
 			}
 		});
-		btnProcurar.setBounds(174, 25, 117, 23);
+		btnProcurar.setBounds(187, 38, 117, 23);
 		frmTelaProcurarCarro.getContentPane().add(btnProcurar);
 		
 		JLabel lblId = new JLabel("ID:");
@@ -190,6 +190,11 @@ public class TelaProcurarCarro {
 		btnLimparTabela.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnLimparTabela.setBounds(491, 171, 132, 23);
 		frmTelaProcurarCarro.getContentPane().add(btnLimparTabela);
+		
+		JLabel lblDigiteAPlaca = new JLabel("Digite a PLACA que deseja procurar");
+		lblDigiteAPlaca.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblDigiteAPlaca.setBounds(50, 8, 248, 21);
+		frmTelaProcurarCarro.getContentPane().add(lblDigiteAPlaca);
 	}// fim do main
 	
 	public void procurar(){

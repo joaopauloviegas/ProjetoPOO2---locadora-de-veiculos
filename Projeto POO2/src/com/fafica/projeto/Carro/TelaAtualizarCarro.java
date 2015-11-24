@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JRadioButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -13,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 
 import com.fafica.projeto.Fachada.Fachada;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -28,13 +30,17 @@ public class TelaAtualizarCarro {
 	private JTextField textPlaca;
 	private JTextField textNome;
 	private JTextField textAno;
-	private JTextField textPorta;
 	private JTextField textKm;
-	private JTextField textCategoria;
 	private Carro carro;
 	private JTable tableCarro;
 	private DefaultTableModel defaultTableModelCarro;
 	private Fachada fachada;
+	private ButtonGroup grupo = new ButtonGroup();
+	private ButtonGroup grupo2 = new ButtonGroup();
+	private JRadioButton radioButton2portas;
+	private JRadioButton radioButton4portas;
+	private JRadioButton rdbtnPopular;
+	private JRadioButton rdbtnLuxo;
 
 	/**
 	 * Launch the application.
@@ -134,22 +140,10 @@ public class TelaAtualizarCarro {
 		lblPortas.setBounds(10, 36, 46, 14);
 		panel_1.add(lblPortas);
 		
-		textPorta = new JTextField();
-		textPorta.setToolTipText("Digite a quantidade dde portas");
-		textPorta.setBounds(66, 33, 66, 20);
-		panel_1.add(textPorta);
-		textPorta.setColumns(10);
-		
 		JLabel lblNewLabel = new JLabel("Categoria:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNewLabel.setBounds(361, 11, 66, 14);
 		panel_1.add(lblNewLabel);
-		
-		textCategoria = new JTextField();
-		textCategoria.setToolTipText("Digite aa categoria do carro");
-		textCategoria.setBounds(437, 8, 176, 20);
-		panel_1.add(textCategoria);
-		textCategoria.setColumns(10);
 		
 		JLabel lblKm = new JLabel("Km:");
 		lblKm.setFont(new Font("Tahoma", Font.BOLD, 11));
@@ -211,6 +205,30 @@ public class TelaAtualizarCarro {
 		btnListar.setFont(new Font("Tahoma", Font.BOLD, 13));
 		btnListar.setBounds(307, 191, 89, 23);
 		panel_1.add(btnListar);
+		
+		rdbtnPopular = new JRadioButton("Popular");
+		rdbtnPopular.setBounds(437, 7, 77, 23);
+		panel_1.add(rdbtnPopular);
+		
+		rdbtnLuxo = new JRadioButton("Luxo");
+		rdbtnLuxo.setBounds(516, 7, 109, 23);
+		panel_1.add(rdbtnLuxo);
+		
+		radioButton2portas = new JRadioButton("2");
+		radioButton2portas.setBounds(58, 32, 46, 23);
+		panel_1.add(radioButton2portas);
+		
+		radioButton4portas = new JRadioButton("4");
+		radioButton4portas.setBounds(106, 32, 46, 23);
+		panel_1.add(radioButton4portas);
+		
+		grupo.add(rdbtnPopular);
+		grupo.add(rdbtnLuxo);
+		
+		grupo2.add(radioButton2portas);
+		grupo2.add(radioButton4portas);
+		
+		
 	}// fim do main
 	
 	public void procurar(){
@@ -223,14 +241,12 @@ public class TelaAtualizarCarro {
 			//convertendo valores para String
 			String ano = Integer.toString(carro.getAno());
 			String id = Integer.toString(carro.getId());
-			String porta = Integer.toString(carro.getQuantidadePorta());
 			String km = String.valueOf(carro.getQuilometragem());
 			
 			textAno.setText(ano);
-			textCategoria.setText(carro.getCategoria());
 			textNome.setText(carro.getNome());
 			textKm.setText(km);
-			textPorta.setText(porta);
+			
 			
 			
 		}catch(Exception e){
@@ -240,16 +256,32 @@ public class TelaAtualizarCarro {
 	
 	
 	}// fim do metodo procurar
+
+	private String selecionarPortas(){
+		String portas = "";
+		if(radioButton2portas.isSelected()) portas = "2";
+		if(radioButton4portas.isSelected()) portas = "4";
+		return portas;
+		
+	}
+	
+	private String selecionarCategoria(){
+		String categoria = "";
+		if(rdbtnPopular.isSelected()) categoria = "popular";
+		if(rdbtnLuxo.isSelected()) categoria = "luxo";
+		return categoria;
+		
+	}
 	
 	public void atualizar(){
 		Fachada fachada = new Fachada();
 		fachada.getInstance();
 		
 		int ano = Integer.parseInt(textAno.getText());
-		String categoria = textCategoria.getText();
+		String categoria = selecionarCategoria();
 		String nome = textNome.getText();
 		double quilometragem = Double.parseDouble(textKm.getText());
-		int quantidadePorta = Integer.parseInt(textPorta.getText());
+		int quantidadePorta = Integer.parseInt(selecionarPortas());
 		String placa = textPlaca.getText();
 		
 		
@@ -266,10 +298,8 @@ public class TelaAtualizarCarro {
 	
 	public void limparCampos(){
 		textAno.setText("");
-		textCategoria.setText("");
 		textNome.setText("");
 		textKm.setText("");
-		textPorta.setText("");
 		textPlaca.setText("");
 
 	}

@@ -117,14 +117,14 @@ public class TelaListarCliente {
 					vector.add(cliente.getNumeroTelefone());
 					vector.add(endereco.getRua());
 					vector.add(endereco.getNumero());
-					vector.add(endereco.getComplemento());
 					vector.add(endereco.getBairro());
+					vector.add(endereco.getComplemento());
 					vector.add(endereco.getCidade());
 					vector.add(endereco.getCep());
 					//defaultTableModelCliente.addRow(vector);
 				}
 				
-				//defaultTableModelCliente.addRow(vector);
+				defaultTableModelCliente.addRow(vector);
 			}// fim do for  
 			
 			
@@ -136,5 +136,5 @@ public class TelaListarCliente {
 	
 	private void limparTabelaCliente() {
 		  defaultTableModelCliente.setRowCount(0);
-		}
+	}
 }// fim da classe

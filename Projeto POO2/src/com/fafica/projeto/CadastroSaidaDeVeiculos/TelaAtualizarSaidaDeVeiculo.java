@@ -14,6 +14,7 @@ import com.fafica.projeto.Carro.Carro;
 import com.fafica.projeto.Carro.CarroNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -23,6 +24,7 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JRadioButton;
 
 public class TelaAtualizarSaidaDeVeiculo {
 
@@ -32,12 +34,15 @@ public class TelaAtualizarSaidaDeVeiculo {
 	private JTextField textNomeFuncionario;
 	private JTextField textData;
 	private JTextField textHora;
-	private JTextField textCombustivel;
 	private JTextField textValorTotal;
 	private Fachada fachada;
 	private CadastroSaidaDeVeiculos saidaVeiculo;
 	private JTable tableCarro;
 	private DefaultTableModel defaultTableModelCarro;
+	private ButtonGroup grupo = new ButtonGroup();
+	private JRadioButton rdbtnSeco;
+	private JRadioButton rdbtnMeio;
+	private JRadioButton rdbtnCheio;
 
 	/**
 	 * Launch the application.
@@ -69,12 +74,12 @@ public class TelaAtualizarSaidaDeVeiculo {
 	private void initialize() {
 		frmTelaAtualizarSaida = new JFrame();
 		frmTelaAtualizarSaida.setTitle("Tela Atualizar Saida de Veiculo");
-		frmTelaAtualizarSaida.setBounds(100, 100, 713, 485);
+		frmTelaAtualizarSaida.setBounds(100, 100, 725, 485);
 		frmTelaAtualizarSaida.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaAtualizarSaida.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
-		panel.setBounds(10, 42, 677, 45);
+		panel.setBounds(10, 42, 689, 45);
 		frmTelaAtualizarSaida.getContentPane().add(panel);
 		panel.setLayout(null);
 		
@@ -100,7 +105,7 @@ public class TelaAtualizarSaidaDeVeiculo {
 		panel.add(btnProcurar);
 		
 		JPanel panel_1 = new JPanel();
-		panel_1.setBounds(10, 98, 677, 279);
+		panel_1.setBounds(10, 98, 689, 279);
 		frmTelaAtualizarSaida.getContentPane().add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -126,7 +131,7 @@ public class TelaAtualizarSaidaDeVeiculo {
 		
 		JLabel lblNewLabel_1 = new JLabel("Combustivel:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 13));
-		lblNewLabel_1.setBounds(418, 61, 103, 14);
+		lblNewLabel_1.setBounds(392, 61, 103, 14);
 		panel_1.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Valor Total:");
@@ -136,13 +141,13 @@ public class TelaAtualizarSaidaDeVeiculo {
 		
 		textNomeCliente = new JTextField();
 		textNomeCliente.setToolTipText("Digite o nome do cliente");
-		textNomeCliente.setBounds(116, 9, 551, 20);
+		textNomeCliente.setBounds(116, 9, 563, 20);
 		panel_1.add(textNomeCliente);
 		textNomeCliente.setColumns(10);
 		
 		textNomeFuncionario = new JTextField();
 		textNomeFuncionario.setToolTipText("Digite o nome do funcionario");
-		textNomeFuncionario.setBounds(116, 33, 551, 20);
+		textNomeFuncionario.setBounds(116, 33, 563, 20);
 		panel_1.add(textNomeFuncionario);
 		textNomeFuncionario.setColumns(10);
 		
@@ -157,11 +162,6 @@ public class TelaAtualizarSaidaDeVeiculo {
 		textHora.setBounds(296, 59, 86, 20);
 		panel_1.add(textHora);
 		textHora.setColumns(10);
-		
-		textCombustivel = new JTextField();
-		textCombustivel.setBounds(531, 59, 86, 20);
-		panel_1.add(textCombustivel);
-		textCombustivel.setColumns(10);
 		
 		textValorTotal = new JTextField();
 		textValorTotal.setToolTipText("Digite o valor total");
@@ -199,6 +199,22 @@ public class TelaAtualizarSaidaDeVeiculo {
 		btnListarPlacas.setBounds(282, 245, 119, 23);
 		panel_1.add(btnListarPlacas);
 		
+		rdbtnSeco = new JRadioButton("Seco");
+		rdbtnSeco.setBounds(501, 58, 61, 23);
+		panel_1.add(rdbtnSeco);
+		
+		rdbtnMeio = new JRadioButton("Meio");
+		rdbtnMeio.setBounds(564, 58, 61, 23);
+		panel_1.add(rdbtnMeio);
+		
+		rdbtnCheio = new JRadioButton("Cheio");
+		rdbtnCheio.setBounds(627, 58, 61, 23);
+		panel_1.add(rdbtnCheio);
+		
+		grupo.add(rdbtnSeco);
+		grupo.add(rdbtnMeio);
+		grupo.add(rdbtnCheio);
+		
 		JPanel panel_2 = new JPanel();
 		panel_2.setBounds(10, 388, 677, 47);
 		frmTelaAtualizarSaida.getContentPane().add(panel_2);
@@ -226,6 +242,14 @@ public class TelaAtualizarSaidaDeVeiculo {
 	}// fim do main
 
 	
+	private String selecionarCombustivel(){
+		String combustivel = "";
+		if(rdbtnSeco.isSelected()) combustivel = "Seco";
+		if(rdbtnMeio.isSelected()) combustivel = "Meio";
+		if(rdbtnCheio.isSelected()) combustivel = "Cheio";
+		return combustivel;
+		
+	}
 	
 	public void procurarCarro(){
 		try{
@@ -236,7 +260,6 @@ public class TelaAtualizarSaidaDeVeiculo {
 		textNomeFuncionario.setText(saidaVeiculo.getNomeFuncionario());
 		textData.setText(saidaVeiculo.getData());
 		textHora.setText(saidaVeiculo.getHora());
-		textCombustivel.setText(saidaVeiculo.getCombustivel());
 		String valorTotal = String.valueOf(saidaVeiculo.getValor());
 		textValorTotal.setText(valorTotal);
 		}catch(Exception e){
@@ -251,7 +274,7 @@ public class TelaAtualizarSaidaDeVeiculo {
 		String nomeFuncionario = textNomeFuncionario.getText();
 		String data = textData.getText();
 		String hora = textHora.getText();
-		String combustivel = textCombustivel.getText();
+		String combustivel = selecionarCombustivel();
 		String valorTotal = textValorTotal.getText();
 		double valor =  Double.parseDouble(valorTotal);
 		String placa = textPlaca.getText();
@@ -272,7 +295,7 @@ public class TelaAtualizarSaidaDeVeiculo {
 	}// fim do metodo atualizar
 	
 	public void limparCampos(){
-		textCombustivel.setText("");
+		
 		textData.setText("");
 		textHora.setText("");
 		textNomeCliente.setText("");
