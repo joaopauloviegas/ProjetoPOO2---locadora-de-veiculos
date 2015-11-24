@@ -106,7 +106,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 
 	@Override
 	public Funcionario buscar(String cpf) {
-				String query = "select nome,cpf,sexo,numeroTelefone from FUNCIONARIO1 where CPF=?";
+		String query = "select nome,cpf,sexo,numeroTelefone from FUNCIONARIO1 where CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);

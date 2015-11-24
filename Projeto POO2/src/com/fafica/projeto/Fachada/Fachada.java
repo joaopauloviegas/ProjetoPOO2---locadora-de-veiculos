@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import com.fafica.projeto.CadastroDeReserva.CadastroDeReserva;
 import com.fafica.projeto.CadastroDeReserva.CadastroDeReservaJaCadastradaException;
+import com.fafica.projeto.CadastroDeReserva.CadastroDeReservaNaoEncontradoException;
 import com.fafica.projeto.CadastroDeReserva.ControladorCadastroDeReserva;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.CadastroSaidaDeVeiculos;
 import com.fafica.projeto.CadastroSaidaDeVeiculos.ControladorCadastroSaidaDeVeiculos;
@@ -156,28 +157,30 @@ public class Fachada {
 	    }
 	    
 	    //CADASTRODERESERVA
-	    public void cadastrarCadastroDeReserva(CadastroDeReserva cadastrodeReserva) throws CadastroDeReservaJaCadastradaException, com.fafica.projeto.CadastroDeReserva.CampoObrigatorioException{
+	    public void cadastrarCadastroDeReserva(CadastroDeReserva cadastrodeReserva) throws CadastroDeReservaJaCadastradaException, com.fafica.projeto.CadastroDeReserva.CampoObrigatorioException, CPFInvalidoException{
 	    	this.controladorcadastrodeReserva.adicionar(cadastrodeReserva);
 	    }//fim do cadastrar
 	    
 	    //ATUALIZA CADASTRODERESERVA
-	    public void atualizarCadastroDeReserva(CadastroDeReserva cadastrodeReserva){
-	    	
+	    public void atualizarCadastroDeReserva(CadastroDeReserva cadastrodeReserva) throws com.fafica.projeto.CadastroDeReserva.CampoObrigatorioException, CadastroDeReservaNaoEncontradoException, CPFInvalidoException{
+	    	this.controladorcadastrodeReserva.atualizar(cadastrodeReserva);
 	    }//fim do atualizar
 	    
 	    //REMOVE CADASTRODERESERVA
-	    public void removerCadastroDeReserva(Integer id){
-	    	
+	    public void removerCadastroDeReserva(String placa) throws CadastroDeReservaNaoEncontradoException{
+	    	this.controladorcadastrodeReserva.remover(placa);
 	    }//fim do remover 
 	    
 	    //PROCURAR CADASTRODERESERVA
-	    public ArrayList<CadastroDeReserva> buscarCadastroDeReserva(Integer id){
-			return null;
+	    public CadastroDeReserva buscarCadastroDeReserva(String placa) throws CadastroDeReservaNaoEncontradoException{
+			return this.controladorcadastrodeReserva.procurar(placa);
 	    }//fim do PROCURACADASTRODERESERVA
 	    
 	    //LISTAR CADASTRODERESERVA
 	    public ArrayList<CadastroDeReserva> listarCadastroDeReserva(){
-	    	return null;
+	    	ArrayList<CadastroDeReserva> listar = new ArrayList<>();
+			listar = this.controladorcadastrodeReserva.listar();
+			return listar;
 	    }
 	    
 	    //ENDERECO
