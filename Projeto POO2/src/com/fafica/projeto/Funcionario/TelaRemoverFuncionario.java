@@ -66,7 +66,7 @@ public class TelaRemoverFuncionario {
 		frmRemoverFuncionario = new JFrame();
 		frmRemoverFuncionario.setTitle("Remover Funcionario");
 		frmRemoverFuncionario.setBounds(100, 100, 447, 329);
-		frmRemoverFuncionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmRemoverFuncionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmRemoverFuncionario.getContentPane().setLayout(null);
 		
 		JLabel lblCpf = new JLabel("CPF:");

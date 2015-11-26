@@ -76,12 +76,12 @@ public class TelaPrincipal {
 	private void initialize() {
 		frmTelaPrincipal = new JFrame();
 		frmTelaPrincipal.setTitle("Tela Principal");
-		frmTelaPrincipal.setBounds(100, 100, 708, 365);
+		frmTelaPrincipal.setBounds(100, 100, 792, 679);
 		frmTelaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTelaPrincipal.getContentPane().setLayout(null);
 		
 		JMenuBar menuBar = new JMenuBar();
-		menuBar.setBounds(0, 0, 692, 21);
+		menuBar.setBounds(0, 0, 774, 21);
 		frmTelaPrincipal.getContentPane().add(menuBar);
 		
 		JMenu mnCadastrar = new JMenu("CADASTRAR");

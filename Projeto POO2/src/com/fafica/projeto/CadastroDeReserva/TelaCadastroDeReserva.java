@@ -58,7 +58,7 @@ public class TelaCadastroDeReserva {
 		frmCadastroDeReserva = new JFrame();
 		frmCadastroDeReserva.setTitle("Cadastro de Reserva");
 		frmCadastroDeReserva.setBounds(100, 100, 716, 414);
-		frmCadastroDeReserva.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCadastroDeReserva.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmCadastroDeReserva.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
