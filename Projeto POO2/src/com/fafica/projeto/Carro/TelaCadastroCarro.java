@@ -61,7 +61,7 @@ public class TelaCadastroCarro {
 		frmTelaCadastroCarro = new JFrame();
 		frmTelaCadastroCarro.setTitle("Tela Cadastro Carro");
 		frmTelaCadastroCarro.setBounds(100, 100, 516, 314);
-		frmTelaCadastroCarro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaCadastroCarro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaCadastroCarro.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

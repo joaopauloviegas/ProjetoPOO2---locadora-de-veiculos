@@ -62,7 +62,7 @@ public class TelaRemoverCliente {
 		frmTelaRemoverCliente = new JFrame();
 		frmTelaRemoverCliente.setTitle("Tela Remover Cliente");
 		frmTelaRemoverCliente.setBounds(100, 100, 558, 338);
-		frmTelaRemoverCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaRemoverCliente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaRemoverCliente.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

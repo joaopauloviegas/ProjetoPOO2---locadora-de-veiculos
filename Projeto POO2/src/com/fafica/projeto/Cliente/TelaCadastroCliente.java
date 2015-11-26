@@ -70,7 +70,7 @@ public class TelaCadastroCliente {
 		frmTelaCadastroCliente = new JFrame();
 		frmTelaCadastroCliente.setTitle("Tela Cadastro Cliente");
 		frmTelaCadastroCliente.setBounds(100, 100, 528, 374);
-		frmTelaCadastroCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaCadastroCliente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaCadastroCliente.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

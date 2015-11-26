@@ -61,7 +61,7 @@ public class TelaRemoverCarro {
 		frmTelaRemoverCarro = new JFrame();
 		frmTelaRemoverCarro.setTitle("Tela Remover Carro");
 		frmTelaRemoverCarro.setBounds(100, 100, 776, 461);
-		frmTelaRemoverCarro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaRemoverCarro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaRemoverCarro.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

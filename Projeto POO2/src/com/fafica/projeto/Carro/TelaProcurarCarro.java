@@ -68,7 +68,7 @@ public class TelaProcurarCarro {
 		frmTelaProcurarCarro = new JFrame();
 		frmTelaProcurarCarro.setTitle("Tela Procurar Carro");
 		frmTelaProcurarCarro.setBounds(100, 100, 748, 261);
-		frmTelaProcurarCarro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaProcurarCarro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaProcurarCarro.getContentPane().setLayout(null);
 		
 		JLabel lblPlaca = new JLabel("Placa:");

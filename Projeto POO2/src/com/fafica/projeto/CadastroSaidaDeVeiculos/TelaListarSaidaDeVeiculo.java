@@ -20,7 +20,7 @@ import java.awt.Font;
 
 public class TelaListarSaidaDeVeiculo {
 
-	public JFrame frame;
+	public JFrame frmTelaListarSaida;
 	private JTable tableSaidaVeiculo;
 	private DefaultTableModel defaultTableModelSaidaVeiculo;
 	private Fachada fachada;
@@ -34,7 +34,7 @@ public class TelaListarSaidaDeVeiculo {
 			public void run() {
 				try {
 					TelaListarSaidaDeVeiculo window = new TelaListarSaidaDeVeiculo();
-					window.frame.setVisible(true);
+					window.frmTelaListarSaida.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -54,14 +54,15 @@ public class TelaListarSaidaDeVeiculo {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 803, 475);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmTelaListarSaida = new JFrame();
+		frmTelaListarSaida.setTitle("Tela Listar Saida de Vaiculos");
+		frmTelaListarSaida.setBounds(100, 100, 803, 475);
+		frmTelaListarSaida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmTelaListarSaida.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 767, 350);
-		frame.getContentPane().add(scrollPane);
+		frmTelaListarSaida.getContentPane().add(scrollPane);
 		
 		tableSaidaVeiculo = new JTable();
 		String colunaTabelaSaidaVeiculo[] = new String[] {"ID", "Cliente", "Funcionario", "Data", "Hora", "Placa", "Valor","Combustivel"};
@@ -87,7 +88,7 @@ public class TelaListarSaidaDeVeiculo {
 			}
 		});
 		btnListar.setBounds(674, 389, 89, 23);
-		frame.getContentPane().add(btnListar);
+		frmTelaListarSaida.getContentPane().add(btnListar);
 	}
 	
 	public void listarSaidaVeiculo() throws SQLException, CarroNaoEncontradoException{

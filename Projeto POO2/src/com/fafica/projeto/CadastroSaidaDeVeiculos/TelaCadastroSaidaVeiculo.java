@@ -81,7 +81,7 @@ public class TelaCadastroSaidaVeiculo {
 		frmTelaCadastroSaida = new JFrame();
 		frmTelaCadastroSaida.setTitle("Tela Cadastro Saida de Veiculo");
 		frmTelaCadastroSaida.setBounds(100, 100, 738, 361);
-		frmTelaCadastroSaida.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaCadastroSaida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaCadastroSaida.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

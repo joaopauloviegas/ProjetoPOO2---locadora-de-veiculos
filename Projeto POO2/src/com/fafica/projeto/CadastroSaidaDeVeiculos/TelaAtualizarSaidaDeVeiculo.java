@@ -75,7 +75,7 @@ public class TelaAtualizarSaidaDeVeiculo {
 		frmTelaAtualizarSaida = new JFrame();
 		frmTelaAtualizarSaida.setTitle("Tela Atualizar Saida de Veiculo");
 		frmTelaAtualizarSaida.setBounds(100, 100, 725, 485);
-		frmTelaAtualizarSaida.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaAtualizarSaida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaAtualizarSaida.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

@@ -84,7 +84,7 @@ public class TelaAtualizarCliente {
 		frmTelaAtualizarCliente = new JFrame();
 		frmTelaAtualizarCliente.setTitle("Tela Atualizar Cliente");
 		frmTelaAtualizarCliente.setBounds(100, 100, 827, 435);
-		frmTelaAtualizarCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaAtualizarCliente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaAtualizarCliente.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
