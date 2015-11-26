@@ -61,7 +61,7 @@ public class TelaCadastroFuncionario {
 		frmCadastroFuncionario = new JFrame();
 		frmCadastroFuncionario.setTitle("Cadastro Funcionario");
 		frmCadastroFuncionario.setBounds(100, 100, 466, 358);
-		frmCadastroFuncionario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmCadastroFuncionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmCadastroFuncionario.getContentPane().setLayout(null);
 		
 		JLabel lblNome = new JLabel("Nome:");
