@@ -58,7 +58,7 @@ public class TelaListarCadastroDeReserva {
 		frmListagemCadastroDe = new JFrame();
 		frmListagemCadastroDe.setTitle("Listagem Cadastro de Reserva");
 		frmListagemCadastroDe.setBounds(100, 100, 802, 360);
-		frmListagemCadastroDe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmListagemCadastroDe.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmListagemCadastroDe.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
