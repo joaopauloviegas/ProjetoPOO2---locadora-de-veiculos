@@ -27,6 +27,7 @@ import com.fafica.projeto.Endereco.EnderecoJaCadastradoException;
 import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Funcionario.ControladorFuncionario;
 import com.fafica.projeto.Funcionario.Funcionario;
+import com.fafica.projeto.Funcionario.FuncionarioJaCadastradoException;
 import com.fafica.projeto.Funcionario.FuncionarioNaoEncontradoException;
 
 public class Fachada {
@@ -132,7 +133,7 @@ public class Fachada {
 	
 	
 		//CADASTRO FUNCIONARIO
-	    public void cadastrarFuncionario(Funcionario funcionario) throws EnderecoJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, IllegalArgumentException, CPFInvalidoException, SQLException{
+	    public void cadastrarFuncionario(Funcionario funcionario) throws FuncionarioJaCadastradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, IllegalArgumentException, CPFInvalidoException, SQLException, com.fafica.projeto.Funcionario.CPFInvalidoException{
 		this.controladorFuncionario.adicionar(funcionario);
 	    }
 		

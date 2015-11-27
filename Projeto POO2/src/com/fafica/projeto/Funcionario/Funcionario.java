@@ -21,10 +21,15 @@ public class Funcionario {
 	}
 	
 
-	public Funcionario(Integer id, String nome, String cpf){
+	public Funcionario(String nome, String sexo,String numeroTelefone){
 		this.setId(id);
 		this.nome = nome;
-		this.cpf = cpf;
+		this.sexo = sexo;
+		this.numeroTelefone = numeroTelefone;
+		
+	}
+	
+	public Funcionario(){
 		
 	}
 	

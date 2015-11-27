@@ -157,7 +157,12 @@ public class TelaCadastroFuncionario {
 		JButton btnNewButton = new JButton("Cadastrar");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				cadastrar();
+				try {
+					cadastrar();
+				} catch (FuncionarioJaCadastradoException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnNewButton.setBounds(334, 275, 97, 25);
@@ -188,7 +193,7 @@ public class TelaCadastroFuncionario {
 		
 	}
 	
-	public void cadastrar(){
+	public void cadastrar()throws FuncionarioJaCadastradoException{
 		String nome = textNome.getText();
 		String cpf = textCPF.getText();
 		String sexo = textSexo.getText();

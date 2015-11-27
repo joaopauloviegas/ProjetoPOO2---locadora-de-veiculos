@@ -20,9 +20,9 @@ public class ControladorFuncionario {
 		
 	}
 	
-	public void adicionar(Funcionario funcionario) throws IllegalArgumentException, EnderecoJaCadastradoException, CampoObrigatorioException, CPFInvalidoException, SQLException{
-		if(funcionario == null) throw new IllegalArgumentException("Cliente inv[alido");
-		//if(!ValidarCPF.validaCPF(funcionario.getCpf())) throw new CPFInvalidoException();
+	public void adicionar(Funcionario funcionario) throws IllegalArgumentException, CampoObrigatorioException, CPFInvalidoException, SQLException, FuncionarioJaCadastradoException, CPFInvalidoException, com.fafica.projeto.Funcionario.CPFInvalidoException{
+		if(funcionario == null) throw new IllegalArgumentException("Cliente inválido");
+		if(!ValidarCPF.validaCPF(funcionario.getCpf())) throw new CPFInvalidoException();
 		if(funcionario.getNome().equals("")) throw new CampoObrigatorioException();
 		
 		this.repositorioFuncionario.adicionar(funcionario);		

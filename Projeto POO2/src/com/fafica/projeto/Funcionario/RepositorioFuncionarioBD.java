@@ -21,7 +21,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try{
-			 con = DriverManager.getConnection(url,"system","contabli123");
+			 con = DriverManager.getConnection(url,"system","91835759ga");
 			 
 		}catch(SQLException sql){
 			System.out.println("Erro na conexão" + sql);
@@ -36,8 +36,10 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 		}//fim do catch
 	}//fim do desconecta
 	
-	public void adicionar(Funcionario funcionario){
-		String query = "INSERT INTO funcionario1(NOME,CPF,SEXO,NUMEROTELEFONE)"
+	public void adicionar(Funcionario funcionario) throws FuncionarioJaCadastradoException{
+		if(this.existe(funcionario.getCpf())) throw new FuncionarioJaCadastradoException();
+		
+		String query = "INSERT INTO funcionario(NOME,CPF,SEXO,NUMEROTELEFONE)"
 							+"VALUES ('"+funcionario.getNome()+"', '"+funcionario.getCpf()+"' , '"+funcionario.getSexo()+"', '"+funcionario.getNumeroTelefone()+"')";
 		conecta();
 			try{
@@ -52,7 +54,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do adicionar
 	
 	public void atualizar(Funcionario funcionario){
-		String query = "UPDATE FUNCIONARIO1 SET NOME=?,Sexo=?,numeroTelefone=? WHERE CPF=?";
+		String query = "UPDATE FUNCIONARIO SET NOME=?,Sexo=?,numeroTelefone=? WHERE CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -68,7 +70,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 
 	@Override
 	public void remover(String cpf) {
-		String query = "DELETE FROM FUNCIONARIO1 WHERE CPF=? ";
+		String query = "DELETE FROM FUNCIONARIO WHERE CPF=? ";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -83,7 +85,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	@Override
 	public ArrayList<Funcionario> listar() {
 		ArrayList<Funcionario> listar = new ArrayList<>();
-		String query = "select * from FUNCIONARIO1";
+		String query = "select * from FUNCIONARIO";
 		conecta();
 		try{
 		PreparedStatement stm = con.prepareStatement(query);
@@ -107,7 +109,7 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 
 	@Override
 	public Funcionario buscar(String cpf) {
-		String query = "select nome,cpf,sexo,numeroTelefone from FUNCIONARIO1 where CPF=?";
+		String query = "select nome,cpf,sexo,numeroTelefone from FUNCIONARIO where CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -132,6 +134,30 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 		return null;
 	}//fim do buscar
 	
+	public boolean existe(String cpf)  {
+		boolean resposta = false;
+		String query = "select nome,cpf,sexo,numeroTelefone from FUNCIONARIO where cpf=?";
+		conecta();
+		try{
+		PreparedStatement stm = con.prepareStatement(query);
+		stm.setString(1, cpf);
+		ResultSet rs = stm.executeQuery();
+		buscar(cpf);
+		while(rs.next()){
+			Funcionario funcionario = new Funcionario(rs.getString("nome"),rs.getString("cpf"),rs.getString("sexo"),rs.getString("numeroTelefone"));
+			if(funcionario.getCpf().equals(cpf)) resposta = true;
+			else resposta = false;
+			
+			return resposta;
+		}
+		
+		
+		} catch(SQLException sql){
+			
+		}
+		return resposta;
+		
+	}
 	
 	
 }//fim da classe
