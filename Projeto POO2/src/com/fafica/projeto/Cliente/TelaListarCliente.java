@@ -59,7 +59,7 @@ public class TelaListarCliente {
 		frmTelaListarClientes = new JFrame();
 		frmTelaListarClientes.setTitle("Tela Listar Clientes");
 		frmTelaListarClientes.setBounds(100, 100, 847, 430);
-		frmTelaListarClientes.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaListarClientes.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaListarClientes.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();

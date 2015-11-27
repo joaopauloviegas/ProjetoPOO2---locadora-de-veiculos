@@ -73,7 +73,7 @@ public class TelaAtualizarCarro {
 		frmTelaAtualizarCarro = new JFrame();
 		frmTelaAtualizarCarro.setTitle("Tela Atualizar Carro");
 		frmTelaAtualizarCarro.setBounds(100, 100, 659, 397);
-		frmTelaAtualizarCarro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaAtualizarCarro.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaAtualizarCarro.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

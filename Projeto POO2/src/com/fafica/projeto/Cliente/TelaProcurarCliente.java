@@ -72,7 +72,7 @@ public class TelaProcurarCliente {
 		frmTelaProcurarCliente = new JFrame();
 		frmTelaProcurarCliente.setTitle("Tela Procurar Cliente");
 		frmTelaProcurarCliente.setBounds(100, 100, 747, 365);
-		frmTelaProcurarCliente.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaProcurarCliente.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaProcurarCliente.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();

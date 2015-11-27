@@ -21,7 +21,7 @@ import java.awt.Font;
 
 public class TelaListarCarro {
 
-	public JFrame frame;
+	public JFrame frmTelaListarCarros;
 	private JTable tableCarro;
 	private DefaultTableModel defaultTableModelCarro;
 	private Fachada fachada;
@@ -34,7 +34,7 @@ public class TelaListarCarro {
 			public void run() {
 				try {
 					TelaListarCarro window = new TelaListarCarro();
-					window.frame.setVisible(true);
+					window.frmTelaListarCarros.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,14 +55,15 @@ public class TelaListarCarro {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		frame = new JFrame();
-		frame.setBounds(100, 100, 717, 425);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.getContentPane().setLayout(null);
+		frmTelaListarCarros = new JFrame();
+		frmTelaListarCarros.setTitle("Tela Listar Carros");
+		frmTelaListarCarros.setBounds(100, 100, 717, 425);
+		frmTelaListarCarros.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		frmTelaListarCarros.getContentPane().setLayout(null);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(10, 11, 681, 276);
-		frame.getContentPane().add(scrollPane);
+		frmTelaListarCarros.getContentPane().add(scrollPane);
 		
 		tableCarro = new JTable();
 		String colunaTabelaCarro[] = new String[] {"ID", "Nome", "Ano", "Placa", "Portas", "Km", "Categoria"};
@@ -77,7 +78,7 @@ public class TelaListarCarro {
 		
 		JPanel panel = new JPanel();
 		panel.setBounds(10, 304, 681, 71);
-		frame.getContentPane().add(panel);
+		frmTelaListarCarros.getContentPane().add(panel);
 		panel.setLayout(null);
 		
 		JButton btnListar = new JButton("Listar");

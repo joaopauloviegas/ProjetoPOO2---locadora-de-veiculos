@@ -292,7 +292,7 @@ public class TelaPrincipal {
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaListarCarro telaListarCarros = new TelaListarCarro();
-				telaListarCarros.frame.setVisible(true);
+				telaListarCarros.frmTelaListarCarros.setVisible(true);
 			}
 		});
 		mnListar.add(mntmNewMenuItem);
@@ -310,7 +310,7 @@ public class TelaPrincipal {
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TelaListarSaidaDeVeiculo telaListarSaidaVeiculo = new TelaListarSaidaDeVeiculo();
-				telaListarSaidaVeiculo.frame.setVisible(true);
+				telaListarSaidaVeiculo.frmTelaListarSaida.setVisible(true);
 			}
 		});
 		mnListar.add(mntmNewMenuItem_2);

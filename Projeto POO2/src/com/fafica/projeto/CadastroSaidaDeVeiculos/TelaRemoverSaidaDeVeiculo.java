@@ -63,7 +63,7 @@ public class TelaRemoverSaidaDeVeiculo {
 		frmTelaRemoverSaida = new JFrame();
 		frmTelaRemoverSaida.setTitle("Tela Remover Saida de Veiculo");
 		frmTelaRemoverSaida.setBounds(100, 100, 810, 471);
-		frmTelaRemoverSaida.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frmTelaRemoverSaida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmTelaRemoverSaida.getContentPane().setLayout(null);
 		
 		JPanel panel = new JPanel();
