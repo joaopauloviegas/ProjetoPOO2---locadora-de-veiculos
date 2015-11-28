@@ -138,7 +138,7 @@ public class Fachada {
 	    }
 		
 	    //ATUALIZAR DO FUNCIONARIO
-	    public void atualizarFuncionario(Funcionario funcionario) throws EnderecoNaoEncontradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, CPFInvalidoException{
+	    public void atualizarFuncionario(Funcionario funcionario) throws EnderecoNaoEncontradoException, com.fafica.projeto.Endereco.CampoObrigatorioException, CPFInvalidoException, FuncionarioNaoEncontradoException{
 		this.controladorFuncionario.atualizar(funcionario);
 	    }//fim do atualizar
 		
@@ -147,7 +147,7 @@ public class Fachada {
 		
 	    }//fim do remover
 	
-	    public Funcionario buscarFuncionario(String cpf){
+	    public Funcionario buscarFuncionario(String cpf) throws FuncionarioNaoEncontradoException{
 				return controladorFuncionario.buscar(cpf);
 	    }
 	    

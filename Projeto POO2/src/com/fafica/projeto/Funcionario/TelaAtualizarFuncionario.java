@@ -3,6 +3,7 @@ package com.fafica.projeto.Funcionario;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -90,6 +91,9 @@ public class TelaAtualizarFuncionario {
 					procurar();
 				} catch (ClienteNaoEncontradoException | CPFInvalidoException
 						| EnderecoNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (FuncionarioNaoEncontradoException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
@@ -187,6 +191,13 @@ public class TelaAtualizarFuncionario {
 		JButton btnAtualizar = new JButton("Atualizar");
 		btnAtualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				try {
+					atualizar();
+				} catch (ClienteNaoEncontradoException | CPFInvalidoException
+						| CampoObrigatorioException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		});
 		btnAtualizar.setBounds(599, 292, 89, 23);
@@ -202,7 +213,8 @@ public class TelaAtualizarFuncionario {
 		frame.getContentPane().add(btnLimpar);
 	}
 	
-	public void procurar() throws ClienteNaoEncontradoException, CPFInvalidoException, EnderecoNaoEncontradoException{
+	public void procurar() throws ClienteNaoEncontradoException, CPFInvalidoException, EnderecoNaoEncontradoException, FuncionarioNaoEncontradoException{
+		try {
 		String cpf = textCPF.getText();
 		funcionario = fachada.buscarFuncionario(cpf);
 		endereco = fachada.buscarEndereco(cpf);
@@ -216,7 +228,9 @@ public class TelaAtualizarFuncionario {
 		textCidade.setText(endereco.getCidade());
 		textNumero.setText(endereco.getNumero());
 		textCEP.setText(endereco.getCep());
-		
+		} catch(FuncionarioNaoEncontradoException e){
+			JOptionPane.showMessageDialog(null, "Funcionario não encontrado!");
+		}
 		
 	}
 	

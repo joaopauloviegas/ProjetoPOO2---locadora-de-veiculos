@@ -20,7 +20,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	public void conecta(){
 		String url = "jdbc:oracle:thin:@localhost:1521:xe";
 		try{
-			 con = DriverManager.getConnection(url,"system","91835759ga");
+			 con = DriverManager.getConnection(url,"system","contabli123");
 			 
 		}catch(SQLException sql){
 			System.out.println("Erro na conexão" + sql);
@@ -38,7 +38,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	@Override
 	public void adicionar(Endereco endereco) throws EnderecoJaCadastradoException, SQLException {
 		
-		String query = "INSERT INTO ENDERECO1(cpf,rua,numero,bairro,complemento,cidade,cep)" +
+		String query = "INSERT INTO ENDERECO(cpf,rua,numero,bairro,complemento,cidade,cep)" +
 				"VALUES ('"+endereco.getCpf()+"', '"+endereco.getRua()+"' , '"+endereco.getNumero()+"', '"+endereco.getBairro()+"', '"+endereco.getComplemento()+"' , '"+endereco.getCidade()+"' , '"+endereco.getCep()+"')";
 			
 		conecta();
@@ -56,7 +56,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 
 	@Override
 	public void atualizar(Endereco endereco) throws EnderecoNaoEncontradoException {
-		String query = "UPDATE ENDERECO1 SET rua=?,numero=?,complemento=?,bairro=?,cidade=?,cep=? WHERE cpf=?";
+		String query = "UPDATE ENDERECO SET rua=?,numero=?,complemento=?,bairro=?,cidade=?,cep=? WHERE cpf=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -78,7 +78,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	@Override
 	public Endereco buscar(String cpf) throws EnderecoNaoEncontradoException {
 		//ArrayList<Endereco> enderecoBuscar = new ArrayList<>();
-		String query = "select cpf,rua,numero,complemento,bairro,cidade,cep,bairro from endereco1 where CPF=?";
+		String query = "select cpf,rua,numero,complemento,bairro,cidade,cep,bairro from endereco where CPF=?";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -111,7 +111,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 
 	@Override
 	public void remover(String cpf) throws EnderecoNaoEncontradoException {
-		String query = "DELETE FROM ENDERECO1 WHERE cpf=? ";
+		String query = "DELETE FROM ENDERECO WHERE cpf=? ";
 		conecta();
 		try{
 			PreparedStatement stm = con.prepareStatement(query);
@@ -127,7 +127,7 @@ public class RepositorioEnderecoBD implements IRepositorioEndereco{
 	@Override
 	public ArrayList<Endereco> listar() {
 		ArrayList<Endereco> listar = new ArrayList<>();
-		String query = "select * from ENDERECO1";
+		String query = "select * from ENDERECO";
 		conecta();
 		try{
 		PreparedStatement stm = con.prepareStatement(query);

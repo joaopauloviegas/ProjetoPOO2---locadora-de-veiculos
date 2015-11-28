@@ -3,12 +3,14 @@ package com.fafica.projeto.Funcionario;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
 import com.fafica.projeto.Endereco.Endereco;
+import com.fafica.projeto.Endereco.EnderecoNaoEncontradoException;
 import com.fafica.projeto.Fachada.Fachada;
 
 import java.awt.Font;
@@ -82,7 +84,13 @@ public class TelaBuscarFuncionario {
 		JButton btnProcurar = new JButton("Procurar");
 		btnProcurar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buscar();
+				try {
+					buscar();
+				} catch (FuncionarioNaoEncontradoException
+						| EnderecoNaoEncontradoException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnProcurar.setBounds(266, 26, 89, 23);
@@ -180,7 +188,7 @@ public class TelaBuscarFuncionario {
 	}
 	
 	
-	public void buscar(){ 
+	public void buscar() throws FuncionarioNaoEncontradoException, EnderecoNaoEncontradoException{ 
 		try{
 		String cpf = textCPF.getText();
 		funcionario = fachada.buscarFuncionario(cpf);
@@ -197,8 +205,8 @@ public class TelaBuscarFuncionario {
 		textComplemento.setText(endereco.getComplemento());
 		textCidade.setText(endereco.getCidade());
 		textCEP.setText(endereco.getCep());
-		} catch(Exception e){
-			
+		} catch(FuncionarioNaoEncontradoException e){
+			JOptionPane.showMessageDialog(null, "Funcionario não encontraco");
 		}//fim do try
 		
 }
