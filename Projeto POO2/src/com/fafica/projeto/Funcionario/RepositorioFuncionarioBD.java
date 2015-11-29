@@ -70,7 +70,8 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	}//fim do atualizar
 
 	@Override
-	public void remover(String cpf) {
+	public void remover(String cpf)throws FuncionarioNaoEncontradoException {
+		if(this.existe(cpf) == false) throw new FuncionarioNaoEncontradoException();
 		String query = "DELETE FROM FUNCIONARIO1 WHERE CPF=? ";
 		conecta();
 		try{
