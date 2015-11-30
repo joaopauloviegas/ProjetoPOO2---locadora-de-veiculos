@@ -107,7 +107,7 @@ public class TelaCadastroFuncionario {
 		textRua = new JTextField();
 		textRua.setBounds(74, 135, 355, 22);
 		frmCadastroFuncionario.getContentPane().add(textRua);
-		textRua.setColumns(10);
+		textRua.setColumns(10); 
 		
 		JLabel lblBairro = new JLabel("Bairro:");
 		lblBairro.setBounds(12, 170, 56, 16);
