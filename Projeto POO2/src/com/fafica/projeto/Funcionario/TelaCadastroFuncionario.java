@@ -30,6 +30,8 @@ public class TelaCadastroFuncionario {
 	private JTextField textComplemento;
 	private JTextField textCidade;
 	private JTextField textCEP;
+	private JTextField textLogin;
+	private JTextField textPassword;
 
 	/**
 	 * Launch the application.
@@ -60,7 +62,7 @@ public class TelaCadastroFuncionario {
 	private void initialize() {
 		frmCadastroFuncionario = new JFrame();
 		frmCadastroFuncionario.setTitle("Cadastro Funcionario");
-		frmCadastroFuncionario.setBounds(100, 100, 466, 358);
+		frmCadastroFuncionario.setBounds(100, 100, 495, 408);
 		frmCadastroFuncionario.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frmCadastroFuncionario.getContentPane().setLayout(null);
 		
@@ -101,56 +103,56 @@ public class TelaCadastroFuncionario {
 		textTelefone.setColumns(10);
 		
 		JLabel lblRua = new JLabel("Rua:");
-		lblRua.setBounds(12, 138, 56, 16);
+		lblRua.setBounds(12, 188, 56, 16);
 		frmCadastroFuncionario.getContentPane().add(lblRua);
 		
 		textRua = new JTextField();
-		textRua.setBounds(74, 135, 355, 22);
+		textRua.setBounds(74, 185, 355, 22);
 		frmCadastroFuncionario.getContentPane().add(textRua);
 		textRua.setColumns(10); 
 		
 		JLabel lblBairro = new JLabel("Bairro:");
-		lblBairro.setBounds(12, 170, 56, 16);
+		lblBairro.setBounds(12, 217, 56, 16);
 		frmCadastroFuncionario.getContentPane().add(lblBairro);
 		
 		textBairro = new JTextField();
-		textBairro.setBounds(74, 170, 144, 22);
+		textBairro.setBounds(74, 214, 144, 22);
 		frmCadastroFuncionario.getContentPane().add(textBairro);
 		textBairro.setColumns(10);
 		
 		JLabel lblNewLabel = new JLabel("Numero:");
-		lblNewLabel.setBounds(230, 170, 56, 16);
+		lblNewLabel.setBounds(230, 217, 56, 16);
 		frmCadastroFuncionario.getContentPane().add(lblNewLabel);
 		
 		textNumero = new JTextField();
-		textNumero.setBounds(290, 170, 139, 22);
+		textNumero.setBounds(290, 214, 139, 22);
 		frmCadastroFuncionario.getContentPane().add(textNumero);
 		textNumero.setColumns(10);
 		
 		JLabel lblComplemento = new JLabel("Comple:");
-		lblComplemento.setBounds(12, 204, 84, 16);
+		lblComplemento.setBounds(12, 246, 84, 16);
 		frmCadastroFuncionario.getContentPane().add(lblComplemento);
 		
 		textComplemento = new JTextField();
-		textComplemento.setBounds(74, 201, 355, 22);
+		textComplemento.setBounds(74, 243, 355, 22);
 		frmCadastroFuncionario.getContentPane().add(textComplemento);
 		textComplemento.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("Cidade:");
-		lblCidade.setBounds(12, 233, 56, 16);
+		lblCidade.setBounds(12, 275, 56, 16);
 		frmCadastroFuncionario.getContentPane().add(lblCidade);
 		
 		textCidade = new JTextField();
-		textCidade.setBounds(74, 233, 116, 22);
+		textCidade.setBounds(74, 272, 116, 22);
 		frmCadastroFuncionario.getContentPane().add(textCidade);
 		textCidade.setColumns(10);
 		
 		JLabel lblCep = new JLabel("CEP:");
-		lblCep.setBounds(201, 237, 56, 16);
+		lblCep.setBounds(202, 275, 56, 16);
 		frmCadastroFuncionario.getContentPane().add(lblCep);
 		
 		textCEP = new JTextField();
-		textCEP.setBounds(232, 233, 197, 22);
+		textCEP.setBounds(232, 272, 197, 22);
 		frmCadastroFuncionario.getContentPane().add(textCEP);
 		textCEP.setColumns(10);
 		
@@ -165,7 +167,7 @@ public class TelaCadastroFuncionario {
 				}
 			}
 		});
-		btnNewButton.setBounds(334, 275, 97, 25);
+		btnNewButton.setBounds(368, 325, 97, 25);
 		frmCadastroFuncionario.getContentPane().add(btnNewButton);
 		
 		JButton btnLimpar = new JButton("Limpar");
@@ -175,8 +177,26 @@ public class TelaCadastroFuncionario {
 			limparCampos();
 			}
 		});
-		btnLimpar.setBounds(216, 275, 97, 25);
+		btnLimpar.setBounds(259, 325, 97, 25);
 		frmCadastroFuncionario.getContentPane().add(btnLimpar);
+		
+		JLabel lblLogin = new JLabel("Login:");
+		lblLogin.setBounds(12, 135, 56, 16);
+		frmCadastroFuncionario.getContentPane().add(lblLogin);
+		
+		textLogin = new JTextField();
+		textLogin.setBounds(74, 135, 116, 22);
+		frmCadastroFuncionario.getContentPane().add(textLogin);
+		textLogin.setColumns(10);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(202, 135, 70, 16);
+		frmCadastroFuncionario.getContentPane().add(lblPassword);
+		
+		textPassword = new JTextField();
+		textPassword.setBounds(267, 132, 116, 22);
+		frmCadastroFuncionario.getContentPane().add(textPassword);
+		textPassword.setColumns(10);
 	}
 	
 	public void limparCampos(){
@@ -198,6 +218,8 @@ public class TelaCadastroFuncionario {
 		String cpf = textCPF.getText();
 		String sexo = textSexo.getText();
 		String telefone = textTelefone.getText();
+		String login = textLogin.getText();
+		String password = textPassword.getText();
 		String rua = textRua.getText();
 		String bairro = textBairro.getText();
 		String numero = textNumero.getText();

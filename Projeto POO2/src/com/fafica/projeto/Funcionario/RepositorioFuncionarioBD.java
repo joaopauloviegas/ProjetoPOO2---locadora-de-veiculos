@@ -39,8 +39,8 @@ public class RepositorioFuncionarioBD implements IRepositorioFuncionario {
 	public void adicionar(Funcionario funcionario) throws FuncionarioJaCadastradoException{
 		if(this.existe(funcionario.getCpf())) throw new FuncionarioJaCadastradoException();
 		
-		String query = "INSERT INTO funcionario1(NOME,CPF,SEXO,NUMEROTELEFONE)"
-							+"VALUES ('"+funcionario.getNome()+"', '"+funcionario.getCpf()+"' , '"+funcionario.getSexo()+"', '"+funcionario.getNumeroTelefone()+"')";
+		String query = "INSERT INTO funcionario1(NOME,CPF,SEXO,NUMEROTELEFONE,LOGIN,PASSWORD)"
+							+"VALUES ('"+funcionario.getNome()+"', '"+funcionario.getCpf()+"' , '"+funcionario.getSexo()+"', '"+funcionario.getNumeroTelefone()+"' , '"+funcionario.getLogin()+"' , '"+funcionario.getPassword()+"')";
 		conecta();
 			try{
 				stm = con.createStatement();

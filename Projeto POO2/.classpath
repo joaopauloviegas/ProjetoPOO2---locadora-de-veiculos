@@ -8,5 +8,6 @@
 	<classpathentry kind="lib" path="postgresql-9.3-1102.jdbc4.jar"/>
 	<classpathentry kind="lib" path="sqljdbc.jar"/>
 	<classpathentry kind="lib" path="sqljdbc4.jar"/>
+	<classpathentry kind="lib" path="miglayout15-swing.jar" sourcepath="miglayout-src.zip"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

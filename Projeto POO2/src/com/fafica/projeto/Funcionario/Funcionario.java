@@ -7,32 +7,16 @@ public class Funcionario {
 	private String login;
 	private String password;
 	private String nome;
-	public String getLogin() {
-		return login;
-	}
-
-
-	public void setLogin(String login) {
-		this.login = login;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
 	private String cpf;
 	private String sexo;
 	private String numeroTelefone;
 	private Integer id;
 	
 	
-	public Funcionario(String nome,String cpf,String sexo,String numeroTelefone){
+	public Funcionario(String nome,String cpf,String sexo,String numeroTelefone,String login,String password){
 		this.id = 0;
+		this.login = login;
+		this.password = password;
 		this.nome = nome;
 		this.cpf = cpf;
 		this.sexo = sexo;
@@ -41,9 +25,18 @@ public class Funcionario {
 	}
 	
 
-	public Funcionario(String nome, String sexo,String numeroTelefone){
+	public Funcionario(String nome, String sexo,String numeroTelefone ){
 		this.setId(id);
 		this.nome = nome;
+		this.sexo = sexo;
+		this.numeroTelefone = numeroTelefone;
+		
+	}
+	
+	public Funcionario(String nome,String cpf, String sexo,String numeroTelefone ){
+		this.setId(id);
+		this.nome = nome;
+		this.cpf = cpf;
 		this.sexo = sexo;
 		this.numeroTelefone = numeroTelefone;
 		
@@ -90,10 +83,33 @@ public class Funcionario {
 	public void setId(Integer id) {
 		this.id = id;
 	}
+	
+	public String getLogin() {
+		return login;
+	}
+
+
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
+	
 	@Override
 	public String toString() {
 		return "Funcionario [nome=" + nome + ", Cpf=" + cpf + " , Sexo=" + sexo + " , numeroTelefone=" +numeroTelefone+ "]";
 	}
+	
+	
 	
 	
 
