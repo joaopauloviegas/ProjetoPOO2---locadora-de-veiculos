@@ -41,6 +41,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 
 import java.awt.Font;
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeEvent;
 
 public class TelaPrincipal {
 
@@ -75,6 +77,10 @@ public class TelaPrincipal {
 	 */
 	private void initialize() {
 		frmTelaPrincipal = new JFrame();
+		frmTelaPrincipal.getContentPane().addPropertyChangeListener(new PropertyChangeListener() {
+			public void propertyChange(PropertyChangeEvent arg0) {
+			}
+		});
 		frmTelaPrincipal.setTitle("Tela Principal");
 		frmTelaPrincipal.setBounds(100, 100, 792, 679);
 		frmTelaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -335,7 +341,7 @@ public class TelaPrincipal {
 		
 		JLabel lblNewLabel = new JLabel("Locadora de veiculos");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 43));
-		lblNewLabel.setBounds(145, 110, 441, 99);
+		lblNewLabel.setBounds(242, 238, 441, 99);
 		frmTelaPrincipal.getContentPane().add(lblNewLabel);
 	}
 }
